@@ -1,6 +1,7 @@
 # disdroc — client source
 
-This is the client source for [disdroc](https://disdroc.com), a free, self-hosted
+[github.com/nadirisim/disdroc](https://github.com/nadirisim/disdroc) — this is
+the client source for [disdroc](https://disdroc.com), a free, self-hosted
 chat platform (servers, channels, DMs, voice/video, a local AI assistant) built
 and run by **nadirisim** — a solo project, not a company. See
 [disdroc.com/who-we-are](https://disdroc.com/who-we-are) for the full story.
