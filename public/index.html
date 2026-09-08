@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="google-site-verification" content="itU_ILEZOSo6jntsEOXiyyER-2yxi5067oLofWrl6LI" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/icon-192.png?v=2" />
+<link rel="manifest" href="/api/manifest.json" />
+<link rel="apple-touch-icon" href="/assets/icon-192.png?v=2" />
+<link rel="canonical" href="https://disdroc.com/" />
+<meta name="theme-color" content="#f4f1ec" />
+<title data-en="disdroc — your own private chat server. Free &amp; self-hosted." data-tr="disdroc — kendi özel sohbet sunucun. Ücretsiz ve kendi donanımında.">disdroc — your own private chat server. Free &amp; self-hosted.</title>
+<meta name="description" content="disdroc is a free, self-hosted chat platform that runs on hardware we own — not a data center. Servers, channels, DMs, voice, video and a local AI assistant. No ads, no tracking, free forever. A private Discord alternative at disdroc.com." />
+<meta property="og:title" content="disdroc — your own private chat server. Free &amp; self-hosted." />
+<meta property="og:description" content="Servers, channels, DMs, voice/video, screen share and a local AI assistant — running on hardware we own. Free, private, no ads, no tracking." />
+<meta property="og:image" content="https://disdroc.com/assets/icon-512.png?v=2" />
+<meta property="og:url" content="https://disdroc.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="disdroc" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="disdroc — your own private chat server" />
+<meta name="twitter:description" content="Self-hosted chat: servers, DMs, voice/video, screen share, local AI assistant. Private, no ads." />
+<meta name="twitter:image" content="https://disdroc.com/assets/icon-512.png?v=2" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "disdroc",
+      "alternateName": "disdroc.com",
+      "url": "https://disdroc.com",
+      "description": "disdroc is a free, self-hosted, web-based real-time communication platform with servers and channels, direct messages, group chats, voice calls, video calls, screen sharing, and a built-in AI assistant that runs entirely on local hardware. No ads, no tracking, no third-party analytics. A private alternative to Discord.",
+      "applicationCategory": "CommunicationApplication",
+      "operatingSystem": "Web, Windows, Linux, Android",
+      "featureList": "Servers and channels, Direct messages, Group chats, Voice calls, Video calls, Screen sharing, Built-in local AI assistant, Trusted devices, Two-factor authentication, 18+ media blur, English and Turkish interface, Desktop app, Android app",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@type": "Organization", "name": "disdroc", "url": "https://disdroc.com" },
+      "keywords": "disdroc, self-hosted Discord alternative, private chat platform, real-time communication, local AI assistant chat, disdroc.com"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is disdroc really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — free forever. There are no paid tiers, no premium, and no boosts. Every feature is available to everyone at no cost." } },
+        { "@type": "Question", "name": "Where does my data live?", "acceptedAnswer": { "@type": "Answer", "text": "On hardware we own and run ourselves — a server at home, not a cloud provider. There are no ads, no tracking, no telemetry, and nothing is ever sold." } },
+        { "@type": "Question", "name": "Do I have to host disdroc myself?", "acceptedAnswer": { "@type": "Answer", "text": "No. disdroc.com is already up and running — just sign up and you are in. It is self-hosted on our side, so you get the privacy without the setup." } },
+        { "@type": "Question", "name": "Will voice work on my network?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Calls connect reliably even when people are behind carrier-grade NAT, the situation that usually makes peer-to-peer voice impossible." } },
+        { "@type": "Question", "name": "Is the AI assistant private?", "acceptedAnswer": { "@type": "Answer", "text": "The assistant runs locally on disdroc's own machine using llama.cpp. Your prompts and its replies never leave the server, with no third-party AI API involved." } }
+      ]
+    },
+    { "@type": "WebSite", "name": "disdroc", "url": "https://disdroc.com", "inLanguage": ["en", "tr"] },
+    { "@type": "Organization", "name": "disdroc", "alternateName": "disdroc.com", "url": "https://disdroc.com", "logo": "https://disdroc.com/assets/icon-512.png?v=2", "sameAs": ["https://www.youtube.com/@Disdroc", "https://www.reddit.com/r/disdrocapp/", "https://github.com/nadirisim"] }
+  ]
+}
+</script>
+<!-- llm-summary: disdroc is a free, self-hosted real-time chat platform at disdroc.com running on hardware the operators own (a Raspberry Pi at home), not a data center. Features: servers and channels, direct messages, group chats, voice and video calls, screen sharing, and a built-in AI assistant (Disdroc AI) that runs llama.cpp locally on the server — prompts never leave the box. Privacy/safety: no ads, no tracking, no analytics, no data sales; trusted devices, email 2FA, 18+ gate and click-to-reveal blur on explicit media. Custom roles and permissions: create as many roles as needed with fine-grained control (kick/ban/timeout/manage channels/manage messages/etc.), or keep it to a single admin role. Calls connect even behind carrier-grade NAT. Interface in English and Turkish with automatic language detection. Platforms: Web (any browser), Android (native app with real incoming-call notifications), Windows and Linux desktop. Open it at disdroc.com, downloads at disdroc.com/download. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link id="fontsPreload" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Anton&display=swap" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Anton&display=swap" rel="stylesheet" /></noscript>
+<style>
+  :root{
+    --violet:#6b4aef;
+    --violet-bright:#7c5cff;
+    --violet-soft:rgba(124,92,255,.1);
+    --mint:#5fd1c4;
+    --mint-deep:#1d9a8c;
+    --mint-soft:rgba(95,209,196,.16);
+    --bg:#f4f1ec;
+    --bg-2:#eeeae3;
+    --panel:#fbf9f6;
+    --ink:#211d2b;
+    --ink-2:#5f596c;
+    --ink-3:#948e9f;
+    --line:rgba(33,29,43,.12);
+    --line-2:rgba(33,29,43,.22);
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --ease-pop:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Instrument Sans',system-ui,sans-serif;font-weight:400;
+    font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  p{margin:0}
+  img,svg{display:block}
+  ::selection{background:var(--violet);color:#fbf9f6}
+  h1,h2,h3{margin:0;line-height:1.04;text-wrap:balance;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.02em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;width:100%}
+  .label{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+  .btn{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:15px;line-height:1;
+    padding:15px 24px;border-radius:8px;border:1px solid transparent;cursor:pointer;
+    transition:transform .22s var(--ease-pop),background .2s,border-color .2s,box-shadow .2s,color .2s;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+  .btn svg{width:17px;height:17px;transition:transform .3s var(--ease-pop)}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-sm{padding:11px 17px;font-size:14px}
+  .btn-primary{
+    color:#fbf9f6;background:var(--violet);
+    box-shadow:none;
+  }
+  .btn-primary:hover{background:var(--violet-bright);transform:translateY(-1px)}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{color:var(--ink);background:transparent;border-color:var(--line-2);box-shadow:none}
+  .btn-ghost:hover{color:var(--violet);border-color:var(--violet);background:rgba(255,255,255,.4);transform:translateY(-1px)}
+  .btn-ghost:active{transform:translateY(1px)}
+  .btn-light{
+    color:var(--ink);background:var(--panel);
+    border-color:rgba(251,249,246,.72);box-shadow:none;
+  }
+  .btn-light:hover{transform:translateY(-1px)}
+  .btn-ghost-light{color:#fbf9f6;background:transparent;border-color:rgba(251,249,246,.4);box-shadow:none}
+  .btn-ghost-light:hover{border-color:#fbf9f6;background:rgba(255,255,255,.08);transform:translateY(-1px)}
+  .btn-ghost-light:active{transform:translateY(1px)}
+  @media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
+  header.nav{position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(244,241,236,.82);border-bottom:1px solid transparent;transition:border-color .3s}
+  header.nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+  .brand img{width:28px;height:28px;border-radius:8px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:15px;font-weight:600;color:var(--ink-2);transition:color .2s}
+  .nav-links a:hover{color:var(--violet)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .lang-toggle{display:flex;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;background:rgba(255,255,255,.4)}
+  .lang-toggle button{font-family:inherit;font-size:12px;font-weight:700;color:var(--ink-2);background:transparent;border:0;padding:0 12px;height:34px;cursor:pointer}
+  .lang-toggle button.on{background:var(--violet);color:#fbf9f6}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line-2);border-radius:9px;width:42px;height:42px;align-items:center;justify-content:center;color:var(--ink);cursor:pointer}
+  .nav-toggle svg{width:20px;height:20px}
+  .mobile-menu{display:none;flex-direction:column;gap:2px;padding:8px 0 16px;border-top:1px solid var(--line)}
+  .mobile-menu a{padding:13px 4px;font-size:16px;font-weight:600;color:var(--ink-2)}
+  .mobile-menu .btn{margin-top:10px}
+  .mobile-menu a.btn-primary{color:#fbf9f6}
+  header.nav.open .mobile-menu{display:flex}
+  section{position:relative}
+  .wall{
+    position:relative;
+    height:calc(100vh - 69px); /* fallback for browsers without dvh support */
+    height:calc(100dvh - 69px); /* tracks the real visible area as mobile browser chrome shows/hides */
+    min-height:540px;max-height:1100px;
+    overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:1.5vh;
+  }
+  .wall-row{
+    font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(56px,min(24.5vh,14vw),250px);line-height:.84;letter-spacing:.005em;
+    white-space:nowrap;color:var(--ink);user-select:none;
+    display:flex;width:max-content;
+    clip-path:inset(0 0 100% 0);animation:wallwipe 1s var(--ease) forwards,drift 70s linear infinite;
+  }
+  .wall-row:nth-child(2){color:var(--violet);animation-delay:.12s,0s}
+  .wall-row:nth-child(3){animation-delay:.24s,0s}
+  .wall-row.rev{animation-direction:normal,reverse}
+  @keyframes wallwipe{to{clip-path:inset(0 0 -6% 0)}}
+  .wall-row span{display:block;padding-right:.35em}
+  @keyframes drift{to{transform:translateX(-50%)}}
+  .wall-logo{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;
+    width:min(300px,34vw);
+    opacity:0;
+    animation:logoin .9s var(--ease-pop) .5s forwards, logofloat 3.6s ease-in-out 1.4s infinite;
+    filter:none;
+  }
+  .wall-logo img{width:100%;height:auto}
+  .wall-strap{
+    position:absolute;left:50%;bottom:30px;z-index:4;transform:translateX(-50%);
+    width:min(820px,calc(100% - 36px));padding:13px 0 0;border:0;border-top:1px solid var(--line-2);border-radius:0;
+    background:transparent;box-shadow:none;
+    color:var(--ink-2);font-size:16px;font-weight:600;line-height:1.4;text-align:center;text-wrap:balance;
+  }
+  @keyframes logoin{from{opacity:0;transform:translate(-50%,-44%) scale(.85)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+  @keyframes logofloat{
+    0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(0deg)}
+    50%{transform:translate(-50%,-50%) translateY(-14px) rotate(-1.5deg)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .wall-row{animation:none;clip-path:none}
+    .wall-logo{animation:none;opacity:1}
+  }
+  .pitch{padding:96px 0 24px;text-align:left}
+  .pitch h1{max-width:820px;font-size:clamp(34px,4.6vw,58px);font-weight:800;letter-spacing:-.025em;margin-bottom:20px}
+  .pitch h1 .accent{color:var(--violet)}
+  .pitch h1 .swash{position:relative;display:inline-block}
+  .pitch h1 .swash::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.05em;height:.13em;background:var(--mint);z-index:-1}
+  .pitch .sub{font-size:19px;color:var(--ink-2);max-width:700px;margin:0 0 36px;font-weight:400}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start}
+  .hero-note{margin-top:26px;font-size:14px;font-weight:500;color:var(--ink-3)}
+  .scroll-cue{
+    position:fixed;right:24px;bottom:24px;z-index:20;
+    display:flex;flex-direction:column;align-items:center;gap:7px;
+    opacity:1;transition:opacity .4s var(--ease);
+  }
+  .scroll-cue svg{width:17px;height:17px;color:var(--ink-3);animation:cuebob 1.8s var(--ease) infinite}
+  @keyframes cuebob{0%,50%,100%{transform:translateY(0)}25%{transform:translateY(6px)}}
+  header.nav.scrolled ~ .scroll-cue{opacity:0}
+  @media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none}}
+  @media (max-width:760px){
+    /* Card spans nearly full width here, so the corner spot from the desktop
+       rule would sit on top of its text — go back to centered, but stacked
+       BELOW the card with real clearance instead of sharing its row. */
+    .scroll-cue{left:50%;right:auto;transform:translateX(-50%);bottom:16px}
+    .wall-strap{bottom:66px}
+  }
+  .showcase{padding:36px 0 0}
+  .cs-card{
+    border:1px solid var(--line-2);border-radius:10px;padding:0;max-width:1020px;margin:0 auto;
+    background:var(--panel);
+    box-shadow:0 20px 45px -34px rgba(33,29,43,.5);
+  }
+  .rv-scale{opacity:0;transform:translateY(40px) scale(.96);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .rv-scale.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv-scale{opacity:1;transform:none}}
+  .cs-chrome{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .cs-chrome i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+  .cs-chrome i:first-child,.cs-chrome i:nth-child(2){background:var(--line-2)}
+  .cs-chrome .url{margin:0 auto;font-size:12.5px;font-weight:600;color:var(--ink-3);background:transparent;border:0;border-radius:0;padding:5px 48px}
+  .cs-inner{border-radius:0 0 9px 9px;overflow:hidden;border:0}
+  .app{
+    --p-bg:#313338;--p-bg2:#2b2d31;--p-rail:#1e1f22;--p-bg3:#383a40;--p-bg4:#404249;
+    --p-acc:#5865f2;--p-ok:#23a55a;--p-idle:#f0b232;--p-text:#f2f3f5;--p-body:#dbdee1;--p-muted:#949ba4;
+    display:grid;grid-template-columns:62px 224px 1fr;height:440px;font-size:13px;
+    font-family:'Instrument Sans',system-ui,sans-serif;background:var(--p-bg);color:var(--p-body)
+  }
+  .a-rail{background:var(--p-rail);display:flex;flex-direction:column;align-items:center;gap:11px;padding:12px 0}
+  .a-srv{width:44px;height:44px;border-radius:16px;background:var(--p-bg3);display:flex;align-items:center;justify-content:center;color:var(--p-muted);position:relative}
+  .a-srv.active{background:var(--p-acc);color:#fff;border-radius:15px}
+  .a-srv.active::before{content:"";position:absolute;left:-12px;top:50%;transform:translateY(-50%);width:4px;height:24px;border-radius:0 4px 4px 0;background:#fff}
+  .a-srv.add{color:var(--p-ok);background:rgba(35,165,90,.12)}
+  .a-srv svg{width:20px;height:20px}
+  .a-sep{width:28px;height:2px;border-radius:2px;background:rgba(255,255,255,.07)}
+  .a-chan{background:var(--p-bg2);display:flex;flex-direction:column}
+  .a-chan-head{padding:0 12px;height:48px;display:flex;align-items:center;font-size:13px;color:var(--p-muted);border-bottom:1px solid rgba(0,0,0,.25);gap:8px}
+  .a-search{flex:1;background:var(--p-rail);border-radius:5px;height:30px;display:flex;align-items:center;padding:0 9px;gap:7px;color:var(--p-muted);font-size:12px}
+  .a-search svg{width:15px;height:15px;flex:none;opacity:.7}
+  .a-list{padding:9px 8px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+  .a-cat{font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--p-muted);padding:11px 8px 5px}
+  .a-side-item{display:flex;align-items:center;gap:11px;padding:8px;border-radius:6px;color:var(--p-muted);font-weight:600;font-size:13.5px}
+  .a-side-item svg{width:19px;height:19px;flex:none;opacity:.85}
+  .a-dm{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:6px;color:var(--p-muted);font-weight:500}
+  .a-dm.sel{background:var(--p-bg4);color:var(--p-text)}
+  .a-dm-av{width:30px;height:30px;border-radius:50%;flex:none;position:relative}
+  .a-dm-av .a-pres,.a-head-av .a-pres{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;border:2.5px solid var(--p-bg2)}
+  .a-pres.on{background:var(--p-ok)}
+  .a-pres.idle{background:var(--p-idle)}
+  .a-dm .nm{font-size:13.5px}
+  .a-bot{margin-left:6px;font-size:9px;font-weight:700;letter-spacing:.03em;background:var(--p-acc);color:#fff;padding:2px 5px;border-radius:4px}
+  .a-av{width:38px;height:38px;border-radius:50%;flex:none}
+  .a-av.x,.a-dm-av.x,.a-head-av.x{background:#5865f2}
+  .a-av.y,.a-dm-av.y,.a-head-av.y{background:#23a55a}
+  .a-av.z,.a-dm-av.z,.a-head-av.z{background:#9b59ff}
+  .a-main{display:flex;flex-direction:column;min-width:0;background:var(--p-bg)}
+  .a-main-head{height:48px;border-bottom:1px solid rgba(0,0,0,.25);display:flex;align-items:center;gap:9px;padding:0 16px;color:var(--p-text);font-weight:600}
+  .a-head-av{width:28px;height:28px;border-radius:50%;flex:none;position:relative}
+  .a-head-av .a-pres{border-color:var(--p-bg);width:10px;height:10px}
+  .a-main-head .a-sub{font-weight:400;font-size:12px;color:var(--p-muted)}
+  .a-feed{flex:1;padding:16px;display:flex;flex-direction:column;gap:17px;overflow:hidden}
+  .a-msg{display:flex;gap:12px}
+  .a-body{min-width:0}
+  .a-meta{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+  .a-name{font-weight:600;font-size:14px;color:var(--p-text)}
+  .a-name.k{color:#aab4ff}
+  .a-time{font-size:11px;color:var(--p-muted)}
+  .a-text{font-size:13.5px;color:var(--p-body);line-height:1.45}
+  .a-input{margin:0 16px 16px;height:42px;border-radius:8px;background:var(--p-bg3);display:flex;align-items:center;padding:0 14px;color:var(--p-muted);font-size:13px;gap:10px}
+  .a-input svg{width:20px;height:20px}
+  .ticker{margin-top:84px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--mint-soft);overflow:hidden;padding:16px 0}
+  .ticker-track{display:flex;width:max-content;animation:tick 36s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-track span{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;letter-spacing:.04em;color:var(--mint-deep);white-space:nowrap;padding-right:14px}
+  .ticker-track span b{color:var(--violet);font-weight:700;padding-right:14px}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+  .shead{display:flex;align-items:baseline;gap:26px;padding:96px 0 52px;flex-wrap:wrap}
+  .shead .label{flex:none;width:186px}
+  .shead-main{max-width:660px}
+  .shead h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.025em;margin-bottom:12px}
+  .shead p{color:var(--ink-2);font-size:17.5px}
+  .why{padding-bottom:20px}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .pillar .idx{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:92px;line-height:.95;display:block;margin-bottom:16px;
+    color:var(--violet);opacity:.18;
+  }
+  .pillar h3{font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px}
+  .pillar p{font-size:15px;color:var(--ink-2)}
+  .features{padding-bottom:40px}
+  .flist{border-top:1px solid var(--line)}
+  .frow{
+    display:grid;grid-template-columns:84px 1fr 1.15fr;gap:28px;align-items:baseline;
+    padding:32px 12px;border-bottom:1px solid var(--line);
+    /* Must re-declare the .rv reveal transition (opacity/transform) here: this
+       shorthand otherwise clobbers it entirely for .frow.rv rows. The --rvd
+       stagger only delays the reveal, never the hover background/padding. */
+    transition:background .3s,padding .35s var(--ease),opacity .8s var(--ease) var(--rvd,0s),transform .8s var(--ease) var(--rvd,0s);
+  }
+  .frow:hover{background:rgba(255,255,255,.55);padding-left:26px}
+  .frow .idx{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;color:var(--ink-3);transition:color .3s}
+  .frow:hover .idx{color:var(--violet)}
+  .frow h3{font-size:clamp(21px,2.4vw,29px);font-weight:700;letter-spacing:-.02em;transition:color .3s}
+  .frow:hover h3{color:var(--violet)}
+  .frow p{font-size:15px;color:var(--ink-2);text-wrap:pretty;max-width:480px}
+  .statement{margin-top:96px;background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:96px 0}
+  .stmt{max-width:940px}
+  .stmt .label{display:block;margin-bottom:26px}
+  .stmt p{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(25px,3.6vw,44px);line-height:1.28;letter-spacing:-.02em}
+  .stmt .w{opacity:.13;transition:opacity .5s var(--ease)}
+  .stmt .w.on{opacity:1}
+  .stmt .hl{color:var(--mint-deep)}
+  .stmt .hv{color:var(--violet)}
+  @media (prefers-reduced-motion:reduce){.stmt .w{opacity:1}}
+  .apps{padding-bottom:30px}
+  .app-rows{border-top:1px solid var(--line)}
+  .app-row{display:grid;grid-template-columns:210px 1fr auto;gap:24px;align-items:center;padding:28px 12px;border-bottom:1px solid var(--line);transition:background .3s,padding .35s var(--ease),opacity .8s var(--ease) var(--rvd,0s),transform .8s var(--ease) var(--rvd,0s)}
+  .app-row:hover{background:rgba(255,255,255,.55);padding-left:26px}
+  .app-row h3{font-size:21px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:13px}
+  .app-row h3 svg{width:21px;height:21px;color:var(--violet);flex:none}
+  .app-row p{font-size:15px;color:var(--ink-2);max-width:520px}
+  .faq{padding-bottom:60px}
+  .faq-list{max-width:860px}
+  .qa{border-bottom:1px solid var(--line)}
+  .qa:first-child{border-top:1px solid var(--line)}
+  .qa-q{width:100%;text-align:left;background:none;border:none;color:var(--ink);font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:17.5px;padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;transition:color .2s}
+  .qa-q:hover{color:var(--violet)}
+  .qa-q:focus-visible{outline:2px solid var(--violet);outline-offset:-2px}
+  .qa-ch{width:20px;height:20px;flex:none;color:var(--ink-3);transition:transform .35s var(--ease-pop)}
+  .qa.open .qa-ch{transform:rotate(45deg);color:var(--violet)}
+  .qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s var(--ease)}
+  .qa.open .qa-a{grid-template-rows:1fr}
+  .qa-a-inner{overflow:hidden}
+  .qa-a p{color:var(--ink-2);font-size:15.5px;padding:0 4px 24px;max-width:660px}
+  .cta{padding-bottom:110px}
+  .cta-band{
+    position:relative;border-radius:10px;padding:76px 56px;overflow:hidden;
+    background:var(--violet-bright);color:#fbf9f6;
+    box-shadow:none;
+  }
+  .cta-band .slash{position:absolute;top:-40%;right:-12%;width:50%;height:180%;background:var(--mint);opacity:.16;transform:rotate(24deg) translateX(60px);border-radius:32px;transition:transform 1.3s var(--ease)}
+  .cta-band.in .slash{transform:rotate(24deg) translateX(0)}
+  .cta-band .inner{position:relative;z-index:2;max-width:600px}
+  .cta-band .label{color:rgba(251,249,246,.75);display:block;margin-bottom:16px}
+  .cta-band h2{font-size:clamp(34px,4.6vw,56px);font-weight:800;letter-spacing:-.025em;line-height:1;margin-bottom:16px;color:#fbf9f6}
+  .cta-band p{color:rgba(251,249,246,.85);font-size:18px;margin-bottom:34px}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  @media (prefers-reduced-motion:reduce){.cta-band .slash{transform:rotate(24deg)}}
+  footer{border-top:1px solid var(--line);padding:44px 0 56px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .foot-brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:var(--ink)}
+  .foot-brand img{width:25px;height:25px;border-radius:7px}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap}
+  .foot-links a{font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  .foot-links a:hover{color:var(--violet)}
+  .foot-meta{font-size:13.5px;color:var(--ink-3);width:100%;margin-top:26px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .foot-meta .ok{color:var(--mint-deep);font-weight:600}
+  @media (max-width:960px){
+    .pillars{grid-template-columns:1fr;gap:36px}
+    .frow{grid-template-columns:56px 1fr;gap:10px 18px}
+    .frow p{grid-column:2}
+    .shead .label{width:100%}
+    .app-row{grid-template-columns:1fr;gap:10px;justify-items:start}
+  }
+  @media (max-width:760px){
+    .nav-links,.nav-cta .btn{display:none}
+    .nav-toggle{display:flex}
+    .shead{padding:64px 0 40px}
+    .statement{padding:64px 0;margin-top:64px}
+    .cta-band{padding:52px 28px}
+    .pillar .idx{font-size:68px}
+    .ticker{margin-top:56px}
+    .pitch{padding:64px 0 24px}
+    .app{grid-template-columns:54px 184px 1fr;height:400px}
+  }
+  @media (max-width:440px){
+    .wrap{padding:0 18px}
+    .wall-strap{bottom:66px;padding:10px 14px;font-size:14px}
+    .hero-actions .btn,.cta-actions .btn{flex:1 1 100%}
+    .app{grid-template-columns:48px 1fr;height:380px}
+    .a-chan{display:none}
+    .a-feed{padding:12px}
+    .cs-chrome .url{padding:5px 20px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="disdroc home"><picture><source srcset="/assets/icon-64.webp?v=2" type="image/webp" /><img src="/assets/icon-64.png?v=2" alt="" width="28" height="28" /></picture>disdroc</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features" data-en="Features" data-tr="Özellikler">Features</a>
+      <a href="#apps" data-en="Apps" data-tr="Uygulamalar">Apps</a>
+      <a href="#faq" data-en="FAQ" data-tr="SSS">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="on">EN</button>
+        <button type="button" data-lang="tr">TR</button>
+      </div>
+      <a class="btn btn-primary btn-sm" href="https://disdroc.com/app" data-en="Open disdroc" data-tr="disdroc'i aç">Open disdroc</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap"><div class="mobile-menu" id="mobileMenu">
+    <a href="#features" data-en="Features" data-tr="Özellikler">Features</a>
+    <a href="#apps" data-en="Apps" data-tr="Uygulamalar">Apps</a>
+    <a href="#faq" data-en="FAQ" data-tr="SSS">FAQ</a>
+    <a href="https://disdroc.com/download" data-en="Download" data-tr="İndir">Download</a>
+    <a class="btn btn-primary" href="https://disdroc.com/app" data-en="Open disdroc" data-tr="disdroc'i aç">Open disdroc</a>
+  </div></div>
+</header>
+
+<div class="scroll-cue" aria-hidden="true">
+  <span class="label" data-en="Scroll" data-tr="Kaydır">Scroll</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+</div>
+
+<a id="top"></a>
+
+<section class="wall" aria-label="disdroc">
+  <div class="wall-row" aria-hidden="true"><span>disdroc disdroc disdroc disdroc disdroc</span></div>
+  <div class="wall-row rev" aria-hidden="true"><span>disdroc disdroc disdroc disdroc disdroc</span></div>
+  <div class="wall-row" aria-hidden="true"><span>disdroc disdroc disdroc disdroc disdroc</span></div>
+  <div class="wall-logo"><picture>
+    <source srcset="/assets/logo-full-256.webp?v=5 1x, /assets/logo-full.webp?v=5 2x" type="image/webp" />
+    <img src="/assets/logo-full-256.png?v=5" srcset="/assets/logo-full.png?v=5 2x" alt="disdroc logo" width="256" height="256" fetchpriority="high" />
+  </picture></div>
+  <p class="wall-strap" data-en="Free, self-hosted chat with servers, channels, voice, video and a local AI assistant. No ads. No tracking." data-tr="Sunucular, kanallar, sesli ve görüntülü görüşme ve yerel bir yapay zekâ asistanı sunan ücretsiz, kendi sunucusunda barındırılan bir sohbet platformu. Reklam yok. Takip yok.">Free, self-hosted chat with servers, channels, voice, video and a local AI assistant. No ads. No tracking.</p>
+</section>
+
+<section class="pitch">
+  <div class="wrap">
+    <h1 class="rv" data-en="Your own <span class=&quot;accent&quot;>private</span> <span class=&quot;swash&quot;>chat server.</span>" data-tr="Kendi <span class=&quot;accent&quot;>özel</span> <span class=&quot;swash&quot;>sohbet sunucun.</span>">Your own <span class="accent">private</span> <span class="swash">chat server.</span></h1>
+    <p class="sub rv" style="transition-delay:.1s" data-en="disdroc is a free, self-hosted chat platform that runs on hardware we own and control — not a data center. Servers, channels, voice, video and a local AI assistant. No ads. No tracking. Nobody selling your data." data-tr="disdroc, kendi sahip olduğumuz ve yönettiğimiz donanımda çalışan ücretsiz, kendi sunucusunda barındırılan bir sohbet platformudur — bir veri merkezinde değil. Sunucular, kanallar, sesli ve görüntülü görüşme ve yerel bir yapay zekâ asistanı. Reklam yok. Takip yok. Verini kimse satmıyor.">disdroc is a free, self-hosted chat platform that runs on hardware we own and control — not a data center. Servers, channels, voice, video and a local AI assistant. No ads. No tracking. Nobody selling your data.</p>
+    <div class="hero-actions rv" style="transition-delay:.2s">
+      <a class="btn btn-primary" href="https://disdroc.com/app">
+        <span data-en="Open disdroc — free" data-tr="disdroc'i aç — ücretsiz">Open disdroc — free</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#features" data-en="See what's inside" data-tr="İçeride ne var, gör">See what's inside</a>
+    </div>
+    <p class="hero-note rv" style="transition-delay:.3s" data-en="Self-hosted, on our own hardware — nothing phones home." data-tr="Kendi sunucumuzda, kendi donanımımızda — hiçbir şey dışarı sızmaz.">Self-hosted, on our own hardware — nothing phones home.</p>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="wrap">
+    <div class="cs-card rv-scale">
+      <div class="cs-chrome"><i></i><i></i><i></i><span class="url">disdroc.com/app</span></div>
+      <div class="cs-inner">
+        <div class="app">
+          <div class="a-rail">
+            <div class="a-srv active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/><path d="M10 19v-5h4v5"/></svg></div>
+            <div class="a-sep"></div>
+            <div class="a-srv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+            <div class="a-srv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5L12 3Z"/></svg></div>
+            <div class="a-srv add" style="margin-top:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+          </div>
+          <div class="a-chan">
+            <div class="a-chan-head">
+              <div class="a-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg> <span data-en="Find a conversation" data-tr="Sohbet bul">Find a conversation</span></div>
+            </div>
+            <div class="a-list">
+              <div class="a-side-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 4.5a3.2 3.2 0 0 1 0 6.4M21 20c0-2.6-1.6-4.2-4-4.8"/></svg> <span data-en="Friends" data-tr="Arkadaşlar">Friends</span></div>
+              <div class="a-side-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/></svg> <span data-en="Saved Messages" data-tr="Kaydedilenler">Saved Messages</span></div>
+              <div class="a-cat" data-en="Direct Messages" data-tr="Direkt Mesajlar">Direct Messages</div>
+              <div class="a-dm sel"><div class="a-dm-av y"><span class="a-pres on"></span></div><span class="nm">mira</span></div>
+              <div class="a-dm"><div class="a-dm-av x"></div><span class="nm">Disdroc AI</span><span class="a-bot">AI</span></div>
+              <div class="a-dm"><div class="a-dm-av z"><span class="a-pres idle"></span></div><span class="nm">kerem</span></div>
+            </div>
+          </div>
+          <div class="a-main">
+            <div class="a-main-head">
+              <div class="a-head-av y"><span class="a-pres on"></span></div>
+              <span>mira</span>
+              <span class="a-sub" data-en="Online" data-tr="Çevrimiçi">Online</span>
+            </div>
+            <div class="a-feed">
+              <div class="a-msg">
+                <div class="a-av y"></div>
+                <div class="a-body">
+                  <div class="a-meta"><span class="a-name">mira</span><span class="a-time">21:14</span></div>
+                  <div class="a-text" data-en="you free tonight? thinking we hop in a call" data-tr="bu akşam müsait misin? bir aramaya atlarız diyordum">you free tonight? thinking we hop in a call</div>
+                </div>
+              </div>
+              <div class="a-msg">
+                <div class="a-av x"></div>
+                <div class="a-body">
+                  <div class="a-meta"><span class="a-name k" data-en="you" data-tr="sen">you</span><span class="a-time">21:15</span></div>
+                  <div class="a-text" data-en="yeah, give me ten — just finishing dinner" data-tr="evet, on dakika ver — yemeği bitiriyorum">yeah, give me ten — just finishing dinner</div>
+                </div>
+              </div>
+              <div class="a-msg">
+                <div class="a-av y"></div>
+                <div class="a-body">
+                  <div class="a-meta"><span class="a-name">mira</span><span class="a-time">21:16</span></div>
+                  <div class="a-text" data-en="no rush. dropped the trip photos on our server too, grab them whenever" data-tr="acelesi yok. gezi fotoğraflarını da sunucumuza attım, istediğinde al">no rush. dropped the trip photos on our server too, grab them whenever</div>
+                </div>
+              </div>
+            </div>
+            <div class="a-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              <span data-en="Message mira" data-tr="mira'ya mesaj yaz">Message mira</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span data-en="No ads <b>·</b> No tracking <b>·</b> No telemetry <b>·</b> Free forever <b>·</b> Self-hosted <b>·</b> Runs on our own hardware <b>·</b> Local AI <b>·</b> Your data stays home <b>·</b>&amp;nbsp;" data-tr="Reklam yok <b>·</b> Takip yok <b>·</b> Telemetri yok <b>·</b> Sonsuza dek ücretsiz <b>·</b> Kendi sunucumuzda <b>·</b> Kendi donanımımızda çalışır <b>·</b> Yerel yapay zekâ <b>·</b> Verin evde kalır <b>·</b>&amp;nbsp;">No ads <b>·</b> No tracking <b>·</b> No telemetry <b>·</b> Free forever <b>·</b> Self-hosted <b>·</b> Runs on our own hardware <b>·</b> Local AI <b>·</b> Your data stays home <b>·</b>&nbsp;</span>
+  </div>
+</div>
+
+<section class="why">
+  <div class="wrap">
+    <div class="shead">
+      <span class="label rv" data-en="What is disdroc" data-tr="disdroc nedir">What is disdroc</span>
+      <div class="shead-main rv">
+        <h2 data-en="The chat you know — on your terms." data-tr="Bildiğin sohbet — kendi şartlarınla.">The chat you know — on your terms.</h2>
+        <p data-en="Everything you'd expect — servers, channels, DMs, voice and video — but it lives on a machine we run ourselves, not someone else's cloud." data-tr="Beklediğin her şey — sunucular, kanallar, DM'ler, sesli ve görüntülü görüşme — ama hepsi başkasının bulutunda değil, kendi işlettiğimiz bir makinede.">Everything you'd expect — servers, channels, DMs, voice and video — but it lives on a machine we run ourselves, not someone else's cloud.</p>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar rv">
+        <span class="idx">1</span>
+        <h3 data-en="Runs on our hardware" data-tr="Kendi donanımımızda çalışır">Runs on our hardware</h3>
+        <p data-en="Messages, files and calls live on a box at home — not a rented cloud. Open disdroc.com and you're on it." data-tr="Mesajlar, dosyalar ve aramalar kiralık bir bulutta değil, evdeki bir kutuda durur. disdroc.com'ı aç, içindesin.">Messages, files and calls live on a box at home — not a rented cloud. Open disdroc.com and you're on it.</p>
+      </div>
+      <div class="pillar rv" style="transition-delay:.12s">
+        <span class="idx">2</span>
+        <h3 data-en="No ads, no tracking" data-tr="Reklam yok, takip yok">No ads, no tracking</h3>
+        <p data-en="No analytics, no telemetry, nothing sold to anyone. The software is the product — not you." data-tr="Analitik yok, telemetri yok, kimseye satılan hiçbir şey yok. Ürün yazılımdır — sen değil.">No analytics, no telemetry, nothing sold to anyone. The software is the product — not you.</p>
+      </div>
+      <div class="pillar rv" style="transition-delay:.24s">
+        <span class="idx">3</span>
+        <h3 data-en="Free forever" data-tr="Sonsuza dek ücretsiz">Free forever</h3>
+        <p data-en="No paid tiers, no premium gates, no &quot;boosts.&quot; Every feature, for everyone, at no cost." data-tr="Ücretli katman yok, premium kapısı yok, &quot;takviye&quot; yok. Her özellik, herkese, ücretsiz.">No paid tiers, no premium gates, no "boosts." Every feature, for everyone, at no cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="shead">
+      <span class="label rv" data-en="Features" data-tr="Özellikler">Features</span>
+      <div class="shead-main rv">
+        <h2 data-en="Everything a community needs" data-tr="Bir topluluğun ihtiyacı olan her şey">Everything a community needs</h2>
+        <p data-en="The full chat stack — plus a couple of things most chat apps don't have, like an AI that runs on the server itself." data-tr="Eksiksiz sohbet altyapısı — artı çoğu sohbet uygulamasında olmayan birkaç şey, mesela sunucunun kendisinde çalışan bir yapay zekâ.">The full chat stack — plus a couple of things most chat apps don't have, like an AI that runs on the server itself.</p>
+      </div>
+    </div>
+    <div class="flist">
+      <div class="frow rv">
+        <span class="idx">01</span>
+        <h3 data-en="Servers &amp; channels" data-tr="Sunucular ve kanallar">Servers &amp; channels</h3>
+        <p data-en="Text and voice channels, categories, direct messages and group chats — the structure you already know your way around." data-tr="Metin ve ses kanalları, kategoriler, direkt mesajlar ve grup sohbetleri — yolunu zaten bildiğin yapı.">Text and voice channels, categories, direct messages and group chats — the structure you already know your way around.</p>
+      </div>
+      <div class="frow rv">
+        <span class="idx">02</span>
+        <h3 data-en="Voice &amp; video" data-tr="Sesli ve görüntülü">Voice &amp; video</h3>
+        <p data-en="Hop into a call with screen sharing on desktop. Calls connect reliably, even on locked-down home and mobile networks." data-tr="Masaüstünde ekran paylaşımıyla bir aramaya atla. Aramalar kısıtlı ev ve mobil ağlarda bile güvenilir şekilde bağlanır.">Hop into a call with screen sharing on desktop. Calls connect reliably, even on locked-down home and mobile networks.</p>
+      </div>
+      <div class="frow rv">
+        <span class="idx">03</span>
+        <h3 data-en="Local AI assistant" data-tr="Yerel yapay zekâ asistanı">Local AI assistant</h3>
+        <p data-en="A model runs on disdroc's own hardware (llama.cpp). Summarize a channel, draft a message, ask a question — your prompts never leave the server." data-tr="disdroc'in kendi donanımında bir model çalışır (llama.cpp). Bir kanalı özetle, mesaj taslağı yaz, soru sor — istemlerin sunucudan asla çıkmaz.">A model runs on disdroc's own hardware (llama.cpp). Summarize a channel, draft a message, ask a question — your prompts never leave the server.</p>
+      </div>
+      <div class="frow rv">
+        <span class="idx">04</span>
+        <h3 data-en="Custom roles &amp; permissions" data-tr="Özel roller ve izinler">Custom roles &amp; permissions</h3>
+        <p data-en="Create as many roles as you need and pick exactly what each can do — or keep it simple with a single admin role. Your call." data-tr="İhtiyacın kadar rol oluştur ve her birinin tam olarak ne yapabileceğini seç — istersen tek bir yönetici rolüyle basit tut. Karar senin.">Create as many roles as you need and pick exactly what each can do — or keep it simple with a single admin role. Your call.</p>
+      </div>
+      <div class="frow rv">
+        <span class="idx">05</span>
+        <h3 data-en="Privacy &amp; safety" data-tr="Gizlilik ve güvenlik">Privacy &amp; safety</h3>
+        <p data-en="Trusted devices that won't sign you out when you travel, email two-factor codes, an 18+ gate and click-to-reveal blur on explicit media." data-tr="Seyahatte seni çıkış yaptırmayan güvenilir cihazlar, e-posta iki adımlı kodlar, 18+ kapısı ve müstehcen medyada tıkla-göster bulanıklığı.">Trusted devices that won't sign you out when you travel, email two-factor codes, an 18+ gate and click-to-reveal blur on explicit media.</p>
+      </div>
+      <div class="frow rv">
+        <span class="idx">06</span>
+        <h3 data-en="Everywhere you are" data-tr="Her yerde yanında">Everywhere you are</h3>
+        <p data-en="Use it in any browser, install the native Android app with real incoming-call notifications, or grab the desktop app for Windows and Linux." data-tr="Herhangi bir tarayıcıda kullan, gerçek gelen-arama bildirimleri olan yerel Android uygulamasını kur ya da Windows ve Linux için masaüstü uygulamasını al.">Use it in any browser, install the native Android app with real incoming-call notifications, or grab the desktop app for Windows and Linux.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="wrap">
+    <div class="stmt">
+      <span class="label rv" data-en="Why it matters" data-tr="Neden önemli">Why it matters</span>
+      <p id="stmtText" data-en="Your conversations belong to you. Not to advertisers, not to data brokers, not to a server farm you'll never see. disdroc keeps every message, call and file on <span class=&quot;hl&quot;>hardware we run ourselves</span> — and <span class=&quot;hv&quot;>the AI runs there too</span>, so nothing ever has to leave." data-tr="Konuşmaların sana aittir. Reklamcılara değil, veri simsarlarına değil, asla göremeyeceğin bir sunucu çiftliğine değil. disdroc her mesajı, aramayı ve dosyayı <span class=&quot;hl&quot;>kendi işlettiğimiz donanımda</span> tutar — ve <span class=&quot;hv&quot;>yapay zekâ da orada çalışır</span>, böylece hiçbir şeyin dışarı çıkması gerekmez.">Your conversations belong to you. Not to advertisers, not to data brokers, not to a server farm you'll never see. disdroc keeps every message, call and file on <span class="hl">hardware we run ourselves</span> — and <span class="hv">the AI runs there too</span>, so nothing ever has to leave.</p>
+    </div>
+  </div>
+</section>
+
+<section class="apps" id="apps">
+  <div class="wrap">
+    <div class="shead">
+      <span class="label rv" data-en="Apps" data-tr="Uygulamalar">Apps</span>
+      <div class="shead-main rv">
+        <h2 data-en="Take it with you" data-tr="Yanında götür">Take it with you</h2>
+        <p data-en="Same account, same servers, everywhere. Pick how you want to chat." data-tr="Aynı hesap, aynı sunucular, her yerde. Nasıl sohbet etmek istediğini seç.">Same account, same servers, everywhere. Pick how you want to chat.</p>
+      </div>
+    </div>
+    <div class="app-rows">
+      <div class="app-row rv">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z"/></svg><span data-en="Web" data-tr="Web">Web</span></h3>
+        <p data-en="Open it in any browser. Nothing to install, nothing to update." data-tr="Herhangi bir tarayıcıda aç. Kurulacak, güncellenecek bir şey yok.">Open it in any browser. Nothing to install, nothing to update.</p>
+        <a class="btn btn-primary btn-sm" href="https://disdroc.com/app" data-en="Open disdroc" data-tr="disdroc'i aç">Open disdroc</a>
+      </div>
+      <div class="app-row rv">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span data-en="Android" data-tr="Android">Android</span></h3>
+        <p data-en="A native app with real, full-screen incoming-call notifications — even when it's closed." data-tr="Gerçek, tam ekran gelen-arama bildirimleri olan yerel bir uygulama — kapalıyken bile.">A native app with real, full-screen incoming-call notifications — even when it's closed.</p>
+        <a class="btn btn-ghost btn-sm" href="https://disdroc.com/downloads/disdroc.apk" data-en="Download APK" data-tr="APK indir">Download APK</a>
+      </div>
+      <div class="app-row rv">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span data-en="Desktop" data-tr="Masaüstü">Desktop</span></h3>
+        <p data-en="A dedicated app for Windows and Linux when a browser tab isn't enough." data-tr="Bir tarayıcı sekmesi yetmediğinde Windows ve Linux için özel bir uygulama.">A dedicated app for Windows and Linux when a browser tab isn't enough.</p>
+        <a class="btn btn-ghost btn-sm" href="https://disdroc.com/download" data-en="Get the app" data-tr="Uygulamayı al">Get the app</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="shead">
+      <span class="label rv" data-en="Questions" data-tr="Sorular">Questions</span>
+      <div class="shead-main rv"><h2 data-en="Good to know" data-tr="Bilmekte fayda var">Good to know</h2></div>
+    </div>
+    <div class="faq-list rv" id="faqList">
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false"><span data-en="Is disdroc really free?" data-tr="disdroc gerçekten ücretsiz mi?">Is disdroc really free?</span><svg class="qa-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="qa-a"><div class="qa-a-inner"><p data-en="Yes — free forever. There are no paid tiers, no premium, and no &quot;boosts.&quot; Every feature is available to everyone at no cost." data-tr="Evet — sonsuza dek ücretsiz. Ücretli katman, premium ve &quot;takviye&quot; yok. Her özellik herkese ücretsiz sunulur.">Yes — free forever. There are no paid tiers, no premium, and no "boosts." Every feature is available to everyone at no cost.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false"><span data-en="Where does my data live?" data-tr="Verim nerede duruyor?">Where does my data live?</span><svg class="qa-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="qa-a"><div class="qa-a-inner"><p data-en="On hardware we own and run ourselves — a server at home, not a cloud provider. There are no ads, no tracking, no telemetry, and nothing is ever sold." data-tr="Kendi sahip olduğumuz ve işlettiğimiz donanımda — bir bulut sağlayıcıda değil, evdeki bir sunucuda. Reklam, takip, telemetri yok ve hiçbir şey satılmaz.">On hardware we own and run ourselves — a server at home, not a cloud provider. There are no ads, no tracking, no telemetry, and nothing is ever sold.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false"><span data-en="Do I have to host it myself?" data-tr="Kendim barındırmak zorunda mıyım?">Do I have to host it myself?</span><svg class="qa-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="qa-a"><div class="qa-a-inner"><p data-en="No. disdroc.com is already up and running — just sign up and you're in. It's self-hosted on our side, so you get the privacy without the setup." data-tr="Hayır. disdroc.com zaten çalışıyor — kaydol ve içindesin. Bizim tarafımızda kendi sunucumuzda barındırılır, yani kurulum olmadan gizliliğe sahip olursun.">No. disdroc.com is already up and running — just sign up and you're in. It's self-hosted on our side, so you get the privacy without the setup.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false"><span data-en="Will voice work on my network?" data-tr="Sesli görüşme ağımda çalışır mı?">Will voice work on my network?</span><svg class="qa-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="qa-a"><div class="qa-a-inner"><p data-en="Yes. Calls connect even when both people are behind carrier-grade NAT — the situation that usually makes peer-to-peer voice impossible." data-tr="Evet. İki taraf da operatör seviyesi NAT (CGNAT) arkasında olsa bile aramalar bağlanır — bu durum genelde uçtan uca sesi imkânsız kılar.">Yes. Calls connect even when both people are behind carrier-grade NAT — the situation that usually makes peer-to-peer voice impossible.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false"><span data-en="Is the AI assistant private?" data-tr="Yapay zekâ asistanı gizli mi?">Is the AI assistant private?</span><svg class="qa-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="qa-a"><div class="qa-a-inner"><p data-en="The assistant runs locally on disdroc's own machine using llama.cpp. Your prompts and its replies never leave the server — no third-party AI API involved." data-tr="Asistan, disdroc'in kendi makinesinde llama.cpp ile yerel olarak çalışır. İstemlerin ve yanıtları sunucudan asla çıkmaz — üçüncü taraf bir yapay zekâ API'si yoktur.">The assistant runs locally on disdroc's own machine using llama.cpp. Your prompts and its replies never leave the server — no third-party AI API involved.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-band rv" id="ctaBand">
+      <div class="slash" aria-hidden="true"></div>
+      <div class="inner">
+        <span class="label">disdroc.com</span>
+        <h2 data-en="Bring your people home." data-tr="İnsanlarını eve getir.">Bring your people home.</h2>
+        <p data-en="Free, private, and running right now. Make a server in under a minute." data-tr="Ücretsiz, özel ve şu an çalışıyor. Bir dakikadan kısa sürede bir sunucu oluştur.">Free, private, and running right now. Make a server in under a minute.</p>
+        <div class="cta-actions">
+          <a class="btn btn-light" href="https://disdroc.com/app">
+            <span data-en="Open disdroc — free" data-tr="disdroc'i aç — ücretsiz">Open disdroc — free</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost-light" href="https://disdroc.com/who-we-are" data-en="Who we are" data-tr="Biz kimiz">Who we are</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand"><picture><source srcset="/assets/icon-64.webp?v=2" type="image/webp" /><img src="/assets/icon-64.png?v=2" alt="" width="25" height="25" /></picture>disdroc</div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#features" data-en="Features" data-tr="Özellikler">Features</a>
+        <a href="#apps" data-en="Apps" data-tr="Uygulamalar">Apps</a>
+        <a href="#faq" data-en="FAQ" data-tr="SSS">FAQ</a>
+        <a href="https://disdroc.com/download" data-en="Download" data-tr="İndir">Download</a>
+        <a href="https://disdroc.com/privacy" data-en="Privacy" data-tr="Gizlilik">Privacy</a>
+        <a href="https://disdroc.com/who-we-are" data-en="Who we are" data-tr="Biz kimiz">Who we are</a>
+        <a href="https://status.disdroc.com" data-en="Status" data-tr="Durum">Status</a>
+        <a href="https://www.reddit.com/r/disdrocapp/" target="_blank" rel="noopener">Reddit</a>
+      </nav>
+    </div>
+    <div class="foot-meta">
+      <span data-en="© 2026 disdroc — free &amp; private chat, on our own hardware" data-tr="© 2026 disdroc — ücretsiz ve özel sohbet, kendi donanımımızda">© 2026 disdroc — free &amp; private chat, on our own hardware</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/lang.js"></script>
+<script defer src="/js/landing.js"></script>
+<script defer src="/js/landing-ui.js"></script>
+</body>
+</html>

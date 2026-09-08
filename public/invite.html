@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Server invite — disdroc" data-tr="Sunucu daveti — disdroc">Server invite — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card" id="card">
+      <div class="brand" style="margin-bottom:16px"><span class="dot"></span> disdroc</div>
+      <h2 id="title" data-en="Loading invite…" data-tr="Davet yükleniyor…">Loading invite…</h2>
+      <p class="muted" id="desc"></p>
+      <div class="error" id="err"></div>
+      <button id="acceptBtn" style="display:none" data-en="Join server" data-tr="Sunucuya katıl">Join server</button>
+      <div class="alt"><a href="/login" data-en="Log in first if you haven't" data-tr="Henüz giriş yapmadıysan önce giriş yap">Log in first if you haven't</a></div>
+    </div>
+  </div>
+  <script src="/js/lang.js"></script>
+  <script src="/js/invite.js"></script>
+</body>
+</html>

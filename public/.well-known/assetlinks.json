@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "online.disdroc.app",
+    "sha256_cert_fingerprints": ["F7:E6:AD:DD:C5:B9:9A:66:B9:24:60:01:6A:D3:8A:F5:C6:99:55:DE:70:CE:14:71:44:5E:1B:14:26:4E:24:36"]
+  }
+}]

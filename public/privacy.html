@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="disdroc — Privacy Policy" data-tr="disdroc — Gizlilik Politikası">disdroc — Privacy Policy</title>
+  <meta name="description" content="How disdroc handles your data: no tracking, no ads, no analytics, no data resold. What is collected, why, and how long it is kept.">
+  <meta name="robots" content="index,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --violet:#6b4aef; --violet-bright:#7c5cff; --mint:#5fd1c4; --mint-deep:#1d9a8c;
+      --bg:#f4f1ec; --bg-2:#eeeae3; --panel:#fbf9f6;
+      --ink:#211d2b; --ink-2:#5f596c; --ink-3:#948e9f;
+      --line:rgba(33,29,43,.12); --line-2:rgba(33,29,43,.22);
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--ink);background:var(--bg);
+      font:400 16.5px/1.62 "Schibsted Grotesk",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    ::selection{background:var(--violet);color:#fbf9f6}
+    h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:0;color:var(--ink);text-wrap:balance}
+    .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+    nav{position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(244,241,236,.82);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1180px;margin:0 auto;padding:0 28px}
+    .brand{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+    .brand img{width:28px;height:28px;border-radius:8px;display:block}
+    .nav-links{display:flex;align-items:center;gap:22px}
+    .nav-links a.lk{font-weight:600;font-size:15px;color:var(--ink-2);transition:color .2s}
+    .nav-links a.lk:hover{color:var(--violet)}
+    @media(max-width:640px){.nav-links .lk{display:none}}
+    .lang-toggle{display:inline-flex;align-items:stretch;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;
+      background:rgba(255,255,255,.4);font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;padding:0}
+    .lang-toggle span{padding:8px 12px;color:var(--ink-2);transition:background .15s,color .15s;display:inline-flex;align-items:center}
+    .lang-toggle span.on{background:var(--violet);color:#fbf9f6}
+
+    .eyebrow{display:block;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0}
+    .eyebrow .dot{display:none}
+    header.head{padding:76px 0 8px}
+    header.head h1{font-size:clamp(40px,6vw,68px);letter-spacing:-.03em;margin:18px 0 0}
+    header.head .updated{margin:20px 0 0;font-size:14px;color:var(--ink-2)}
+    header.head .updated b{color:var(--ink);font-weight:700}
+
+    .tldr{margin:38px 0 0;border-radius:16px;padding:28px 30px;background:var(--violet-bright);color:#fbf9f6;
+      box-shadow:0 40px 80px -40px rgba(107,74,239,.55);position:relative;overflow:hidden}
+    .tldr::after{content:"";position:absolute;top:-60%;right:-16%;width:34%;height:220%;background:var(--mint);transform:rotate(24deg);border-radius:20px;opacity:.9}
+    .tldr h2{color:#fbf9f6;font-size:19px;position:relative;z-index:2}
+    .tldr ul{margin:14px 0 0;padding-left:20px;position:relative;z-index:2;max-width:82%}
+    .tldr li{margin:7px 0;color:rgba(251,249,246,.94);font-weight:500;font-size:15px}
+    @media(max-width:720px){.tldr::after{display:none}.tldr ul{max-width:none}}
+
+    section.s{padding:44px 0 0}
+    section.s h2{font-size:clamp(22px,3.2vw,30px);display:flex;align-items:baseline;gap:14px}
+    section.s h2 .n{font-family:"Bricolage Grotesque",sans-serif;font-size:15px;font-weight:800;color:var(--violet)}
+    section.s h3{font-size:16.5px;font-weight:700;margin:24px 0 0}
+    section.s p{color:var(--ink-2);font-size:15.5px;margin:14px 0 0;text-wrap:pretty}
+    section.s ul{margin:14px 0 0;padding-left:20px;color:var(--ink-2)}
+    section.s li{margin:8px 0;font-size:15px}
+    section.s li b,section.s p b{color:var(--ink)}
+    a.inline{color:var(--violet);font-weight:600;border-bottom:2px solid rgba(107,74,239,.3)}
+    a.inline:hover{border-bottom-color:var(--violet)}
+    hr.rule{border:none;border-top:1px solid var(--line);margin:48px 0 0}
+
+    .contact{margin:48px 0 0;border:1px solid var(--line);border-radius:14px;padding:26px 28px;background:var(--panel)}
+    .contact h3{font-size:16.5px}
+    .contact h3::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--mint);margin-right:10px}
+    .contact p{color:var(--ink-2);font-size:14.5px;margin:12px 0 0}
+
+    footer{border-top:1px solid var(--line);margin-top:76px;padding:34px 0;color:var(--ink-2);font-size:14px;font-weight:500;
+      display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    footer .mono{color:var(--ink-3)}
+    footer a{font-weight:600}
+    footer a:hover{color:var(--violet)}
+    @media(max-width:720px){footer{flex-direction:column;gap:14px}}
+
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/"><img src="/assets/icon-192.png?v=2" alt="disdroc"> disdroc</a>
+      <div class="nav-links">
+        <a class="lk" href="/#features" data-en="Features" data-tr="Özellikler">Features</a>
+        <a class="lk" href="/support" data-en="Support" data-tr="Destek">Support</a>
+        <a class="lk" href="/login" data-en="Log in" data-tr="Giriş yap">Log in</a>
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Language / Dil">
+          <span data-lang="en">EN</span><span data-lang="tr">TR</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="wrap head">
+    <p class="eyebrow"><span class="dot"></span><span data-en="The boring-but-important page" data-tr="Sıkıcı ama önemli sayfa">The boring-but-important page</span></p>
+    <h1 data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</h1>
+    <p class="updated"><span data-en="Last updated" data-tr="Son güncelleme">Last updated</span> <b>2026-07-11</b></p>
+  </header>
+
+  <main class="wrap">
+    <div class="tldr">
+      <h2 data-en="The short version" data-tr="Kısa özet">The short version</h2>
+      <ul>
+        <li data-en="No tracking, no analytics, no ads, and your data is never sold or shared for marketing." data-tr="Takip yok, analiz yok, reklam yok; verileriniz asla satılmaz veya pazarlama için paylaşılmaz.">No tracking, no analytics, no ads, and your data is never sold or shared for marketing.</li>
+        <li data-en="Your messages and uploads live on the single server that runs the site — uploaded files auto-delete after 24 hours." data-tr="Mesajlarınız ve yüklemeleriniz siteyi çalıştıran tek sunucuda kalır — yüklenen dosyalar 24 saat sonra otomatik silinir.">Your messages and uploads live on the single server that runs the site — uploaded files auto-delete after 24 hours.</li>
+        <li data-en="We keep only what's needed to run a chat app: your account, your messages, and basic technical/security data." data-tr="Yalnızca bir sohbet uygulamasını çalıştırmak için gerekenleri tutarız: hesabınız, mesajlarınız ve temel teknik/güvenlik verileri.">We keep only what's needed to run a chat app: your account, your messages, and basic technical/security data.</li>
+        <li data-en="You can delete your account at any time, which removes your profile and personal data." data-tr="Hesabınızı istediğiniz zaman silebilirsiniz; bu, profilinizi ve kişisel verilerinizi kaldırır.">You can delete your account at any time, which removes your profile and personal data.</li>
+      </ul>
+    </div>
+
+    <section class="s">
+      <h2><span class="n">01</span> <span data-en="Who runs disdroc" data-tr="disdroc'u kim işletiyor">Who runs disdroc</span></h2>
+      <p data-en="disdroc is a small, self-hosted chat app run by an individual hobbyist (not a company) on a private server. It is a personal side project and is not affiliated with, endorsed by, or related to Discord Inc. This policy explains what data the app handles and why." data-tr="disdroc, özel bir sunucuda bireysel bir hobi geliştiricisi (bir şirket değil) tarafından işletilen küçük, kendi kendine barındırılan bir sohbet uygulamasıdır. Kişisel bir yan projedir ve Discord Inc. ile bağlantılı, onaylı veya ilişkili değildir. Bu politika, uygulamanın hangi verileri işlediğini ve nedenini açıklar.">disdroc is a small, self-hosted chat app run by an individual hobbyist (not a company) on a private server. It is a personal side project and is not affiliated with, endorsed by, or related to Discord Inc. This policy explains what data the app handles and why.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">02</span> <span data-en="What we collect" data-tr="Neleri topluyoruz">What we collect</span></h2>
+      <h3 data-en="Account information" data-tr="Hesap bilgileri">Account information</h3>
+      <p data-en="When you sign up we store a username, an email address, your date of birth, and your password (kept only as a salted hash — never in plain text). The date of birth is used solely to age-restrict explicit content (you must be 18+ to view or send it) and is kept for as long as your account exists, like the rest of your account data. You may also add optional profile details such as a display name, avatar, status and bio." data-tr="Kaydolduğunuzda bir kullanıcı adı, bir e-posta adresi, doğum tarihiniz ve parolanızı (yalnızca tuzlanmış bir özet olarak saklanır — asla düz metin olarak değil) tutarız. Doğum tarihi yalnızca müstehcen içeriği yaş sınırına tabi tutmak için kullanılır (görüntülemek/göndermek için 18+ olmalısınız) ve hesabınızın geri kalan verileri gibi hesabınız var olduğu sürece saklanır. İsteğe bağlı olarak görünen ad, avatar, durum ve biyografi gibi profil ayrıntıları da ekleyebilirsiniz.">When you sign up we store a username, an email address, your date of birth, and your password (kept only as a salted hash — never in plain text). The date of birth is used solely to age-restrict explicit content (you must be 18+ to view or send it) and is kept for as long as your account exists, like the rest of your account data. You may also add optional profile details such as a display name, avatar, status and bio.</p>
+      <h3 data-en="Content you create" data-tr="Oluşturduğunuz içerik">Content you create</h3>
+      <p data-en="Messages, reactions, server and channel names, files and images you upload, and similar content. This is stored so the app can show it to you and the people you send it to." data-tr="Mesajlar, tepkiler, sunucu ve kanal adları, yüklediğiniz dosya ve görseller ve benzeri içerikler. Bu, uygulamanın bunları size ve gönderdiğiniz kişilere gösterebilmesi için saklanır.">Messages, reactions, server and channel names, files and images you upload, and similar content. This is stored so the app can show it to you and the people you send it to.</p>
+      <h3 data-en="Technical &amp; security data" data-tr="Teknik ve güvenlik verileri">Technical &amp; security data</h3>
+      <p data-en="To keep accounts secure and the service working, we record login sessions, your IP address, and basic device/browser information (user-agent) for recent logins. If you turn on two-factor authentication (2FA), we store the secret needed to verify your codes." data-tr="Hesapları güvende ve hizmeti çalışır tutmak için oturum açma oturumlarını, IP adresinizi ve son girişlere ait temel cihaz/tarayıcı bilgilerini (user-agent) kaydederiz. İki adımlı doğrulamayı (2FA) açarsanız, kodlarınızı doğrulamak için gereken sırrı saklarız.">To keep accounts secure and the service working, we record login sessions, your IP address, and basic device/browser information (user-agent) for recent logins. If you turn on two-factor authentication (2FA), we store the secret needed to verify your codes.</p>
+      <h3 data-en="Approximate country" data-tr="Yaklaşık ülke">Approximate country</h3>
+      <p data-en="On your first visit the site reads the approximate country your connection comes from (provided by our network/CDN) purely to pick a starting language — English or Turkish. It isn't stored as a profile field or used to identify you." data-tr="İlk ziyaretinizde site, yalnızca bir başlangıç dili — İngilizce veya Türkçe — seçmek için bağlantınızın geldiği yaklaşık ülkeyi (ağ/CDN tarafından sağlanır) okur. Bir profil alanı olarak saklanmaz veya sizi tanımlamak için kullanılmaz.">On your first visit the site reads the approximate country your connection comes from (provided by our network/CDN) purely to pick a starting language — English or Turkish. It isn't stored as a profile field or used to identify you.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">03</span> <span data-en="What we DON'T do" data-tr="Neleri YAPMIYORUZ">What we DON'T do</span></h2>
+      <ul>
+        <li data-en="No third-party analytics, advertising or marketing trackers." data-tr="Üçüncü taraf analiz, reklam veya pazarlama izleyicisi yok.">No third-party analytics, advertising or marketing trackers.</li>
+        <li data-en="No selling, renting or trading of your personal data." data-tr="Kişisel verilerinizin satışı, kiralanması veya takası yok.">No selling, renting or trading of your personal data.</li>
+        <li data-en="No advertising profiles and no building a picture of you across other sites." data-tr="Reklam profili yok ve sizi başka siteler arasında profilleme yok.">No advertising profiles and no building a picture of you across other sites.</li>
+        <li data-en="We don't read your private messages for any purpose other than running the service (e.g. delivering them, abuse/safety, or a legal obligation)." data-tr="Özel mesajlarınızı, hizmeti çalıştırmak (örneğin teslim etmek, kötüye kullanım/güvenlik veya yasal bir yükümlülük) dışında hiçbir amaçla okumayız.">We don't read your private messages for any purpose other than running the service (e.g. delivering them, abuse/safety, or a legal obligation).</li>
+      </ul>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">04</span> <span data-en="How your data is used" data-tr="Verileriniz nasıl kullanılır">How your data is used</span></h2>
+      <p data-en="We use the data above only to: create and secure your account; deliver your messages, calls and files to the right people; show presence, friends and notifications; let admins keep the community safe (e.g. handling reports and abuse); and keep the service running and debugged." data-tr="Yukarıdaki verileri yalnızca şunlar için kullanırız: hesabınızı oluşturmak ve güvenceye almak; mesajlarınızı, aramalarınızı ve dosyalarınızı doğru kişilere iletmek; durumu, arkadaşları ve bildirimleri göstermek; yöneticilerin topluluğu güvende tutmasını sağlamak (örneğin şikayetleri ve kötüye kullanımı ele almak); ve hizmeti çalışır ve hatasız tutmak.">We use the data above only to: create and secure your account; deliver your messages, calls and files to the right people; show presence, friends and notifications; let admins keep the community safe (e.g. handling reports and abuse); and keep the service running and debugged.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">05</span> <span data-en="Voice, video &amp; screen share" data-tr="Ses, görüntü ve ekran paylaşımı">Voice, video &amp; screen share</span></h2>
+      <p data-en="Calls use WebRTC and are streamed live between participants — we don't record voice, video or screen shares. To set up a call, connection-helper (STUN/TURN) servers may see network address information needed to route the media; they don't see your conversation." data-tr="Aramalar WebRTC kullanır ve katılımcılar arasında canlı olarak aktarılır — ses, görüntü veya ekran paylaşımlarını kaydetmeyiz. Bir aramayı kurmak için bağlantı yardımcısı (STUN/TURN) sunucuları, medyayı yönlendirmek için gereken ağ adresi bilgilerini görebilir; konuşmanızı görmezler.">Calls use WebRTC and are streamed live between participants — we don't record voice, video or screen shares. To set up a call, connection-helper (STUN/TURN) servers may see network address information needed to route the media; they don't see your conversation.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">06</span> <span data-en="How long we keep it" data-tr="Ne kadar süre saklarız">How long we keep it</span></h2>
+      <ul>
+        <li data-en="Uploaded files &amp; images: automatically deleted after 24 hours." data-tr="Yüklenen dosyalar ve görseller: 24 saat sonra otomatik silinir.">Uploaded files &amp; images: automatically deleted after 24 hours.</li>
+        <li data-en="Messages: kept until you or another participant deletes them, or the channel/server is removed." data-tr="Mesajlar: siz veya başka bir katılımcı silene ya da kanal/sunucu kaldırılana kadar tutulur.">Messages: kept until you or another participant deletes them, or the channel/server is removed.</li>
+        <li data-en="Account &amp; profile: kept until you delete your account." data-tr="Hesap ve profil: hesabınızı silene kadar tutulur.">Account &amp; profile: kept until you delete your account.</li>
+        <li data-en="Login/session &amp; IP records: kept for a limited time for security, then cleared." data-tr="Giriş/oturum ve IP kayıtları: güvenlik için sınırlı bir süre tutulur, sonra temizlenir.">Login/session &amp; IP records: kept for a limited time for security, then cleared.</li>
+      </ul>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">07</span> <span data-en="Cookies &amp; local storage" data-tr="Çerezler ve yerel depolama">Cookies &amp; local storage</span></h2>
+      <p data-en="We use two strictly-necessary httpOnly cookies (an access token and a refresh token) to keep you logged in — neither is used for tracking. The app also stores a copy of these sign-in tokens, a device identifier, and small preferences (such as your chosen language, theme and sound settings) in your browser's local storage, so the app can authenticate API requests directly. No advertising or third-party cookies are set." data-tr="Oturum açık kalmanız için kesinlikle gerekli iki httpOnly çerez (bir erişim jetonu ve bir yenileme jetonu) kullanırız — hiçbiri takip için kullanılmaz. Uygulama ayrıca, API isteklerini doğrudan doğrulayabilmek için bu oturum jetonlarının bir kopyasını, bir cihaz kimliğini ve küçük tercihleri (seçtiğiniz dil, tema ve ses ayarları gibi) tarayıcınızın yerel depolamasında saklar. Hiçbir reklam veya üçüncü taraf çerezi ayarlanmaz.">We use two strictly-necessary httpOnly cookies (an access token and a refresh token) to keep you logged in — neither is used for tracking. The app also stores a copy of these sign-in tokens, a device identifier, and small preferences (such as your chosen language, theme and sound settings) in your browser's local storage, so the app can authenticate API requests directly. No advertising or third-party cookies are set.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">08</span> <span data-en="Third-party services" data-tr="Üçüncü taraf hizmetler">Third-party services</span></h2>
+      <p data-en="disdroc keeps outside services to a minimum. The ones it does use:" data-tr="disdroc, dış hizmetleri en aza indirir. Kullandıkları şunlardır:">disdroc keeps outside services to a minimum. The ones it does use:</p>
+      <ul>
+        <li data-en="A network/CDN provider (Cloudflare) sits in front of the site to deliver it securely; it processes connection data such as IP addresses." data-tr="Sitenin önünde, onu güvenli bir şekilde sunmak için bir ağ/CDN sağlayıcısı (Cloudflare) bulunur; IP adresleri gibi bağlantı verilerini işler.">A network/CDN provider (Cloudflare) sits in front of the site to deliver it securely; it processes connection data such as IP addresses.</li>
+        <li data-en="The GIF picker fetches GIFs from a third-party GIF provider when you search; your search terms are sent to that provider to return results." data-tr="GIF seçici, arama yaptığınızda üçüncü taraf bir GIF sağlayıcısından GIF'ler getirir; sonuçları döndürmek için arama terimleriniz o sağlayıcıya gönderilir.">The GIF picker fetches GIFs from a third-party GIF provider when you search; your search terms are sent to that provider to return results.</li>
+        <li data-en="Web fonts are loaded from Google Fonts; embedded YouTube links load content from YouTube only when you choose to play them." data-tr="Web yazı tipleri Google Fonts'tan yüklenir; gömülü YouTube bağlantıları yalnızca oynatmayı seçtiğinizde YouTube'dan içerik yükler.">Web fonts are loaded from Google Fonts; embedded YouTube links load content from YouTube only when you choose to play them.</li>
+      </ul>
+      <p data-en="These providers have their own privacy policies governing the data they receive." data-tr="Bu sağlayıcıların, aldıkları verileri yöneten kendi gizlilik politikaları vardır.">These providers have their own privacy policies governing the data they receive.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">09</span> <span data-en="Security" data-tr="Güvenlik">Security</span></h2>
+      <p data-en="Passwords are stored only as salted hashes, traffic is served over HTTPS, and you can enable TOTP two-factor authentication for an extra layer. Access to personal details like emails and IP addresses is restricted to the site owner and admins with explicit permission. No system is ever perfectly secure, but we keep the surface small on purpose." data-tr="Parolalar yalnızca tuzlanmış özetler olarak saklanır, trafik HTTPS üzerinden sunulur ve ek bir katman için TOTP iki adımlı doğrulamayı etkinleştirebilirsiniz. E-postalar ve IP adresleri gibi kişisel ayrıntılara erişim, site sahibi ve açık izne sahip yöneticilerle sınırlıdır. Hiçbir sistem asla tam olarak güvenli değildir, ancak yüzeyi bilerek küçük tutuyoruz.">Passwords are stored only as salted hashes, traffic is served over HTTPS, and you can enable TOTP two-factor authentication for an extra layer. Access to personal details like emails and IP addresses is restricted to the site owner and admins with explicit permission. No system is ever perfectly secure, but we keep the surface small on purpose.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">10</span> <span data-en="Your choices &amp; rights" data-tr="Seçimleriniz ve haklarınız">Your choices &amp; rights</span></h2>
+      <p data-en="You can edit or remove most of your profile from within the app, and you can delete your account at any time — deleting it removes your profile and personal data. If you'd like a copy of the personal data we hold about you, or want help deleting it, contact us using the details below. We'll do our best to respond promptly." data-tr="Profilinizin çoğunu uygulama içinden düzenleyebilir veya kaldırabilirsiniz ve hesabınızı istediğiniz zaman silebilirsiniz — silmek profilinizi ve kişisel verilerinizi kaldırır. Hakkınızda tuttuğumuz kişisel verilerin bir kopyasını isterseniz veya silmek için yardım isterseniz, aşağıdaki bilgileri kullanarak bizimle iletişime geçin. Hızlıca yanıt vermek için elimizden geleni yapacağız.">You can edit or remove most of your profile from within the app, and you can delete your account at any time — deleting it removes your profile and personal data. If you'd like a copy of the personal data we hold about you, or want help deleting it, contact us using the details below. We'll do our best to respond promptly.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">11</span> <span data-en="Children" data-tr="Çocuklar">Children</span></h2>
+      <p data-en="disdroc is not intended for children under 13 (or the minimum age required in your country). If you believe a child has created an account, contact us and we'll remove it." data-tr="disdroc, 13 yaşından küçük çocuklar (veya ülkenizde gereken asgari yaş) için tasarlanmamıştır. Bir çocuğun hesap oluşturduğunu düşünüyorsanız bizimle iletişime geçin, kaldıralım.">disdroc is not intended for children under 13 (or the minimum age required in your country). If you believe a child has created an account, contact us and we'll remove it.</p>
+    </section>
+
+    <section class="s">
+      <h2><span class="n">12</span> <span data-en="Changes to this policy" data-tr="Bu politikadaki değişiklikler">Changes to this policy</span></h2>
+      <p data-en="If this policy changes, the “last updated” date at the top will change too. Because this is a small project, we won't always email about minor updates — please check back occasionally." data-tr="Bu politika değişirse, üstteki “son güncelleme” tarihi de değişecektir. Bu küçük bir proje olduğundan, küçük güncellemeler hakkında her zaman e-posta göndermeyiz — lütfen ara sıra tekrar kontrol edin.">If this policy changes, the “last updated” date at the top will change too. Because this is a small project, we won't always email about minor updates — please check back occasionally.</p>
+    </section>
+
+    <div class="contact">
+      <h3 data-en="Contact" data-tr="İletişim">Contact</h3>
+      <p data-en="Questions about your data or this policy? Use the feedback form on our &lt;a class=&quot;inline&quot; href=&quot;/support&quot;&gt;support page&lt;/a&gt;, and we'll get back to you." data-tr="Verileriniz veya bu politika hakkında sorularınız mı var? &lt;a class=&quot;inline&quot; href=&quot;/support&quot;&gt;Destek sayfamızdaki&lt;/a&gt; geri bildirim formunu kullanın, size geri dönelim.">Questions about your data or this policy? Use the feedback form on our <a class="inline" href="/support">support page</a>, and we'll get back to you.</p>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <div class="mono" data-en="disdroc.online — built for friends." data-tr="disdroc.online — arkadaşlar için yapıldı.">disdroc.online — built for friends.</div>
+    <div style="display:flex;gap:20px">
+      <a href="/" data-en="Home" data-tr="Ana sayfa">Home</a><a href="/who-we-are" data-en="Who we are" data-tr="Biz kimiz">Who we are</a><a href="/support" data-en="Support" data-tr="Destek">Support</a><a href="/login" data-en="Log in" data-tr="Giriş yap">Log in</a><a href="/signup" data-en="Sign up" data-tr="Kaydol">Sign up</a>
+    </div>
+  </footer>
+
+  <script src="/js/privacy.js"></script>
+</body>
+</html>

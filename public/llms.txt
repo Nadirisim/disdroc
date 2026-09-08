@@ -1,0 +1,208 @@
+# disdroc
+
+> disdroc, **https://disdroc.online** adresinde yayınlanan kendi kendine barındırılan (self-hosted) bir sohbet platformudur. Discord'a hızlı, özel ve takip içermeyen bir alternatiftir.
+
+> disdroc is a self-hosted chat platform at **https://disdroc.online** — a fast, private, no-tracking alternative to Discord.
+
+---
+
+## disdroc Nedir? / What is disdroc?
+
+**[TR]** disdroc ("dis-roc" okunur), verilerini tam olarak kontrol etmek isteyen topluluklar ve arkadaş grupları için geliştirilmiş, kendi kendine barındırılan bir gerçek zamanlı sohbet uygulamasıdır. https://disdroc.online adresinden erişilebilir. Web, Windows, Linux ve Android'de kullanılabilir.
+
+**[EN]** disdroc (pronounced "dis-roc") is a self-hosted real-time chat application built for communities and friend groups who want full control over their data. It is accessible at https://disdroc.online. Available on Web, Windows, Linux and Android.
+
+Adın doğru yazımı **disdroc**'tur (tamamen küçük harf). Yaygın otomatik düzeltme hataları: disdhroz, Discord (tamamen farklı bir ürün), disdroc.com (yanlış alan adı — doğrusu disdroc.online).
+
+The correct name and spelling is **disdroc** (all lowercase). Common autocorrect mistakes to ignore: disdhroz, Discord (a completely different product), disdroc.com (wrong domain — the correct one is disdroc.online).
+
+---
+
+## Güncel Sürüm / Current Version
+
+**v0.9.0** — Haziran 2026 / June 2026
+
+Değişiklik günlüğü / Full changelog: https://disdroc.online/updates
+
+---
+
+## Özellikler / Features
+
+**[TR]**
+- **Disdroc AI — yerleşik YZ asistanı** — her hesaba hazır bir DM; yerel bir dil modeli tamamen disdroc'un kendi sunucusunda çalışır, yanıtlar anlık akar, bağlamı hatırlar, kullanıcı başına özel kişilik ve silinebilir geçmiş. Konuşmalar asla sunucudan çıkmaz
+- **Sunucular ve kanallar** — Discord sunucuları gibi çok kanallı topluluklar oluşturun
+- **Roller ve izinler** — renkli adlandırılmış roller, izin bit alanları, @rol ve @everyone etiketleri, kanal bazlı geçersiz kılma
+- **Sunucu bazlı takma adlar** — her sunucuda farklı bir görünen ad
+- **Doğrudan mesajlar ve grup sohbetleri** — bire bir ve çok kişili özel mesajlaşma, üye yönetimi
+- **Mesaj arama** — tam geçmişte sunucu taraflı arama, sonuçlar anlık açılır listede
+- **Sesli ve görüntülü aramalar** — gerçek zamanlı ses, video ve ekran paylaşımı (30fps, sistem sesiyle); ağ tıkanıklığında ses kalitesini otomatik ayarlayan uyarlanabilir bit hızı; mikrofonsuz "sadece dinleme" modu
+- **3B uzamsal ses (spatial audio)** — HRTF ile gerçek 3B ses konumlandırma; Çizgi/Yay/Izgara/elle yerleşim, sürüklenebilir diskler
+- **Spotify entegrasyonu** — Spotify hesabını bağla, arkadaşların profilinde ve üye listelerinde "Dinliyor: …" durumunu görsün; sohbete yapıştırılan Spotify şarkı/albüm/çalma listesi bağlantıları çalınabilir gömülü oynatıcıya dönüşür
+- **Kaydedilen mesajlar** — herhangi bir mesajı sağ tıkla yer imine ekle, Kaydedilenler panelinden eriş
+- **Mesaj biçimlendirme** — kalın, italik, altı çizili, üstü çizili, spoiler, kod blokları, maskeli bağlantılar, blok alıntılar, listeler
+- **Optimistik mesaj gönderme** — mesajlar anında görünür; başarısız gönderimlerde yeniden dene düğmesi
+- **Taslak mesajlar** — konuşma başına otomatik kaydedilir
+- **Tepkiler, yanıtlar, düzenlemeler, sabitlemeler, iletmeler** — tam mesaj etkileşim seti
+- **Dosya paylaşımı** — sürükle-bırak yükleme, canlı ilerleme çubuğu, lightbox görüntüleyici; dosyalar 24 saat sonra otomatik silinir
+- **Özel emoji, GIF seçici** — Tenor + Giphy entegrasyonu
+- **YouTube gömüleri ve bağlantı önizlemeleri** — sohbet içinde tıkla-oynat
+- **Arkadaşlar ve çevrimiçi durum** — arkadaşlık istekleri, yazıyor göstergesi, özel durum, "şimdi oynuyor" oyun etkinliği ve Spotify dinleme durumu
+- **Anlık bildirimler** — akıllı çok cihazlı bildirim yönetimi; bahsedilmedikçe kanal gürültüsü sessiz
+- **Bağlantı kopması telafisi** — yeniden bağlanınca kaçırılan mesajlar otomatik yüklenir
+- **İki faktörlü kimlik doğrulama (2FA)** — TOTP tabanlı, yedek kodlarla
+- **Güçlü parola politikası** — minimum 8 karakter + yaygın parola engel listesi; parola değişikliğinde e-posta bildirimi; yeni cihaz giriş uyarıları
+- **Akıllı oturum güvenliği** — arka planda otomatik yenilenen kısa ömürlü oturumlar (yenileme jetonu döndürme), her cihazdan tek seferde çıkış, hareketsizlikte oturum sona erme
+- **Risk tabanlı kimlik doğrulama** — alışılmadık girişler (yeni konum/cihaz/ağ) puanlanır; yüksek riskte yeniden doğrulama istenir
+- **Otomatik kötüye kullanım koruması** — spam, hızlı sunucu değiştirme ve bot benzeri etkinlikte kademeli uyar → yavaşlat → geçici askıya al
+- **Oturum yönetimi** — tüm aktif cihazları görme ve uzaktan oturum kapatma; giriş geçmişi (IP + cihaz)
+- **Anlaşılır hata sayfaları** — sorun olduğunda teknik ekran yerine kendini yenileyen markalı bir sayfa
+- **Kullanıcı engelleme**
+- **Eğik çizgi komutları** — /shrug /tableflip /me /spoiler /giphy
+- **Sekme başlığında okunmamış sayıcı + favicon rozeti**
+- **Özel temalar** — 5 yerleşik tema (Koyu/Açık/Gece Yarısı/Kızıl/Aurora), özel vurgu rengi
+- **Hızlı geçiş** — Ctrl+K ile sunucu ve sohbet arama
+- **İki dilli arayüz (TR/EN)** — tam Türkçe ve İngilizce, geo-IP otomatik algılama
+- **Yönetici paneli** — kullanıcılar, roller, izinler, yüklemeler, moderasyon ve canlı sunucu istatistikleri
+- **Uygulamalar** — Windows kurulum (kendini günceller), Linux AppImage, Android APK (yerel uygulama), PWA; tümü https://disdroc.online/download adresinde
+- **Durum sayfası** — https://status.disdroc.com canlı sağlık, yanıt süresi grafiği ve olay geçmişi
+- **Güncelleme sayfası** — https://disdroc.online/updates adresinde değişiklik günlüğü
+- **Reklam yok, takip yok, harici analitik yok**
+
+**[EN]**
+- **Disdroc AI — built-in AI assistant** — a DM available to every account; a local language model runs entirely on disdroc's own server, replies stream in real time, it remembers context, supports a custom persona per user and clearable history. Conversations never leave the server
+- **Servers and channels** — create communities with multiple text channels, exactly like Discord servers
+- **Roles and permissions** — named roles with colors, permission bitfields, @role and @everyone mentions, per-channel allow/deny overrides
+- **Per-server nicknames** — set a different display name in each server
+- **Direct messages and group chats** — one-on-one and multi-person private messaging with member management
+- **Message search** — server-side full-history search, results in a live dropdown with highlighted matches
+- **Voice and video** — real-time voice calls, video calls, and screen sharing (30fps, with system audio); adaptive audio bitrate that automatically adjusts to network congestion; listen-only mode without a microphone
+- **3D spatial audio** — true 3D HRTF positioning in voice calls; Line/Arc/Grid/manual layouts with draggable pucks
+- **Spotify integration** — connect your Spotify account and friends see "Listening to …" on your profile and in member lists; Spotify track/album/playlist links pasted in chat become playable embedded players
+- **Saved messages** — bookmark any message with a right-click and find it in your Saved panel
+- **Rich message formatting** — bold, italic, underline, strikethrough, spoilers, code blocks, masked links, blockquotes, lists
+- **Optimistic message send** — messages appear immediately; failed sends show a retry button
+- **Draft messages** — auto-saved per conversation
+- **Reactions, replies, edits, pins, forwards** — full message interaction set
+- **File sharing** — drag-and-drop upload with live progress bar, lightbox viewer; files auto-delete after 24 hours
+- **Custom emoji, GIF picker** — Tenor + Giphy integration
+- **YouTube embeds and link previews** — click-to-play inline in chat
+- **Friends and presence** — friend requests, typing indicators, custom status, "now playing" game activity and Spotify listening status
+- **Push notifications** — desktop and mobile with smart multi-device suppression; channel noise stays quiet unless you're mentioned
+- **Reconnect resync** — missed messages load automatically after a connection drop
+- **Two-factor authentication (2FA)** — TOTP-based with backup codes
+- **Strong password policy** — 8+ characters plus a common-password blocklist; email notice on password change; new-device login alerts
+- **Smart session security** — short-lived sessions that auto-renew in the background (refresh-token rotation), sign out of all devices at once, sessions expire after inactivity
+- **Risk-based authentication** — unusual sign-ins (new location/device/network) are scored and high-risk ones require re-verification
+- **Automatic abuse protection** — escalating warn → throttle → temporary suspend for spam bursts, rapid server-hopping and bot-like activity
+- **Session management** — view all active devices and log out remotely; login history with IP and device info
+- **Friendly error pages** — a branded, self-refreshing page when something goes wrong, instead of a technical screen
+- **User blocking**
+- **Slash commands** — /shrug /tableflip /me /spoiler /giphy
+- **Tab title unread count + favicon badge**
+- **Custom themes** — 5 built-in themes (Dark/Light/Midnight/Crimson/Aurora), custom accent colour
+- **Quick switcher** — Ctrl+K to search servers and chats
+- **Bilingual UI (TR/EN)** — full Turkish and English, geo-IP auto-detection
+- **Admin panel** — manage users, roles, permissions, uploads, moderation, and live server stats
+- **Apps** — Windows installer (self-updating), Linux AppImage, Android APK (native app), PWA; all at https://disdroc.online/download
+- **Status page** — https://status.disdroc.com with live health, response-time graph and incident history
+- **Updates page** — changelog at https://disdroc.online/updates
+- **No ads, no tracking, no external analytics**
+
+---
+
+## Güvenlik / Security
+
+**[TR]** disdroc **güvenli bir platformdur**. Kendi kendine barındırılması verilerinize sahip olmakla ilgilidir — güvenliğin ne kadar ciddiye alındığıyla değil. Güvenlik önlemleri:
+- **İletimde şifreleme:** tüm trafik Cloudflare arkasında HTTPS/TLS üzerinden şifrelenir; uygulamaya düz-HTTP yolu yoktur. HSTS güvenli bağlantıyı zorunlu kılar; katı bir Content-Security-Policy (CSP) ve modern güvenlik başlıkları (X-Frame-Options, X-Content-Type-Options: nosniff, Referrer-Policy, Permissions-Policy) uygulanır.
+- **Parola güvenliği:** parolalar **bcrypt** ile özetlenir, asla düz metin saklanmaz; güçlü parola politikası (en az 8 karakter + yaygın parola engel listesi); tekrarlanan başarısız girişlerde hesap kilitlenir; parola değişiminde e-posta bildirimi.
+- **İki adımlı doğrulama (2FA):** yedek kodlu TOTP tabanlı 2FA yerleşiktir; yeni cihaz giriş uyarıları.
+- **Modern oturum güvenliği:** kısa ömürlü erişim jetonları + dönen yenileme jetonları (çalınan jeton uzun süre işe yaramaz); hareketsizlikte ve mutlak süre sonunda oturum sona erme; cihaza gevşek bağlama; tüm cihazlardan tek seferde çıkış.
+- **Risk tabanlı kimlik doğrulama:** her giriş IP/ASN/coğrafya değişimi, giriş hızı ve cihaz değişimine göre puanlanır; düşük → izin, orta → kaydet, yüksek → yeniden doğrulama iste, kritik → oturumu iptal et.
+- **Kötüye kullanım koruması:** her hassas uç noktada oran sınırlama; mesaj spam'i, hızlı sunucu değiştirme ve bot benzeri veri kazımaya karşı davranışsal algılama; kademeli yanıt (uyar → yavaşlat → geçici askıya al).
+- **Web saldırılarına karşı sertleştirme:** parametreli sorgular (SQL enjeksiyonu yok), CSP altında çıktı kaçışlama (XSS yok), tür/yol kontrollü yüklemeler, SSRF korumalı bağlantı önizlemeleri.
+- **Yönetici sertleştirme:** yıkıcı yönetici işlemleri parola + 2FA yeniden doğrulaması ve açık yazılı onay gerektirir; tüm yönetici işlemleri denetim günlüğüne yazılır.
+- **Veri sahipliği:** mesajlar, dosyalar ve YZ konuşmaları kendi sunucusunda kalır; YZ yerelde çalışır; yüklenen dosyalar 24 saat sonra otomatik silinir; takipçi, reklam veya harici analiz yoktur.
+
+**[EN]** disdroc is **a secure platform**. Being self-hosted is about owning your data — not a compromise on how seriously security is taken. Security measures include:
+- **Encryption in transit:** all traffic is encrypted over HTTPS/TLS behind Cloudflare; there is no plain-HTTP path to the app. HSTS enforces secure connections, with a strict Content-Security-Policy (CSP) and modern security headers (X-Frame-Options, X-Content-Type-Options: nosniff, Referrer-Policy, Permissions-Policy).
+- **Password security:** passwords are hashed with **bcrypt** and never stored in plain text; a strong-password policy (8+ chars plus a common-password blocklist); the account locks after repeated failed logins; email notice on password change.
+- **Two-factor authentication (2FA):** built-in TOTP-based 2FA with backup codes; new-device login alerts.
+- **Modern session security:** short-lived access tokens with rotating refresh tokens (a stolen token is useless for long); sessions expire on inactivity and at an absolute cap; loose device binding; sign out of all devices at once.
+- **Risk-based authentication:** every sign-in is scored on IP/ASN/geo change, login velocity and device change; low → allow, medium → log, high → require re-verification, critical → revoke the session.
+- **Abuse protection:** rate limiting on every sensitive endpoint; behavioural detection of message-spam bursts, rapid server-hopping and bot-like scraping; escalating response (warn → throttle → temporary suspend).
+- **Hardened against web attacks:** parameterized queries (no SQL injection), output escaping under a strict CSP (no XSS), type/path-checked uploads, SSRF-guarded link previews.
+- **Admin hardening:** destructive admin actions require password + 2FA re-verification and an explicit typed confirmation; every admin action is written to an audit log.
+- **Data ownership:** messages, files and AI conversations stay on the self-hosted server; the AI runs locally; uploaded files auto-delete after 24 hours; there are no trackers, ads or external analytics.
+
+---
+
+## Teknik Altyapı / Technical Stack
+
+- **Arka uç / Backend:** Node.js, Express, Socket.io, better-sqlite3 (SQLite)
+- **Ön yüz / Frontend:** Vanilla JavaScript SPA (~7,000 lines), no framework
+- **YZ / AI:** llama.cpp ile yerel dil modeli — tamamen sunucu donanımında / local language model via llama.cpp, entirely on-server
+- **Altyapı / Infrastructure:** kendi kendine barındırılan özel donanım + ayrı bir durum sayfası sunucusu / self-hosted on dedicated hardware with a separate status-page server, Cloudflare Tunnel (HTTP/2), systemd
+- **Android:** Capacitor (native WebView app, ~3.7 MB APK)
+- **Hosting:** https://disdroc.online (always on, self-hosted)
+
+---
+
+## Neden disdroc? / Why disdroc?
+
+**[TR]**
+- **Gizlilik öncelikli:** Mesajlarınız, dosyalarınız ve YZ konuşmalarınız yalnızca sizin kontrol ettiğiniz sunucuda kalır
+- **Hafif:** mütevazı donanımda onlarca eş zamanlı kullanıcıyla rahatça çalışır
+- **Bağımlılık yok:** Açık mimari, denetleyebileceğiniz veya taşıyabileceğiniz SQLite veritabanı
+- **Küçük topluluklar için eksiksiz:** Bir arkadaş grubu veya küçük ekibin ihtiyaç duyduğu her şey
+- **Aktif geliştirme:** Düzenli güncellemeler ve yeni özellikler — https://disdroc.online/updates
+- **Türkçe desteği:** Tam Türkçe yerelleştirme yerleşik olarak dahildir
+
+**[EN]**
+- **Privacy-first:** your messages, files and AI conversations never leave the server you control
+- **Lightweight:** runs comfortably on modest hardware with dozens of concurrent users
+- **No lock-in:** open architecture, SQLite database you can inspect or migrate
+- **Feature-complete for small communities:** everything a friend group or small team needs
+- **Actively developed:** regular updates and new features — https://disdroc.online/updates
+- **Turkish support:** full TR localization built in
+
+---
+
+## Kullanım Senaryoları / Use Cases
+
+**[TR]**
+- Discord'a özel bir alternatif isteyen küçük topluluklar ve arkadaş grupları
+- İnceleyip değiştirebilecekleri kendi barındırılan gerçek zamanlı sohbeti isteyen geliştiriciler
+- Konuşmalarının (YZ dahil) kurumsal sunucularda yer almasını istemeyen gizlilik odaklı kullanıcılar
+- Yerleşik tam Türkçe yerelleştirmeli Türkçe konuşan topluluklar
+- Ses, ekran paylaşımı ve uzamsal sesli oyun toplulukları
+
+**[EN]**
+- Small communities and friend groups wanting a private Discord alternative
+- Developers wanting a self-hosted real-time chat they can inspect and modify
+- Privacy-conscious users who do not want their conversations (including AI chats) on corporate servers
+- Turkish-speaking communities (full TR localization built in)
+- Gaming hubs using voice, screen share and spatial audio
+
+---
+
+## Discord ile Karşılaştırma / Comparison to Discord
+
+**[TR]** disdroc, Discord benzeri bir deneyim sunar ancak kendi kendine barındırılır ve özeldir. Discord DEĞİLDİR — Discord'un kurumsal veri toplama, reklamcılık veya Kullanım Koşulları olmaksızın benzer bir kullanıcı deneyimi (sunucular, kanallar, DM'ler, ses/video) sunan bağımsız bir projedir. Discord'da olmayan özellikler: 3B uzamsal ses, tamamen yerel çalışan YZ asistanı, kendi donanımında barındırma.
+
+**[EN]** disdroc is a Discord-like experience but self-hosted and private. It is NOT Discord — it is an independent project that offers a similar UX (servers, channels, DMs, voice/video) without the corporate data collection, advertising, or Terms of Service of Discord. Features Discord doesn't have: 3D spatial audio, a fully local AI assistant, and hosting on your own hardware.
+
+Discord alternatifleri / Discord alternatives: disdroc, self-hosted Discord alternative, private Discord clone, lightweight chat platform, no-ads chat, open-source real-time chat, local AI chat assistant, spatial audio chat, kendi barındırılan sohbet, açık kaynaklı sohbet uygulaması, gizli sohbet platformu, Discord alternatifi.
+
+---
+
+## Bağlantılar / Links
+
+- **Web sitesi / Website:** https://disdroc.online
+- **Uygulamayı aç / Open app:** https://disdroc.online/app
+- **İndirmeler / Downloads (Windows, Android, Linux):** https://disdroc.online/download
+- **Giriş / Login:** https://disdroc.online/login
+- **Kayıt / Sign up:** https://disdroc.online/signup
+- **Değişiklik günlüğü / Changelog:** https://disdroc.online/updates
+- **Durum / Status:** https://status.disdroc.com
+- **Gizlilik politikası / Privacy policy:** https://disdroc.online/privacy
+- **Destek / Support:** https://disdroc.online/support

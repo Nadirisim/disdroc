@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title>disdroc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="/api/manifest.json">
+  <meta name="theme-color" content="#5865f2">
+  <link rel="apple-touch-icon" href="/assets/icon-192.png?v=2">
+  <link rel="stylesheet" href="/vendor/highlight/atom-one-dark.min.css">
+  <script defer src="/vendor/highlight/highlight.min.js"></script>
+</head>
+<body class="app-page">
+  <div id="appLoading" style="position:fixed;inset:0;background:#0e1015;z-index:9999;display:grid;place-items:center;color:#8a90a3">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div class="load-dot" style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#5865f2,#00a8fc)"></div>
+      <div style="font-size:14px">Loading…</div>
+    </div>
+  </div>
+  <div id="announceBanner" class="announce-banner" style="display:none"></div>
+
+  <div class="app" id="app">
+    <nav class="server-rail" id="serverRail">
+      <button class="rail-icon home active" data-view="home" title="Home">DM</button>
+      <div class="rail-divider"></div>
+      <div id="serverIcons"></div>
+      <button class="rail-icon plus" id="newServerBtn" title="Add server">+</button>
+      <button class="rail-icon discover" id="discoverServersBtn" title="Discover Servers"></button>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-search">
+        <button type="button" id="sidebarSearch" class="sidebar-search-btn">Find or start a conversation</button>
+      </div>
+      <div id="sidebarContent"></div>
+      <div class="voice-panel" id="voicePanel" style="display:none"></div>
+      <div class="user-panel" id="userPanel">
+        <div class="up-me" id="userPanelMe">
+          <div class="member-avatar-wrap">
+            <div class="avatar small" id="meAvatar">··</div>
+            <span class="status-dot status-online up-status"></span>
+          </div>
+          <div class="up-info">
+            <div id="meName">…</div>
+            <div class="muted" id="meRole"></div>
+          </div>
+        </div>
+        <div class="up-actions">
+          <button class="ghost icon-btn" id="panelMicBtn" title="Mute"></button>
+          <button class="ghost icon-btn" id="panelDeafenBtn" title="Deafen"></button>
+          <button class="ghost icon-btn" id="settingsBtn" data-icon="settings" title="User Settings"></button>
+          <button class="ghost icon-btn" id="profileBtn" data-icon="settings" title="Edit profile" style="display:none"></button>
+          <button class="ghost icon-btn" id="logoutBtn" title="Log out">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <div class="lhs">
+          <button id="sidebarToggle" class="toggle-btn" title="Toggle sidebar">☰</button>
+          <div>
+            <div class="title" id="chatTitle">Welcome</div>
+            <div class="muted" id="chatSub"></div>
+          </div>
+        </div>
+        <div class="rhs">
+          <div class="hd-actions" id="chatActions"></div>
+          <button id="mobileSearchBtn" class="ghost icon-btn" title="Search" data-icon="search"></button>
+          <div class="header-search"><input id="headerSearch" placeholder="Search" autocomplete="off"></div>
+          <button id="inboxBtn" class="ghost icon-btn" title="Inbox — your mentions" data-icon="inbox"></button>
+        </div>
+      </header>
+      <div id="mainContent" style="display:flex;flex-direction:column;flex:1;min-height:0">
+        <div id="voiceBar" class="voice-bar" style="display:none"></div>
+        <div id="pinnedBar" class="pinned-bar" style="display:none"></div>
+        <div class="messages" id="messages"></div>
+        <button type="button" id="jumpBottom" class="jump-bottom" title="Jump to present">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <span>Jump to present</span>
+        </button>
+        <div class="typing" id="typing"></div>
+        <div id="attachPreview" class="attach-preview"></div>
+        <div id="slowmodeBanner" class="slowmode-banner" style="display:none"></div>
+        <div id="voiceNoteIndicator" class="voice-note-indicator" style="display:none"></div>
+        <span id="charCount" class="char-count" style="display:none"></span>
+        <form class="composer" id="composer">
+          <button type="button" class="ghost icon-btn" id="attachBtn" data-icon="circle-plus" title="Attach a file (5MB · 5/day · 24h)"></button>
+          <input type="file" id="fileInput" hidden multiple>
+          <input id="msgInput" placeholder="Message…" autocomplete="off" maxlength="2000">
+          <button type="button" class="ghost icon-btn" id="gifBtn" data-icon="gif" title="GIF"></button>
+          <button type="button" class="ghost icon-btn" id="emojiBtn" data-icon="smile" title="Emoji"></button>
+          <button type="submit" id="msgSend"><span class="send-label">Send</span><span class="mobile-send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></span></button>
+        </form>
+      </div>
+      <div id="friendsPanel" class="friends-page" style="display:none"></div>
+    </main>
+
+    <aside class="right" id="rightPanel"></aside>
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+    <div class="right-scrim" id="rightScrim"></div>
+
+    <nav id="mobileTabbar" class="mobile-tabbar" aria-label="Mobile navigation">
+      <button type="button" class="mobile-tab active" data-mobile-tab="home"><span class="mobile-tab-icon" data-tab-icon="message"></span><span data-tab-label="home"></span></button>
+      <button type="button" class="mobile-tab" data-mobile-tab="friends"><span class="mobile-tab-icon" data-tab-icon="users"></span><span data-tab-label="friends"></span></button>
+      <button type="button" class="mobile-tab" data-mobile-tab="notifications"><span class="mobile-tab-icon" data-tab-icon="inbox"></span><span data-tab-label="notifications"></span></button>
+      <button type="button" class="mobile-tab" data-mobile-tab="you"><span id="mobileTabAvatar" class="mobile-tab-avatar">··</span><span data-tab-label="you"></span></button>
+    </nav>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/i18n.js"></script>
+  <!-- Before app.js: the call controls check window.VoiceFX.isSupported() while
+       building the first voice bar, so the engine has to already be defined. -->
+  <script src="/js/voicefx.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/tour.js"></script>
+  <script src="/js/spatial.js"></script>
+</body>
+</html>

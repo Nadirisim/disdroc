@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Sign up — disdroc" data-tr="Kaydol — disdroc">Sign up — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/marketing.css">
+</head>
+<body class="auth-page auth-site">
+  <header class="public-bar">
+    <a class="public-brand" href="/"><img src="/assets/icon-64.png?v=2" alt="">disdroc</a>
+    <div class="public-bar-tools">
+      <a class="public-back" href="/" data-en="Back to home" data-tr="Ana sayfaya dön">Back to home</a>
+      <div class="public-lang" id="langToggle" role="group" aria-label="Language / Dil">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="tr">TR</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <section class="auth-context">
+      <div>
+        <p class="page-kicker" data-en="One account, every screen" data-tr="Tek hesap, her ekran">One account, every screen</p>
+        <h1 data-en="A place for your people, without the platform tax." data-tr="İnsanların için platform bedeli olmayan bir yer.">A place for your people, without the platform tax.</h1>
+        <p class="auth-context-copy" data-en="Create servers, talk in channels and jump into calls. Every feature is available from day one." data-tr="Sunucular kur, kanallarda konuş ve aramalara katıl. Her özellik ilk günden kullanılabilir.">Create servers, talk in channels and jump into calls. Every feature is available from day one.</p>
+      </div>
+      <p class="auth-context-note" data-en="Free forever, with no ads, boosts or paid gates." data-tr="Reklamsız, takviyesiz ve ücretli kapılar olmadan sonsuza dek ücretsiz.">Free forever, with no ads, boosts or paid gates.</p>
+    </section>
+
+    <section class="auth-workspace">
+    <form class="auth-card" id="signupForm">
+      <h2 data-en="Create account" data-tr="Hesap oluştur">Create account</h2>
+      <p class="muted" data-en="Email is required — we use it for login codes." data-tr="E-posta gereklidir — giriş kodları için kullanırız.">Email is required — we use it for login codes.</p>
+      <label for="username" data-en="Username" data-tr="Kullanıcı adı">Username</label>
+      <input id="username" name="username" autocomplete="username" required pattern="^[a-zA-Z0-9_]{3,20}$" data-attr="title" data-en="3–20 chars, letters/numbers/underscore" data-tr="3–20 karakter; harf/rakam/alt çizgi" title="3–20 chars, letters/numbers/underscore">
+      <label for="email" data-en="Email" data-tr="E-posta">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="birthdate" data-en="Date of birth" data-tr="Doğum tarihi">Date of birth</label>
+      <input id="birthdate" name="birthdate" type="date" autocomplete="bday" required>
+      <p class="muted auth-helper" data-en="Used to age-restrict explicit content — you must be 18+ to view or send it." data-tr="Müstehcen içeriği yaş sınırına tabi tutmak için kullanılır — görüntülemek/göndermek için 18+ olmalısınız.">Used to age-restrict explicit content — you must be 18+ to view or send it.</p>
+      <label for="password" data-en="Password" data-tr="Parola">Password</label>
+      <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+      <p class="muted auth-helper" data-en="At least 8 characters." data-tr="En az 8 karakter.">At least 8 characters.</p>
+      <div class="error" id="err"></div>
+      <button type="submit" data-en="Create account" data-tr="Hesap oluştur">Create account</button>
+      <div class="alt" data-en="Already have one? &lt;a href=&quot;/login&quot;&gt;Log in&lt;/a&gt;" data-tr="Zaten hesabın var mı? &lt;a href=&quot;/login&quot;&gt;Giriş yap&lt;/a&gt;">Already have one? <a href="/login">Log in</a></div>
+    </form>
+
+    <form class="auth-card" id="verifyForm" style="display:none">
+      <h2 data-en="Check your email" data-tr="E-postanı kontrol et">Check your email</h2>
+      <p class="muted" data-en="We sent a 6-digit code. It expires in 10 minutes." data-tr="6 haneli bir kod gönderdik. 10 dakika içinde geçerliliğini yitirir.">We sent a 6-digit code. It expires in 10 minutes.</p>
+      <label for="vcode" data-en="Verification code" data-tr="Doğrulama kodu">Verification code</label>
+      <input id="vcode" name="code" inputmode="numeric" pattern="\d{6}" autocomplete="one-time-code" required maxlength="6">
+      <div class="error" id="verr"></div>
+      <button type="submit" data-en="Verify &amp; log in" data-tr="Doğrula ve giriş yap">Verify &amp; log in</button>
+      <div class="alt">
+        <button type="button" class="link-btn" id="resendCodeBtn" data-en="Resend code" data-tr="Kodu tekrar gönder">Resend code</button>
+        &nbsp;·&nbsp;
+        <button type="button" class="link-btn" id="verifyBackBtn" data-en="Back" data-tr="Geri">Back</button>
+      </div>
+    </form>
+    </section>
+  </main>
+  <script src="/js/lang.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

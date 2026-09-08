@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Leaving disdroc" data-tr="disdroc'tan ayrılıyorsun">Leaving disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/marketing.css">
+</head>
+<body class="public-page notice-page">
+  <header class="public-bar">
+    <a class="public-brand" href="/"><img src="/assets/icon-64.png?v=2" alt="">disdroc</a>
+    <div class="public-lang" id="langToggle" role="group" aria-label="Language / Dil">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="tr">TR</button>
+    </div>
+  </header>
+
+  <main class="notice-shell leaving-shell">
+    <div class="notice-index" aria-hidden="true">↗</div>
+    <div class="notice-copy">
+      <p class="page-kicker" data-en="External link" data-tr="Harici bağlantı">External link</p>
+      <h1 data-en="You're about to leave disdroc." data-tr="disdroc'tan ayrılmak üzeresin.">You're about to leave disdroc.</h1>
+      <p class="notice-lede"
+       data-en="A user shared this link in chat. &lt;strong style=&quot;color:var(--warn)&quot;&gt;disdroc has not verified it.&lt;/strong&gt; Don't proceed unless you trust the sender — third-party sites can host phishing, malware, or scams."
+       data-tr="Bir kullanıcı bu bağlantıyı sohbette paylaştı. &lt;strong style=&quot;color:var(--warn)&quot;&gt;disdroc bunu doğrulamadı.&lt;/strong&gt; Göndereni güvenmediğin sürece devam etme — üçüncü taraf siteler kimlik avı, kötü amaçlı yazılım veya dolandırıcılık barındırabilir.">
+      A user shared this link in chat. <strong style="color:var(--warn)">disdroc has not verified it.</strong>
+      Don't proceed unless you trust the sender — third-party sites can host phishing, malware, or scams.
+    </p>
+
+      <div class="destination" id="leavingCard">
+        <div class="destination-label" data-en="Destination" data-tr="Hedef">Destination</div>
+        <div class="destination-host" id="leavingHost">…</div>
+        <div class="destination-url" id="leavingUrl"></div>
+      </div>
+
+      <div class="invalid-note" id="invalidNote" style="display:none"
+         data-en="This URL doesn't look like a valid &lt;code&gt;http&lt;/code&gt; or &lt;code&gt;https&lt;/code&gt; address. The link was not opened."
+         data-tr="Bu URL geçerli bir &lt;code&gt;http&lt;/code&gt; ya da &lt;code&gt;https&lt;/code&gt; adresi gibi görünmüyor. Bağlantı açılmadı.">
+      This URL doesn't look like a valid <code>http</code> or <code>https</code> address. The link was not opened.
+      </div>
+
+      <div class="notice-actions">
+        <button class="public-button" id="continueBtn" data-en="Continue to site" data-tr="Siteye devam et">Continue to site</button>
+        <button class="public-button secondary" id="cancelBtn" data-en="Cancel" data-tr="İptal">Cancel</button>
+      </div>
+
+      <p class="notice-foot"
+       data-en="Tip: if a link looks suspicious — fake login pages, unexpected addresses, &quot;free money&quot; schemes — go back and report the message via its ⋯ menu."
+       data-tr="İpucu: bir bağlantı şüpheli görünüyorsa — sahte giriş sayfaları, beklenmedik adresler, &quot;bedava para&quot; tuzakları — geri dön ve mesajı ⋯ menüsünden bildir.">
+      Tip: if a link looks suspicious — fake login pages, unexpected addresses, "free money" schemes — go back and report the message via its ⋯ menu.
+      </p>
+    </div>
+  </main>
+
+  <script src="/js/lang.js"></script>
+  <script src="/js/leaving.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Connect Minecraft — disdroc" data-tr="Minecraft'ı bağla — disdroc">Connect Minecraft — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .mc-code-input {
+      width:100%; box-sizing:border-box; margin:14px 0 4px; padding:14px 12px;
+      font-size:26px; font-weight:700; letter-spacing:.28em; text-align:center;
+      text-transform:uppercase; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);
+      border-radius:10px; color:#e6e8ee;
+    }
+    .mc-code-input:focus { outline:none; border-color:#7aa2ff; }
+    .mc-hint { color:#8b93a7; font-size:13px; margin-top:10px; }
+    #go { width:100%; margin-top:14px; }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="brand" style="margin-bottom:16px"><span class="dot"></span> disdroc</div>
+      <h2 data-en="Connect Minecraft" data-tr="Minecraft'ı bağla">Connect Minecraft</h2>
+      <p class="muted" data-en="Type <code>/link</code> in game, then enter the code it gives you below." data-tr="Oyun içinde <code>/link</code> yaz, ardından sana verdiği kodu aşağıya gir.">Type <code>/link</code> in game, then enter the code it gives you below.</p>
+
+      <form id="form" autocomplete="off">
+        <input id="code" class="mc-code-input" inputmode="latin" autocapitalize="characters"
+               spellcheck="false" maxlength="6" placeholder="ABC123"
+               aria-label="Link code" data-en="Link code" data-tr="Bağlantı kodu" data-attr="aria-label">
+        <div class="error" id="err"></div>
+        <button id="go" type="submit" data-en="Continue" data-tr="Devam et">Continue</button>
+      </form>
+
+      <p class="mc-hint" data-en="On Bedrock you can't tap chat links — that's why you enter the code here." data-tr="Bedrock'ta sohbetteki bağlantılara dokunamazsın — bu yüzden kodu buraya giriyorsun.">On Bedrock you can't tap chat links — that's why you enter the code here.</p>
+      <div class="alt"><a href="/app" data-en="Open disdroc" data-tr="disdroc'u aç">Open disdroc</a></div>
+    </div>
+  </div>
+  <script src="/js/lang.js"></script>
+  <script src="/js/mc-code.js"></script>
+</body>
+</html>

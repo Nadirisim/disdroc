@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title data-en="disdroc — account suspended" data-tr="disdroc — hesap askıya alındı">disdroc — account suspended</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/marketing.css">
+</head>
+<body class="public-page notice-page">
+  <header class="public-bar">
+    <a class="public-brand" href="/"><img src="/assets/icon-64.png?v=2" alt="">disdroc</a>
+    <div class="public-lang" id="langToggle" role="group" aria-label="Language / Dil">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="tr">TR</button>
+    </div>
+  </header>
+
+  <main class="notice-shell">
+    <div class="notice-index" aria-hidden="true">403</div>
+    <div class="notice-copy">
+      <p class="page-kicker" data-en="Account notice" data-tr="Hesap bildirimi">Account notice</p>
+      <h1 id="title">Access blocked</h1>
+      <div class="notice-lede"><p id="lede"></p></div>
+      <div class="notice-reason" id="reasonBox" style="display:none">
+      <div class="label" id="reasonLabel" data-en="Reason" data-tr="Sebep">Reason</div>
+      <div class="text" id="reasonText"></div>
+      </div>
+      <div class="notice-actions">
+        <button type="button" class="public-button" id="appealToggle" data-en="Appeal this ban" data-tr="Bu yasağa itiraz et">Appeal this ban</button>
+        <a class="public-button secondary" href="/" data-en="Back to disdroc" data-tr="disdroc'a dön">Back to disdroc</a>
+      </div>
+      <form class="notice-appeal" id="appealForm" style="display:none;margin-top:16px">
+        <p class="muted" style="font-size:13px" data-en="Confirm it's your account, then explain why this ban should be reconsidered. A moderator reviews every appeal." data-tr="Önce hesabın olduğunu doğrula, sonra bu yasağın neden yeniden değerlendirilmesi gerektiğini açıkla. Her itirazı bir moderatör inceler.">Confirm it's your account, then explain why this ban should be reconsidered. A moderator reviews every appeal.</p>
+        <input type="text" id="appealIdentifier" autocomplete="username" required data-attr="placeholder" data-en="Username or email" data-tr="Kullanıcı adı veya e-posta" placeholder="Username or email">
+        <input type="password" id="appealPassword" autocomplete="current-password" required data-attr="placeholder" data-en="Password" data-tr="Şifre" placeholder="Password">
+        <textarea id="appealMessage" rows="4" required maxlength="1000" data-attr="placeholder" data-en="Why should this ban be lifted?" data-tr="Bu yasak neden kaldırılmalı?" placeholder="Why should this ban be lifted?"></textarea>
+        <div class="notice-actions">
+          <button type="submit" class="public-button" id="appealSubmit" data-en="Submit appeal" data-tr="İtirazı gönder">Submit appeal</button>
+        </div>
+        <p id="appealStatus" style="font-size:13px;margin-top:8px"></p>
+        <p style="font-size:12px;margin-top:10px"><a href="mailto:help@disdroc.com?subject=Ban%20appeal" data-en="Prefer email instead?" data-tr="E-posta ile mi ulaşmak istersin?">Prefer email instead?</a></p>
+      </form>
+      <p class="notice-foot" id="sub"></p>
+    </div>
+  </main>
+<script src="/js/lang.js"></script>
+<script src="/js/banned.js"></script>
+</body>
+</html>

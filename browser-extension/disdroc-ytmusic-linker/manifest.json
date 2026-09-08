@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "disdroc YouTube Music Linker",
+  "version": "1.0.0",
+  "description": "Links your YouTube Music account to disdroc without manually copying request headers. Only acts when armed with a one-time code from your own disdroc server.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["webRequest", "storage"],
+  "host_permissions": [
+    "*://music.youtube.com/*",
+    "https://disdroc.com/*"
+  ]
+}

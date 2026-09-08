@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Developer Portal — disdroc" data-tr="Geliştirici Portalı — disdroc">Developer Portal — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .dev-page { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    .dev-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; gap: 12px; flex-wrap: wrap; }
+    .dev-title { display: flex; align-items: center; gap: 10px; }
+    .bot-app-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--border, #333); border-radius: 10px; margin-bottom: 10px; cursor: pointer; }
+    .bot-app-card:hover { background: var(--bg-2, #20222a); }
+    .bot-app-card img.bot-avatar { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: #444; flex-shrink: 0; }
+    .bot-app-meta { flex: 1; min-width: 0; }
+    .bot-app-meta h4 { margin: 0 0 2px; }
+    .bot-app-meta p { margin: 0; font-size: 13px; opacity: .7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dev-empty { opacity: .7; padding: 20px 0; }
+    .token-banner { background: var(--bg-2, #20222a); border: 1px solid var(--accent, #5865f2); border-radius: 8px; padding: 12px; margin: 10px 0; }
+    .token-value { font-family: monospace; word-break: break-all; user-select: all; padding: 8px; background: rgba(0,0,0,.25); border-radius: 6px; margin: 8px 0; }
+    .dev-tabs { display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--border, #333); }
+    .dev-tab { background: none; border: none; padding: 8px 12px; cursor: pointer; opacity: .6; border-bottom: 2px solid transparent; }
+    .dev-tab.active { opacity: 1; border-bottom-color: var(--accent, #5865f2); }
+    .danger-zone { border: 1px solid #f23f43; border-radius: 8px; padding: 12px; margin-top: 10px; }
+  </style>
+</head>
+<body style="overflow:auto">
+  <div class="dev-page">
+    <div class="dev-header">
+      <div class="dev-title">
+        <span class="dot"></span>
+        <h2 style="margin:0" data-en="Developer Portal" data-tr="Geliştirici Portalı">Developer Portal</h2>
+      </div>
+      <button id="createBtn" type="button" data-en="New Application" data-tr="Yeni Uygulama">New Application</button>
+    </div>
+    <p class="muted-text" style="margin-top:-10px;margin-bottom:20px"
+       data-en="Create a bot, grab its token, and invite it into any server you manage. Read the <a href=&quot;/bot-docs&quot;>Bot API guide</a> for the full endpoint reference (or the <a href=&quot;/bot-api-llms.txt&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>plain-text version</a> to paste into an LLM), or skip the code entirely with a ready-made bot from the <a href=&quot;/bots&quot;>Bot Marketplace</a>. Wrote your own script but don't want to run a server for it? <a href=&quot;/bot-hosting&quot;>Community Bot Hosting</a> will run it for you, sandboxed."
+       data-tr="Bir bot oluştur, jetonunu al ve yönettiğin herhangi bir sunucuya davet et. Uç noktaların tam listesi için <a href=&quot;/bot-docs&quot;>Bot API rehberi</a>'ni oku (ya da bir yapay zekâya yapıştırmak için <a href=&quot;/bot-api-llms.txt&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>düz metin sürümünü</a> kullan) veya kod yazmayı tamamen atlayıp <a href=&quot;/bots&quot;>Bot Marketi</a>'nden hazır bir bot ekle. Kendi betiğini yazdın ama onun için sunucu çalıştırmak istemiyor musun? <a href=&quot;/bot-hosting&quot;>Topluluk Bot Barındırma</a> onu senin için yalıtılmış şekilde çalıştırır.">
+      Create a bot, grab its token, and invite it into any server you manage. Read the
+      <a href="/bot-docs">Bot API guide</a> for the full endpoint reference (or the
+      <a href="/bot-api-llms.txt" target="_blank" rel="noopener">plain-text version</a> to paste into an LLM),
+      or skip the code entirely with a ready-made bot from the <a href="/bots">Bot Marketplace</a>. Wrote your
+      own script but don't want to run a server for it? <a href="/bot-hosting">Community Bot Hosting</a> will
+      run it for you, sandboxed.
+    </p>
+    <div id="appList"></div>
+    <p class="dev-empty" id="empty" style="display:none" data-en="You haven't created any bot applications yet." data-tr="Henüz hiç bot uygulaması oluşturmadın.">You haven't created any bot applications yet.</p>
+  </div>
+  <div id="modalRoot"></div>
+  <script src="/js/lang.js"></script>
+  <script src="/js/api-client.js"></script>
+  <script src="/js/developers.js"></script>
+</body>
+</html>

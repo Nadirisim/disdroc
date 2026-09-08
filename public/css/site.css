@@ -1,0 +1,55 @@
+:root{
+  --site-violet:#6b4aef;
+  --site-violet-bright:#7c5cff;
+  --site-mint:#5fd1c4;
+  --site-mint-deep:#1d9a8c;
+  --site-bg:#f4f1ec;
+  --site-panel:#fbf9f6;
+  --site-ink:#211d2b;
+  --site-ink-2:#5f596c;
+  --site-ink-3:#948e9f;
+  --site-line:rgba(33,29,43,.14);
+}
+body{
+  background:var(--site-bg);color:var(--site-ink);
+  font-family:'Schibsted Grotesk',system-ui,sans-serif;
+}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+a{color:var(--site-violet)}
+.auth-page{
+  background:
+    radial-gradient(650px 420px at 12% -8%, rgba(124,92,255,.14), transparent 60%),
+    radial-gradient(500px 360px at 106% 108%, rgba(95,209,196,.18), transparent 60%),
+    var(--site-bg);
+}
+.auth-card{
+  background:var(--site-panel);
+  border:1px solid var(--site-line);border-radius:16px;
+  box-shadow:0 40px 80px -40px rgba(107,74,239,.3),0 16px 36px -24px rgba(33,29,43,.35);
+  color:var(--site-ink);
+}
+.auth-card::before{background:linear-gradient(90deg,var(--site-violet-bright),var(--site-mint))}
+.auth-card .brand,.brand{color:var(--site-ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:800}
+.brand .dot{background:var(--site-violet-bright)}
+.auth-card h2{color:var(--site-ink)}
+.auth-card .muted,.muted{color:var(--site-ink-2)}
+.auth-card label{color:var(--site-ink)}
+.auth-card input,.auth-card select,.auth-card textarea,input,select,textarea{
+  background:#fff;border:1px solid var(--site-line);color:var(--site-ink);border-radius:9px;
+}
+.auth-card input:focus,input:focus,select:focus,textarea:focus{border-color:var(--site-violet);outline:none;box-shadow:0 0 0 3px rgba(124,92,255,.18)}
+.auth-card input::placeholder{color:var(--site-ink-3)}
+.auth-card button[type=submit],button.primary,.cta .primary{
+  background:var(--site-violet);color:#fbf9f6;border:none;border-radius:10px;font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -3px 0 rgba(30,12,90,.38),0 2px 0 rgba(33,29,43,.18);
+}
+.auth-card button[type=submit]:hover,button.primary:hover,.cta .primary:hover{background:var(--site-violet-bright);filter:none}
+.auth-card .alt{color:var(--site-ink-2)}
+.auth-card .alt a{color:var(--site-violet);font-weight:600}
+button.link-btn{color:var(--site-violet)}
+.error{color:#c23c3c}
+.cta .secondary{background:var(--site-panel);color:var(--site-ink);border:1px solid var(--site-line)}
+.feature{background:var(--site-panel);border:1px solid var(--site-line)}
+.feature p{color:var(--site-ink-2)}
+.footer{color:var(--site-ink-2)}
+.announce-banner{background:linear-gradient(90deg,var(--site-violet-bright),var(--site-mint))}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Log in — disdroc" data-tr="Giriş yap — disdroc">Log in — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/marketing.css">
+</head>
+<body class="auth-page auth-site">
+  <header class="public-bar">
+    <a class="public-brand" href="/"><img src="/assets/icon-64.png?v=2" alt="">disdroc</a>
+    <div class="public-bar-tools">
+      <a class="public-back" href="/" data-en="Back to home" data-tr="Ana sayfaya dön">Back to home</a>
+      <div class="public-lang" id="langToggle" role="group" aria-label="Language / Dil">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="tr">TR</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <section class="auth-context">
+      <div>
+        <p class="page-kicker" data-en="Private by default" data-tr="Baştan sona özel">Private by default</p>
+        <h1 data-en="Pick up where your people left off." data-tr="İnsanlarınla kaldığın yerden devam et.">Pick up where your people left off.</h1>
+        <p class="auth-context-copy" data-en="Your servers, messages and calls stay on hardware disdroc runs itself — never an ad network." data-tr="Sunucuların, mesajların ve aramaların disdroc'un kendi işlettiği donanımda kalır — bir reklam ağında değil.">Your servers, messages and calls stay on hardware disdroc runs itself — never an ad network.</p>
+      </div>
+      <p class="auth-context-note" data-en="No premium tier. No tracking. The same account works on web, desktop and Android." data-tr="Premium katman yok. Takip yok. Aynı hesap web, masaüstü ve Android'de çalışır.">No premium tier. No tracking. The same account works on web, desktop and Android.</p>
+    </section>
+
+    <section class="auth-workspace">
+    <form class="auth-card" id="loginForm">
+      <h2 data-en="Welcome back" data-tr="Tekrar hoş geldin">Welcome back</h2>
+      <p class="muted" data-en="Log in to keep chatting." data-tr="Sohbete devam etmek için giriş yap.">Log in to keep chatting.</p>
+      <label for="email" data-en="Email" data-tr="E-posta">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="password" data-en="Password" data-tr="Parola">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <div class="error" id="err"></div>
+      <button type="submit" data-en="Log in" data-tr="Giriş yap">Log in</button>
+      <div class="alt" data-en="No account? &lt;a href=&quot;/signup&quot;&gt;Sign up&lt;/a&gt;" data-tr="Hesabın yok mu? &lt;a href=&quot;/signup&quot;&gt;Kaydol&lt;/a&gt;">No account? <a href="/signup">Sign up</a></div>
+      <div class="alt" style="margin-top:8px" data-en="&lt;a href=&quot;/forgot-password&quot;&gt;Forgot password?&lt;/a&gt;" data-tr="&lt;a href=&quot;/forgot-password&quot;&gt;Parolamı unuttum&lt;/a&gt;"><a href="/forgot-password">Forgot password?</a></div>
+      <div class="alt" style="margin-top:8px"><button type="button" id="showQrBtn" class="link-btn" data-en="Log in with QR code" data-tr="QR kod ile giriş yap">Log in with QR code</button></div>
+    </form>
+
+    <div class="auth-card" id="qrCard" style="display:none;text-align:center">
+      <h2 data-en="Scan to log in" data-tr="Giriş için tara">Scan to log in</h2>
+      <p class="muted" data-en="Open disdroc on your phone → Settings → Sessions → Scan QR code." data-tr="Telefonunda disdroc'u aç → Ayarlar → Oturumlar → QR kod tara.">Open disdroc on your phone → Settings → Sessions → Scan QR code.</p>
+      <img id="qrImg" alt="QR code" style="width:220px;height:220px;margin:12px auto;display:block;border-radius:8px;background:#fff;padding:8px">
+      <div class="error" id="qerr"></div>
+      <div class="alt" style="margin-top:8px"><button type="button" id="showPasswordBtn" class="link-btn" data-en="Log in with password instead" data-tr="Bunun yerine parola ile giriş yap">Log in with password instead</button></div>
+    </div>
+
+    <form class="auth-card" id="verifyForm" style="display:none">
+      <h2 data-en="Verify your email" data-tr="E-postanı doğrula">Verify your email</h2>
+      <p class="muted" data-en="We sent a 6-digit code to your email. It expires in 10 minutes." data-tr="E-postana 6 haneli bir kod gönderdik. 10 dakika içinde geçerliliğini yitirir.">We sent a 6-digit code to your email. It expires in 10 minutes.</p>
+      <label for="vcode" data-en="Verification code" data-tr="Doğrulama kodu">Verification code</label>
+      <input id="vcode" name="code" inputmode="numeric" pattern="\d{6}" autocomplete="one-time-code" required maxlength="6">
+      <div class="error" id="verr"></div>
+      <button type="submit" data-en="Verify &amp; log in" data-tr="Doğrula ve giriş yap">Verify &amp; log in</button>
+      <div class="alt">
+        <button type="button" class="link-btn" id="resendCodeBtn" data-en="Resend code" data-tr="Kodu tekrar gönder">Resend code</button>
+        &nbsp;·&nbsp;
+        <button type="button" class="link-btn" id="verifyBackBtn" data-en="Back" data-tr="Geri">Back</button>
+      </div>
+    </form>
+
+    <form class="auth-card" id="twofaForm" style="display:none">
+      <h2 id="tfaTitle">Two-factor auth</h2>
+      <p class="muted" id="tfaHint"></p>
+      <!-- Title/hint/label are written by showTwoFaForm() in auth.js (they depend
+           on whether this is the authenticator or the email path), so they
+           deliberately carry no data-en/data-tr — lang.js would reset them. -->
+      <label for="tcode" id="tfaLabel">Code</label>
+      <input id="tcode" name="code" inputmode="numeric" pattern="\d{6}" autocomplete="one-time-code" required maxlength="6">
+      <div class="error" id="terr"></div>
+      <button type="submit" data-en="Verify" data-tr="Doğrula">Verify</button>
+      <div id="tfaSwitch" style="display:none;margin-top:14px;text-align:center">
+        <button type="button" id="tfaSwitchBtn" class="link-btn" style="font-size:13px;color:var(--muted)"></button>
+      </div>
+    </form>
+    </section>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/lang.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

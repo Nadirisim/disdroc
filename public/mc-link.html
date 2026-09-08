@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Connect Minecraft — disdroc" data-tr="Minecraft'ı bağla — disdroc">Connect Minecraft — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .mc-bind { display:flex; align-items:center; justify-content:center; gap:14px; margin:18px 0 6px; }
+    .mc-node { flex:1; min-width:0; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+               border-radius:10px; padding:12px 10px; text-align:center; }
+    .mc-node .lbl { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:#8b93a7; }
+    .mc-node .val { font-weight:650; margin-top:4px; word-break:break-word; }
+    .mc-node.mc .val { color:#7ee0a8; }
+    .mc-node.dd .val { color:#7aa2ff; }
+    .mc-link-ico { flex:0 0 auto; color:#8b93a7; }
+    .mc-actions { display:flex; gap:10px; margin-top:18px; }
+    .mc-actions button { flex:1; }
+    .btn-ghost { background:rgba(255,255,255,0.06); color:#e6e8ee; }
+    .mc-ok { color:#7ee0a8; font-weight:650; }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card" id="card">
+      <div class="brand" style="margin-bottom:16px"><span class="dot"></span> disdroc</div>
+      <h2 id="title">Connect Minecraft…</h2>
+      <p class="muted" id="desc">Checking your link request…</p>
+
+      <div id="bind" class="mc-bind" style="display:none">
+        <div class="mc-node mc"><div class="lbl">Minecraft</div><div class="val" id="mcName">—</div></div>
+        <svg class="mc-link-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <div class="mc-node dd"><div class="lbl">disdroc</div><div class="val" id="ddName">—</div></div>
+      </div>
+
+      <div class="error" id="err"></div>
+
+      <div class="mc-actions" id="actions" style="display:none">
+        <button class="btn-ghost" id="denyBtn" type="button" data-en="Deny" data-tr="Reddet">Deny</button>
+        <button id="approveBtn" type="button" data-en="Connect account" data-tr="Hesabı bağla">Connect account</button>
+      </div>
+
+      <div class="alt"><a href="/login" id="loginLink" style="display:none" data-en="Log in to disdroc first" data-tr="Önce disdroc'a giriş yap">Log in to disdroc first</a></div>
+      <div class="alt"><a href="/app" data-en="Open disdroc" data-tr="disdroc'u aç">Open disdroc</a></div>
+    </div>
+  </div>
+  <script src="/js/lang.js"></script>
+  <script src="/js/mc-link.js"></script>
+</body>
+</html>

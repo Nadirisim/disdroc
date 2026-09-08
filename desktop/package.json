@@ -1,0 +1,34 @@
+{
+  "name": "disdroc-desktop",
+  "version": "0.6.1",
+  "description": "disdroc desktop client",
+  "main": "main.js",
+  "author": "disdroc",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:linux": "electron-builder --linux --x64",
+    "build": "npm run build:linux && npm run build:win"
+  },
+  "build": {
+    "appId": "online.disdroc.desktop",
+    "productName": "disdroc",
+    "files": ["main.js", "picker.html", "picker-preload.js", "desktop-preload.js", "games.json", "package.json", "assets/**/*"],
+    "directories": { "output": "dist" },
+    "win": {
+      "target": "portable",
+      "artifactName": "disdroc-windows.exe",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Network",
+      "artifactName": "disdroc-linux.AppImage",
+      "icon": "assets/icon-256.png"
+    }
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

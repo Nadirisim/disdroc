@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Community Bot Hosting — disdroc" data-tr="Topluluk Bot Barındırma — disdroc">Community Bot Hosting — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .dev-page { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    .dev-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+    .dev-title { display: flex; align-items: center; gap: 10px; }
+    .script-card { border: 1px solid var(--border, #333); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+    .script-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .script-name { font-weight: 600; }
+    .status-pill { font-size: 12px; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border, #333); }
+    .status-pill.pending { color: #e0a326; border-color: #e0a326; }
+    .status-pill.approved { color: #3ba55c; border-color: #3ba55c; }
+    .status-pill.rejected { color: #ed4245; border-color: #ed4245; }
+    .status-pill.listed { color: #5865f2; border-color: #5865f2; }
+    .script-reason { font-size: 13px; opacity: .8; margin-top: 6px; }
+    .script-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .code-input { width: 100%; min-height: 260px; font-family: ui-monospace, monospace; font-size: 13px; resize: vertical; }
+    .log-pane { background: rgba(0,0,0,.25); border-radius: 6px; padding: 8px 10px; height: 160px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 12px; white-space: pre-wrap; margin-top: 8px; }
+    .dev-empty { opacity: .7; padding: 20px 0; }
+    .warn-box { font-size: 13px; color: #e0a326; margin-top: 6px; }
+    .config-field-row { border: 1px solid var(--border, #333); border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+    .config-field-row .row1 { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .config-field-row .row2 { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+    .config-field-row input, .config-field-row select { margin: 0; }
+    .config-field-row .req-label { display: flex; align-items: center; gap: 4px; font-size: 12px; white-space: nowrap; }
+    .config-empty { opacity: .65; font-size: 13px; padding: 4px 0 10px; }
+    .runtime-picker { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .runtime-option { display: flex; align-items: flex-start; gap: 8px; border: 1px solid var(--border, #333); border-radius: 8px; padding: 10px 12px; flex: 1 1 220px; cursor: pointer; font-weight: normal; }
+    .runtime-option input { margin-top: 3px; }
+    .runtime-option div { display: flex; flex-direction: column; gap: 2px; }
+    .runtime-option span { font-size: 12px; opacity: .75; font-weight: normal; }
+    .runtime-badge { font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border, #333); opacity: .8; }
+  </style>
+</head>
+<body style="overflow:auto">
+  <div class="dev-page">
+    <div class="dev-header">
+      <div class="dev-title">
+        <span class="dot"></span>
+        <h2 style="margin:0" data-en="Community Bot Hosting" data-tr="Topluluk Bot Barındırma">Community Bot Hosting</h2>
+      </div>
+    </div>
+    <p class="muted-text" style="margin-top:-4px;margin-bottom:20px"
+       data-en="Paste your bot's token and your own JavaScript, and we'll run it for you — sandboxed, no server of your own required. Create a bot in the <a href=&quot;/developers&quot;>Developer Portal</a> first if you haven't. New and edited scripts are reviewed by an admin before they go live. Read the <a href=&quot;/bot-docs#hosting&quot;>hosting guide</a> for the exact script shape and what <code>api.*</code> calls are available."
+       data-tr="Botunun jetonunu ve kendi JavaScript kodunu yapıştır, biz senin için çalıştıralım — yalıtılmış ortamda, kendi sunucuna gerek kalmadan. Henüz yapmadıysan önce <a href=&quot;/developers&quot;>Geliştirici Portalı</a>'ndan bir bot oluştur. Yeni ve düzenlenen betikler yayına girmeden önce bir yönetici tarafından incelenir. Betiğin tam olarak nasıl görünmesi gerektiğini ve hangi <code>api.*</code> çağrılarının kullanılabildiğini <a href=&quot;/bot-docs#hosting&quot;>barındırma rehberi</a>'nde bulabilirsin.">
+      Paste your bot's token and your own JavaScript, and we'll run it for you — sandboxed, no server of your own
+      required. Create a bot in the <a href="/developers">Developer Portal</a> first if you haven't. New and edited
+      scripts are reviewed by an admin before they go live. Read the <a href="/bot-docs#hosting">hosting guide</a>
+      for the exact script shape and what <code>api.*</code> calls are available.
+    </p>
+
+    <div class="card" style="margin-bottom:24px">
+      <h3 style="margin-top:0" data-en="Submit a script" data-tr="Betik gönder">Submit a script</h3>
+      <label><span data-en="Bot application" data-tr="Bot uygulaması">Bot application</span>
+        <select id="botAppSelect"></select>
+      </label>
+      <label><span data-en="Name" data-tr="Ad">Name</span>
+        <input id="scriptName" maxlength="60" placeholder="My auto-role bot"
+               data-en="My auto-role bot" data-tr="Otomatik rol botum" data-attr="placeholder">
+      </label>
+      <label data-en="Runtime" data-tr="Çalışma ortamı">Runtime</label>
+      <div class="runtime-picker" id="runtimePicker">
+        <label class="runtime-option"><input type="radio" name="runtime" value="isolated-vm" checked>
+          <div><strong>isolated-vm</strong><span data-en="Plain JavaScript only — no <code>require</code>, no timers, no Node core modules. The original, lightest-weight sandbox." data-tr="Yalnızca düz JavaScript — <code>require</code> yok, zamanlayıcı yok, Node çekirdek modülleri yok. En hafif, orijinal sanal alan.">Plain JavaScript only — no <code>require</code>, no timers, no Node core modules. The original, lightest-weight sandbox.</span></div>
+        </label>
+        <label class="runtime-option"><input type="radio" name="runtime" value="node">
+          <div><strong>Node.js</strong><span data-en="Real Node — <code>setTimeout</code>/timers work, plus a few core modules (crypto, util, path, ...). No filesystem or network access either way — everything still goes through <code>api.*</code>." data-tr="Gerçek Node — <code>setTimeout</code>/zamanlayıcılar çalışır, ayrıca birkaç çekirdek modül (crypto, util, path, ...). Her iki durumda da dosya sistemi veya ağ erişimi yok — her şey yine <code>api.*</code> üzerinden geçer.">Real Node — <code>setTimeout</code>/timers work, plus a few core modules (crypto, util, path, ...). No filesystem or network access either way — everything still goes through <code>api.*</code>.</span></div>
+        </label>
+      </div>
+      <label><span data-en="Script" data-tr="Betik">Script</span>
+        <textarea id="scriptCode" class="code-input" placeholder="module.exports.onMessage = async function(text, m, config) {
+  if (text.trim() === '!ping') await api.reply(m.chat_id, 'pong');
+};"></textarea>
+      </label>
+      <div id="submitWarnings" class="warn-box"></div>
+      <p class="error" id="submitError"></p>
+      <button id="submitBtn" type="button" data-en="Submit for review" data-tr="İncelemeye gönder">Submit for review</button>
+    </div>
+
+    <h3 data-en="Your scripts" data-tr="Betiklerin">Your scripts</h3>
+    <div id="scriptList"></div>
+    <p class="dev-empty" id="empty" style="display:none" data-en="You haven't submitted any scripts yet." data-tr="Henüz hiç betik göndermedin.">You haven't submitted any scripts yet.</p>
+  </div>
+  <div id="modalRoot"></div>
+  <script src="/js/lang.js"></script>
+  <script src="/js/api-client.js"></script>
+  <script src="/js/bot-hosting.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Choose what to share</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font: 14px system-ui, sans-serif;
+    background: #15151a; color: #efece4;
+    display: flex; flex-direction: column; height: 100vh;
+  }
+  header { padding: 16px 20px 8px; }
+  header h1 { margin: 0; font-size: 16px; font-weight: 600; }
+  header p { margin: 4px 0 0; color: #8a8a92; font-size: 12px; }
+  .grid {
+    flex: 1; overflow-y: auto; padding: 12px 20px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; align-content: start;
+  }
+  .src {
+    background: #1c1c22; border: 2px solid transparent; border-radius: 10px;
+    padding: 8px; cursor: pointer; text-align: left;
+    display: flex; flex-direction: column; gap: 6px; min-width: 0;
+  }
+  .src:hover { border-color: #34343f; background: #24242c; }
+  .src:focus-visible { outline: none; border-color: #b8a4ff; }
+  .src img {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+    background: #0a0a0c; border-radius: 6px; display: block;
+  }
+  .src .name {
+    font-size: 12px; color: #c5c1b8; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .empty, .loading { padding: 40px; text-align: center; color: #8a8a92; }
+  footer {
+    padding: 12px 20px; border-top: 1px solid #25252d;
+    display: flex; justify-content: flex-end; gap: 8px;
+  }
+  button.act {
+    font: inherit; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid #34343f; background: #1c1c22; color: #efece4; cursor: pointer;
+  }
+  button.act:hover { background: #24242c; }
+</style>
+</head>
+<body>
+  <header>
+    <h1 id="title">Choose what to share</h1>
+    <p id="subtitle">Pick a screen or a window to share with your call.</p>
+  </header>
+  <div class="grid" id="grid"><div class="loading" id="loading">Loading sources…</div></div>
+  <footer><button class="act" id="cancel">Cancel</button></footer>
+  <script>
+    const grid = document.getElementById('grid');
+    // Strings resolve from the same `disdroc_lang` preference as the web app —
+    // see desktop/locale.js and picker-preload.js.
+    const t = (k) => (window.picker && window.picker.t ? window.picker.t(k) : null);
+    const setText = (id, key) => {
+      const v = t(key);
+      const el = document.getElementById(id);
+      if (v && el) el.textContent = v;
+    };
+    setText('title', 'picker.title');
+    setText('subtitle', 'picker.subtitle');
+    setText('loading', 'picker.loading');
+    setText('cancel', 'picker.cancel');
+    document.title = t('picker.title') || document.title;
+
+    document.getElementById('cancel').onclick = () => window.picker.cancel();
+
+    (async () => {
+      let sources = [];
+      try { sources = await window.picker.list(); } catch (e) {}
+      grid.innerHTML = '';
+      if (!sources.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = t('picker.empty') || 'No screens or windows available to share.';
+        grid.append(empty);
+        return;
+      }
+      for (const s of sources) {
+        const btn = document.createElement('button');
+        btn.className = 'src';
+        btn.onclick = () => window.picker.choose(s.id);
+        const img = document.createElement('img');
+        if (s.thumb) img.src = s.thumb;
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = s.name;
+        btn.append(img, name);
+        grid.append(btn);
+      }
+    })();
+  </script>
+</body>
+</html>

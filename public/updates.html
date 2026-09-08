@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="What's New — disdroc" data-tr="Yenilikler — disdroc">What's New — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .up-wrap { max-width: 740px; margin: 0 auto; padding: 28px 20px 80px; }
+    .up-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .up-head .brand { font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .up-lang { display: flex; gap: 6px; }
+    .up-lang button { background: var(--bg-3, #2b2d31); border: 1px solid var(--border, #3a3c41); color: var(--muted, #b5bac1); border-radius: 8px; padding: 5px 10px; cursor: pointer; font-size: 13px; }
+    .up-lang button.active { background: var(--accent, #5865f2); color: #fff; border-color: transparent; }
+    .up-current { background: var(--bg-3, #2b2d31); border: 1px solid var(--border, #3a3c41); border-radius: 16px; padding: 22px 24px 18px; margin-bottom: 36px; }
+    .up-current-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent, #5865f2); margin-bottom: 6px; }
+    .up-current-ver { font-size: 28px; font-weight: 700; color: var(--text-bright, #fff); margin-bottom: 4px; }
+    .up-current-date { font-size: 13px; color: var(--muted, #b5bac1); }
+    .release { margin-bottom: 40px; }
+    .rel-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border, #3a3c41); }
+    .rel-ver { font-size: 18px; font-weight: 700; color: var(--text-bright, #fff); }
+    .rel-badge { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+    .rel-badge.latest { background: var(--accent, #5865f2); color: #fff; }
+    .rel-badge.stable { background: var(--ok, #23a55a); color: #fff; }
+    .rel-badge.legacy { background: var(--bg-4, #3a3c41); color: var(--muted, #b5bac1); }
+    .rel-date { font-size: 13px; color: var(--muted, #b5bac1); margin-left: auto; }
+    .rel-group { margin-bottom: 18px; }
+    .rel-group-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted, #b5bac1); margin-bottom: 8px; }
+    .rel-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .rel-item { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--text, #dbdee1); }
+    .rel-item .ri-icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font-size: 12px; margin-top: 2px; }
+    .ri-icon.feat { background: rgba(88,101,242,.18); color: var(--accent, #5865f2); }
+    .ri-icon.fix  { background: rgba(35,165,90,.18);  color: var(--ok, #23a55a); }
+    .rel-item strong { color: var(--text-bright, #fff); font-weight: 600; }
+    .rel-item a { color: var(--accent, #5865f2); }
+    .up-foot { margin-top: 24px; font-size: 13px; }
+    .up-foot a { color: var(--accent, #5865f2); text-decoration: none; }
+    .up-foot a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body style="overflow:auto">
+  <div class="up-wrap">
+
+    <div class="up-head">
+      <div class="brand"><span class="dot"></span> disdroc</div>
+      <div class="up-lang" id="langToggle">
+        <button data-lang="en">EN</button>
+        <button data-lang="tr">TR</button>
+      </div>
+    </div>
+
+    <div class="up-current">
+      <div class="up-current-label" data-i18n="latestLabel">Latest release</div>
+      <div class="up-current-ver"></div>
+      <div class="up-current-date"></div>
+    </div>
+
+    <div id="changelog"></div>
+
+    <div class="up-foot">
+      <a href="/app" data-i18n="backToApp">← Back to disdroc</a>
+    </div>
+  </div>
+
+  <script src="/js/updates.js"></script>
+</body>
+</html>

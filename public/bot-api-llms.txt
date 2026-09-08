@@ -1,0 +1,301 @@
+# disdroc Bot API — reference for LLMs
+
+> Paste this whole file into an LLM (ChatGPT, Claude, etc.) along with a request like
+> "write me a disdroc bot that welcomes new members" or "write a disdroc bot that
+> replies to !roll with a random number." The LLM should use ONLY the endpoints and
+> event names documented below — do not invent endpoints, headers, or payload fields
+> that aren't listed here.
+
+## What disdroc is
+
+disdroc (https://disdroc.com) is a self-hosted, Discord-like real-time chat
+platform (servers, channels, DMs, voice/video). It exposes a bot API: create a bot
+application in the Developer Portal, get a secret token, add the bot to a server you
+manage, then talk to it over REST and/or Socket.IO exactly as described below.
+
+## Instructions for the LLM writing the bot
+
+1. Use `Authorization: Bot <token>` as the auth header on every REST call under
+   `/api/bot/v1/*`. Do not use `Bearer` — that scheme is for human logins, not bots.
+2. The base URL is `https://disdroc.com` unless the user tells you they're
+   running a different instance — if so, substitute their URL everywhere below.
+3. Prefer Socket.IO for anything that reacts to events in real time (new messages,
+   new members joining). Use the plain REST send endpoint only for one-shot,
+   no-listening sends (e.g. a cron job).
+4. A message must contain at least one of: `content` (text), an `embed`, or an
+   attachment. It cannot be completely empty.
+5. Never fabricate a `dbot_` token — that only comes from the human's own Developer
+   Portal at https://disdroc.com/developers. Tell the user to get one there and
+   paste it into the code (e.g. as an environment variable), don't invent a
+   placeholder that looks real.
+6. Message content is capped at 2000 characters; embed title at 256; embed
+   description at 1000.
+
+## Step-by-step: how a human sets up the bot this code will run as
+
+1. Go to https://disdroc.com/developers, log in, click "New Application".
+2. Copy the token shown ONCE (`dbot_...`) — if lost, regenerate it from the app's
+   Token tab (this invalidates the old one immediately).
+3. Copy the app's invite link (shown on its Overview tab, `/bot-invite/<appId>`) and
+   open it while logged into a server you manage (owner, admin, or a role with
+   Manage Server) — this adds the bot as a normal member with the base `member`
+   role. Give it a different/higher role the same way you'd promote a person, via
+   the server's Roles settings, if it needs to do more.
+4. Run the bot's code with that token.
+
+## Authentication
+
+Header on every `/api/bot/v1/*` request:
+
+    Authorization: Bot dbot_your_token_here
+
+For the Socket.IO connection, pass the same token as the `auth.token` option (see
+below) — do not put it in a query string or a normal HTTP header there.
+
+There is no OAuth, no scopes, no "intents" system in v1. A bot's capabilities are
+exactly whatever permissions its server role grants — same permission system as a
+human member (view channels, send messages, etc., per-channel overrides included).
+
+## REST endpoints (bot-facing, all under /api, all require the Bot header above)
+
+### GET /bot/v1/me
+Returns the bot's own identity.
+Response: `{ "id": 1, "username": "bot_ab12cd", "displayName": "My Bot", "tag": "1234", "avatarPath": null }`
+
+### GET /bot/v1/servers
+Servers the bot is currently a member of.
+Response: `{ "servers": [ { "id": 1, "name": "...", "description": "...", "icon_path": null } ] }`
+
+### GET /bot/v1/servers/:id
+One server's detail plus the channels the bot can view.
+Response: `{ "server": { "id": 1, "name": "...", "memberCount": 12, "channels": [ { "id": 5, "name": "general", "type": "channel" } ] } }`
+
+### GET /bot/v1/channels
+Every chat the bot can currently see: DMs, groups, and server channels, flattened
+into one array. Call this once at startup to know which chat IDs to `chat:join`
+over the socket.
+Response: `{ "channels": [ { "id": 5, "type": "channel", "name": "general", "server_id": 1 }, { "id": 9, "type": "dm", "name": null } ] }`
+
+### GET /bot/v1/channels/:id/messages
+Recent message history for one channel, oldest-to-newest in the response array.
+Query params (both optional): `before` (ms-epoch timestamp, default = now — paginate
+backwards by passing the oldest `created_at` you've seen), `limit` (1–100, default 50).
+Response: `{ "messages": [ { "id": 100, "chat_id": 5, "content": "hi", "created_at": 1234567890000, "kind": "text", "user_id": 2, "username": "alice", "display_name": "Alice", "tag": "0420", "is_bot": 0 } ] }`
+
+### POST /bot/v1/channels/:id/messages
+Send exactly one message. This is a one-shot REST convenience for bots that don't
+want to hold a socket open (e.g. a cron-triggered notifier) — it does NOT support
+attachments, replies, or polls; use the Socket.IO `message:send` event for those.
+Request body (JSON): `{ "content": "text here", "embed": { ... } }` — `content` alone,
+`embed` alone, or both; see the Embeds section for the embed shape.
+Response on success: `{ "ok": true, "message": { ...the created message object... } }`
+Response on failure: HTTP 400 with `{ "error": "empty" | "forbidden" | "no_send" | "rate_limited" | "slowmode" | "locked" | "bad_embed" | ... }`
+
+## Voice playback (outbound audio only)
+
+These routes let the bot appear as a normal audio-only peer in a server voice
+channel. The bot publishes audio but does not receive/process human audio, video,
+or screen shares. Joining requires the bot to be a server member that can view the
+voice channel; the normal voice mute, timeout, and join-rate checks also apply.
+
+### POST /bot/v1/voice/:channelId/join
+Joins the voice channel. Response: `{ "joined": true, "channelId": 5 }`.
+
+### POST /bot/v1/voice/:channelId/play
+Starts/replaces playback while joined. Body: `{ "url": "https://example.com/audio.mp3" }`
+(the field name `audioUrl` is also accepted). The URL must use public HTTP(S) on
+port 80 or 443. Audio in a video source is accepted; only its audio track is sent.
+Response: `{ "playing": true, "channelId": 5, "audioUrl": "https://..." }`.
+
+### POST /bot/v1/voice/:channelId/stop
+Stops the current source and remains joined. Response includes `stopped` (boolean).
+
+### POST /bot/v1/voice/:channelId/leave
+Stops playback, leaves voice, and closes every peer connection.
+
+Only one source is supported at a time; there is no queue or playlist. A server
+where the optional voice-bot WebRTC component is not installed returns HTTP 503
+with `{ "error": "voice_bot_unavailable" }` from all four routes.
+
+## Members, roles & moderation (requires the bot to hold the matching permission)
+
+Grant the bot a server role with the needed permission (Manage Roles / Kick Members /
+Ban Members / Timeout Members) the same way you'd promote a person, then:
+
+### GET /bot/v1/servers/:id/members
+All members, each with a `role_ids` array.
+
+### GET /bot/v1/servers/:id/roles
+All roles in the server. Response also includes `myPerms` — the bot's own effective
+permission bitfield in that server.
+
+### GET /bot/v1/servers/:id/members/:uid/perms
+Response: `{ "permissions": <bitfield>, "role_ids": [...] }` — a specific MEMBER's
+permissions (not the bot's own). Check this for whoever typed a command before
+acting on their behalf, so the bot can't be puppeted into moderating someone the
+invoking human has no authority over.
+
+### PUT /bot/v1/servers/:id/members/:uid/roles/:roleId
+Adds one role to a member. Requires Manage Roles, and the role must sit below the
+bot's own highest role (same hierarchy rule as the human-facing role UI).
+
+### DELETE /bot/v1/servers/:id/members/:uid/roles/:roleId
+Removes one role from a member. Same requirements as above.
+
+### DELETE /bot/v1/servers/:id/members/:uid
+Kicks a member. Requires Kick Members. Body (optional): `{ "reason": "..." }`.
+
+### POST /bot/v1/servers/:id/members/:uid/ban
+Bans a member. Requires Ban Members. Body (optional): `{ "reason": "..." }`.
+
+### GET /bot/v1/servers/:id/bans
+Lists current bans. Requires Ban Members.
+
+### DELETE /bot/v1/servers/:id/bans/:uid
+Unbans a member. Requires Ban Members.
+
+### POST /bot/v1/servers/:id/members/:uid/timeout
+Times out (temporarily mutes) a member. Requires Timeout Members.
+Body: `{ "minutes": 10, "reason": "..." }` — `minutes: 0` clears an existing timeout.
+
+All of the mutating routes above (roles/kick/ban/timeout) share a separate rate
+limit of 30 calls/minute per bot app, independent of the message-send limit.
+
+## What bots cannot do (don't claim otherwise)
+
+- No file/image upload endpoint for bots — an embed's `imageUrl` must point to an
+  image the bot's own code hosts somewhere else (any public http(s) URL). The bot
+  API cannot attach a locally-stored file to a message.
+- No slash-command/interaction system (no "register a /command with Discord-style
+  autocomplete") — a bot that wants commands should just parse `message.content`
+  itself (e.g. check for a `!` prefix), same as the example below does.
+- No OAuth scopes or per-bot permission model beyond the normal server role system.
+
+## Embeds
+
+An embed is a small rich card (title, description, image, accent color) attached to
+a message, similar to a Discord embed. Pass it as the `embed` field on
+`POST /bot/v1/channels/:id/messages` or the socket's `message:send` payload:
+
+    {
+      "content": "",
+      "embed": {
+        "title": "Deploy finished",
+        "description": "Build #482 shipped in 41s.",
+        "imageUrl": "https://your-host.example/screenshot.png",
+        "color": "#57f287"
+      }
+    }
+
+Rules: `imageUrl` must start with `http://` or `https://` if present. `color` must be
+a 6-digit hex string like `#57f287`, otherwise it's ignored (default accent is used).
+All embed fields are optional but at least one of `title`/`description`/`imageUrl`
+must be non-empty, OR the message must have non-empty `content`/an attachment —
+a completely empty message is rejected with `{"error":"empty"}` or `{"error":"bad_embed"}`.
+
+## Real-time: Socket.IO
+
+Connect to the same origin as the REST API, authenticating with the bot token:
+
+    const { io } = require('socket.io-client');
+    const socket = io('https://disdroc.com', { auth: { token: 'dbot_your_token_here' } });
+
+Events to emit:
+- `chat:join` — payload: a chat id (number). Call once per chat id returned by
+  `GET /bot/v1/channels` so the bot receives `message:new` for it.
+- `message:send` — payload: `{ chatId, content, embed? }` (accepts an ack callback
+  with the same response shape as the REST send endpoint).
+
+Events to listen for:
+- `message:new` — fires for every message posted in a chat the bot has joined,
+  INCLUDING the bot's own messages. IMPORTANT: this payload does NOT carry an
+  `is_bot` field (that's a common mistake) — fetch the bot's own id once from
+  `GET /bot/v1/me` at connect time and compare `msg.user_id` to it, skipping the
+  bot's own messages, or it will reply to itself in a loop.
+- `member:joined` — payload: `{ serverId, user: { id, username, displayName, tag,
+  avatarPath }, joinedAt }`. Fires whenever anyone joins a server the bot is a
+  member of. Use this for auto-role or welcome-message bots.
+
+## Rate limits and other constraints
+
+- Creating or regenerating a bot application (human-side, Developer Portal): 20 per
+  hour per account.
+- Message content: 2000 characters max. Embed title: 256 characters. Embed
+  description: 1000 characters.
+- Sending messages: subject to the same abuse-detection ladder as a human account
+  (escalating warn → throttle → temporary suspend on sustained bursts) plus
+  per-channel slowmode if the channel has one configured — a `429`-style
+  `{"error":"rate_limited"}` or `{"error":"slowmode","retryAfter":N}` means back off.
+- `GET .../messages` `limit` is capped at 100 per call; paginate with `before`.
+- A bot only sees/can post in channels its assigned server role can view/post in —
+  the exact same per-channel permission overrides that apply to human members.
+
+## Full example: an echo + ping bot (Node.js)
+
+    npm install socket.io-client
+
+    const { io } = require('socket.io-client');
+    const TOKEN = process.env.DISDROC_BOT_TOKEN; // dbot_...
+    const BASE = 'https://disdroc.com';
+
+    const socket = io(BASE, { auth: { token: TOKEN } });
+    let selfId = null;
+
+    socket.on('connect', async () => {
+      console.log('connected as bot');
+      const me = await fetch(BASE + '/api/bot/v1/me', { headers: { Authorization: 'Bot ' + TOKEN } }).then(r => r.json());
+      selfId = me.id;
+      const { channels } = await fetch(BASE + '/api/bot/v1/channels', {
+        headers: { Authorization: 'Bot ' + TOKEN },
+      }).then(r => r.json());
+      channels.forEach(c => socket.emit('chat:join', c.id));
+    });
+
+    socket.on('message:new', (msg) => {
+      if (msg.user_id === selfId) return; // never react to your own messages
+      if (msg.content === '!ping') {
+        socket.emit('message:send', { chatId: msg.chat_id, content: 'pong' });
+      } else if (msg.content?.startsWith('!echo ')) {
+        socket.emit('message:send', { chatId: msg.chat_id, content: msg.content.slice(6) });
+      }
+    });
+
+## Community Bot Hosting (running the bot without the human's own server)
+
+If the human doesn't want to run this code themselves, they can paste the token
+AND the script's source into https://disdroc.com/bot-hosting and disdroc
+runs it for them, sandboxed. Things to know if you're writing code for that:
+- An admin reviews new scripts (and any edit to one) before they run — this can
+  take a while, it's not instant.
+- The sandbox has NO `require`, NO `process`, NO filesystem, and NO network access
+  of its own — only a global `api` object is available. Do NOT write `require(...)`,
+  `fetch(...)`, or use `process.env` in code destined for the hosting sandbox; it
+  will throw a ReferenceError at runtime.
+- Export `onMessage(text, m, config)` and/or `onMemberJoin(payload, config)` via
+  `module.exports` — same shapes as the events above, minus the `msg`/`payload`
+  wrapping already being the second positional arg. `api` is an ambient global
+  inside the sandbox, NOT a parameter — do not add it to the function signature.
+- `api` methods mirror the REST endpoints above as plain async functions:
+  `reply(chatId, content)`, `listMembers(serverId)`, `listRoles(serverId)`,
+  `memberPerms(serverId, uid)`, `addRole(serverId, uid, roleId)`,
+  `removeRole(serverId, uid, roleId)`, `kick(serverId, uid, reason)`,
+  `ban(serverId, uid, reason)`, `timeout(serverId, uid, minutes, reason)`.
+- There is no `schedule`/interval support in the hosted sandbox — it's event-driven
+  only (`onMessage`/`onMemberJoin`). A script that needs a timer should be run by
+  the human on their own machine instead (see the Socket.IO section above).
+- Limits: 50KB source code, 32MB memory, a short per-call timeout, and the script
+  auto-disables after 10 consecutive errors.
+
+Minimal hosted-script example (paste as the "script" field, no npm install needed,
+this is NOT run with Node.js — it runs inside the sandbox):
+
+    module.exports.onMessage = async function(text, m, config) {
+      if (text.trim() === '!ping') await api.reply(m.chat_id, 'pong');
+    };
+
+## Links
+
+- Developer Portal (create/manage bot apps): https://disdroc.com/developers
+- Bot API guide (human-readable version of this file): https://disdroc.com/bot-docs
+- Community Bot Hosting (we run your script for you): https://disdroc.com/bot-hosting
+- Ready-made bots, no code required: https://disdroc.com/bots

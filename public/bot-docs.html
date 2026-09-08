@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
+  <title data-en="Bot API Guide — disdroc" data-tr="Bot API Rehberi — disdroc">Bot API Guide — disdroc</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .doc-page { max-width: 780px; margin: 0 auto; padding: 32px 20px 100px; }
+    .doc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 12px; flex-wrap: wrap; }
+    .doc-title { display: flex; align-items: center; gap: 10px; }
+    .doc-sub { opacity: .75; margin: 0 0 28px; }
+    .doc-page h3 { margin: 36px 0 10px; padding-top: 10px; border-top: 1px solid var(--border, #333); }
+    .doc-page h3:first-of-type { border-top: none; padding-top: 0; }
+    .doc-page h4 { margin: 20px 0 6px; }
+    .doc-page p { line-height: 1.6; }
+    .doc-page code { background: var(--bg-3, #16171d); padding: 1px 5px; border-radius: 4px; font-size: 90%; }
+    .doc-page pre { background: var(--bg-3, #16171d); border: 1px solid var(--border, #333); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+    .doc-page pre code { background: none; padding: 0; }
+    .ep-table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 13px; }
+    .ep-table th, .ep-table td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border, #333); vertical-align: top; }
+    .ep-table th { opacity: .6; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+    .verb { font-family: monospace; font-weight: 700; }
+    .verb.get { color: #23a55a; }
+    .verb.post { color: var(--accent, #5865f2); }
+    .verb.delete { color: var(--danger, #f23f43); }
+    .callout { background: var(--bg-2, #20222a); border-left: 3px solid var(--accent, #5865f2); border-radius: 6px; padding: 12px 14px; margin: 16px 0; font-size: 14px; }
+    .doc-toc { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 30px; font-size: 13px; }
+  </style>
+</head>
+<body style="overflow:auto">
+  <div class="doc-page">
+    <div class="doc-header">
+      <div class="doc-title">
+        <span class="dot"></span>
+        <h2 style="margin:0" data-en="Bot API Guide" data-tr="Bot API Rehberi">Bot API Guide</h2>
+      </div>
+      <a href="/developers" data-en="← Developer Portal" data-tr="← Geliştirici Portalı">← Developer Portal</a>
+    </div>
+    <p class="doc-sub"
+       data-en="Everything you need to build a disdroc bot: authentication, every REST endpoint, the Socket.IO real-time protocol, rich embeds, and rate limits. Prefer a ready-made bot with no code? Check the <a href=&quot;/bots&quot;>Bot Marketplace</a> instead. Building with an LLM? Paste <a href=&quot;/bot-api-llms.txt&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>bot-api-llms.txt</a> into the chat first."
+       data-tr="Bir disdroc botu yazmak için gereken her şey: kimlik doğrulama, tüm REST uç noktaları, Socket.IO gerçek zamanlı protokolü, zengin kartlar ve hız sınırları. Kod yazmadan hazır bir bot mu istersin? O zaman <a href=&quot;/bots&quot;>Bot Marketi</a>'ne bak. Yapay zekâ ile mi geliştiriyorsun? Önce <a href=&quot;/bot-api-llms.txt&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>bot-api-llms.txt</a> dosyasını sohbete yapıştır.">
+      Everything you need to build a disdroc bot: authentication, every REST endpoint, the Socket.IO
+      real-time protocol, rich embeds, and rate limits. Prefer a ready-made bot with no code?
+      Check the <a href="/bots">Bot Marketplace</a> instead. Building with an LLM? Paste
+      <a href="/bot-api-llms.txt" target="_blank" rel="noopener">bot-api-llms.txt</a> into the chat first.
+    </p>
+
+    <div class="doc-toc">
+      <a href="#quickstart" data-en="Quickstart" data-tr="Hızlı başlangıç">Quickstart</a>
+      <a href="#auth" data-en="Auth" data-tr="Kimlik doğrulama">Auth</a>
+      <a href="#rest" data-en="REST endpoints" data-tr="REST uç noktaları">REST endpoints</a>
+      <a href="#moderation" data-en="Members, roles &amp; moderation" data-tr="Üyeler, roller ve moderasyon">Members, roles &amp; moderation</a>
+      <a href="#embeds" data-en="Embeds" data-tr="Zengin kartlar">Embeds</a>
+      <a href="#realtime" data-en="Real-time (Socket.IO)" data-tr="Gerçek zamanlı (Socket.IO)">Real-time (Socket.IO)</a>
+      <a href="#hosting" data-en="Community Bot Hosting" data-tr="Topluluk Bot Barındırma">Community Bot Hosting</a>
+      <a href="#limits" data-en="Limits" data-tr="Sınırlar">Limits</a>
+      <a href="#example" data-en="Example bot" data-tr="Örnek bot">Example bot</a>
+    </div>
+
+    <h3 id="quickstart" data-en="Quickstart" data-tr="Hızlı başlangıç">Quickstart</h3>
+    <p data-en="Creating an application requires a second factor on your <em>disdroc account</em> (not the bot) — either a verified email address or an authenticator app (TOTP). Almost every account already has this via its verified email, so most people never see a prompt for it; if you do get a &quot;two-factor authentication required&quot; error, verify your email or enable TOTP in Settings → Security."
+       data-tr="Uygulama oluşturmak için <em>disdroc hesabında</em> (botta değil) ikinci bir doğrulama adımı gerekir — ya doğrulanmış bir e-posta adresi ya da bir kimlik doğrulayıcı uygulama (TOTP). Neredeyse her hesapta doğrulanmış e-posta üzerinden bu zaten var, bu yüzden çoğu kişi böyle bir uyarı görmez; yine de &quot;iki adımlı doğrulama gerekli&quot; hatası alırsan Ayarlar → Güvenlik bölümünden e-postanı doğrula veya TOTP'yi etkinleştir.">Creating an application requires a second factor on your <em>disdroc account</em> (not the bot) — either a verified email address or an authenticator app (TOTP). Almost every account already has this via its verified email, so most people never see a prompt for it; if you do get a "two-factor authentication required" error, verify your email or enable TOTP in Settings → Security.</p>
+    <ol>
+      <li data-en="Open the <a href=&quot;/developers&quot;>Developer Portal</a> and click <strong>New Application</strong>."
+          data-tr="<a href=&quot;/developers&quot;>Geliştirici Portalı</a>'nı aç ve <strong>Yeni Uygulama</strong>'ya tıkla.">Open the <a href="/developers">Developer Portal</a> and click <strong>New Application</strong>.</li>
+      <li data-en="Copy the token shown once after creation — it looks like <code>dbot_xxxxxxxx…</code>. If you lose it, regenerate it from the app's Token tab (the old one stops working immediately)."
+          data-tr="Oluşturduktan sonra bir kez gösterilen jetonu kopyala — <code>dbot_xxxxxxxx…</code> şeklinde görünür. Kaybedersen uygulamanın Jeton sekmesinden yenisini üret (eskisi anında çalışmayı bırakır).">Copy the token shown once after creation — it looks like <code>dbot_xxxxxxxx…</code>. If you lose it, regenerate it from the app's Token tab (the old one stops working immediately).</li>
+      <li data-en="Copy the app's invite link (<code>/bot-invite/&lt;appId&gt;</code>) and open it while logged into any server you manage — this adds the bot as a normal member with the <code>member</code> role. Give it more permissions the same way you would a person (server Roles settings)."
+          data-tr="Uygulamanın davet bağlantısını (<code>/bot-invite/&lt;appId&gt;</code>) kopyala ve yönettiğin bir sunucuda giriş yapmışken aç — bu, botu <code>member</code> rolüyle normal bir üye olarak ekler. Daha fazla yetkiyi, bir kişiye verdiğin gibi (sunucunun Roller ayarlarından) verirsin.">Copy the app's invite link (<code>/bot-invite/&lt;appId&gt;</code>) and open it while logged into any server you manage — this adds the bot as a normal member with the <code>member</code> role. Give it more permissions the same way you would a person (server Roles settings).</li>
+      <li data-en="Authenticate your bot's requests with <code>Authorization: Bot &lt;token&gt;</code>, and start reading/sending with the endpoints below."
+          data-tr="Botunun isteklerini <code>Authorization: Bot &lt;token&gt;</code> ile doğrula ve aşağıdaki uç noktalarla okumaya/göndermeye başla.">Authenticate your bot's requests with <code>Authorization: Bot &lt;token&gt;</code>, and start reading/sending with the endpoints below.</li>
+    </ol>
+
+    <h3 id="auth" data-en="Authentication" data-tr="Kimlik doğrulama">Authentication</h3>
+    <p data-en="A bot is an ordinary user account (<code>is_bot</code> flag set) with no password — it can never log in through <code>/login</code>. Every bot-facing endpoint checks a bearer-style header instead:"
+       data-tr="Bot, parolası olmayan sıradan bir kullanıcı hesabıdır (<code>is_bot</code> bayrağı işaretli) — <code>/login</code> üzerinden asla giriş yapamaz. Bunun yerine bota yönelik her uç nokta bearer tarzı bir başlık kontrol eder:">A bot is an ordinary user account (<code>is_bot</code> flag set) with no password — it can never log in through <code>/login</code>. Every bot-facing endpoint checks a bearer-style header instead:</p>
+    <pre><code>Authorization: Bot dbot_your_token_here</code></pre>
+    <p data-en="There is no OAuth flow and no scopes in v1 — a bot can do exactly what its assigned server role permits, same as a human member (view/send messages per channel, nothing more unless you grant it a role with more permissions)."
+       data-tr="v1'de OAuth akışı ve kapsam (scope) yoktur — bir bot, tıpkı insan bir üye gibi, atandığı sunucu rolünün izin verdiği kadarını yapabilir (kanal bazında mesaj görme/gönderme; daha fazla yetkili bir rol vermediğin sürece fazlası değil).">There is no OAuth flow and no scopes in v1 — a bot can do exactly what its assigned server role permits, same as a human member (view/send messages per channel, nothing more unless you grant it a role with more permissions).</p>
+
+    <h3 id="rest" data-en="REST endpoints (bot-facing)" data-tr="REST uç noktaları (bota yönelik)">REST endpoints (bot-facing)</h3>
+    <p data-en="Base URL: <code>https://disdroc.com/api</code>. All of these require the <code>Authorization: Bot …</code> header above."
+       data-tr="Temel adres: <code>https://disdroc.com/api</code>. Bunların tümü yukarıdaki <code>Authorization: Bot …</code> başlığını gerektirir.">Base URL: <code>https://disdroc.com/api</code>. All of these require the <code>Authorization: Bot …</code> header above.</p>
+    <table class="ep-table">
+      <tr><th data-en="Method &amp; path" data-tr="Yöntem ve yol">Method &amp; path</th><th data-en="What it does" data-tr="Ne işe yarar">What it does</th></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/me</td><td data-en="Your bot's own identity: <code>id, username, displayName, tag, avatarPath</code>." data-tr="Botunun kendi kimliği: <code>id, username, displayName, tag, avatarPath</code>.">Your bot's own identity: <code>id, username, displayName, tag, avatarPath</code>.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers</td><td data-en="Servers the bot is currently a member of." data-tr="Botun şu anda üyesi olduğu sunucular.">Servers the bot is currently a member of.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers/:id</td><td data-en="One server's details + the channels the bot can view." data-tr="Bir sunucunun ayrıntıları ve botun görebildiği kanallar.">One server's details + the channels the bot can view.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/channels</td><td data-en="Every chat the bot can see — DMs, groups, and server channels — flattened into one list. Use this at startup to know what to <code>chat:join</code> over the socket." data-tr="Botun görebildiği tüm sohbetler — direkt mesajlar, gruplar ve sunucu kanalları — tek bir listede. Başlangıçta soket üzerinden neye <code>chat:join</code> yapacağını öğrenmek için bunu kullan.">Every chat the bot can see — DMs, groups, and server channels — flattened into one list. Use this at startup to know what to <code>chat:join</code> over the socket.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/channels/:id/messages</td><td data-en="Recent history for one channel. Query params: <code>before</code> (ms epoch, default now), <code>limit</code> (1–100, default 50)." data-tr="Bir kanalın son mesaj geçmişi. Sorgu parametreleri: <code>before</code> (ms cinsinden zaman damgası, varsayılan şu an), <code>limit</code> (1–100, varsayılan 50).">Recent history for one channel. Query params: <code>before</code> (ms epoch, default now), <code>limit</code> (1–100, default 50).</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/channels/:id/messages</td><td data-en="Send one message. Body: <code>{ &quot;content&quot;: &quot;text&quot;, &quot;embed&quot;: {...} }</code> — <code>content</code> alone, <code>embed</code> alone, or both. No attachments/replies/polls here — use the Socket.IO path (below) for those." data-tr="Tek bir mesaj gönder. Gövde: <code>{ &quot;content&quot;: &quot;text&quot;, &quot;embed&quot;: {...} }</code> — yalnızca <code>content</code>, yalnızca <code>embed</code> ya da ikisi birlikte. Burada dosya eki, yanıt veya anket yok — bunlar için aşağıdaki Socket.IO yolunu kullan.">Send one message. Body: <code>{ "content": "text", "embed": {...} }</code> — <code>content</code> alone, <code>embed</code> alone, or both. No attachments/replies/polls here — use the Socket.IO path (below) for those.</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/voice/:channelId/join</td><td data-en="Join an accessible server voice channel as an audio-only participant." data-tr="Erişebildiği bir sunucu ses kanalına yalnızca ses veren katılımcı olarak katıl.">Join an accessible server voice channel as an audio-only participant.</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/voice/:channelId/play</td><td data-en="Play one public HTTP(S) audio/video URL while joined. Body: <code>{ &quot;url&quot;: &quot;https://…&quot; }</code> (or <code>audioUrl</code>). Starting another source replaces the current one." data-tr="Kanaldayken herkese açık bir HTTP(S) ses/video adresini çal. Gövde: <code>{ &quot;url&quot;: &quot;https://…&quot; }</code> (veya <code>audioUrl</code>). Yeni bir kaynak başlatmak mevcut olanın yerini alır.">Play one public HTTP(S) audio/video URL while joined. Body: <code>{ "url": "https://…" }</code> (or <code>audioUrl</code>). Starting another source replaces the current one.</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/voice/:channelId/stop</td><td data-en="Stop playback but remain in the channel." data-tr="Çalmayı durdur ama kanalda kal.">Stop playback but remain in the channel.</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/voice/:channelId/leave</td><td data-en="Leave voice and close every peer connection." data-tr="Ses kanalından ayrıl ve tüm eş bağlantılarını kapat.">Leave voice and close every peer connection.</td></tr>
+    </table>
+
+    <p data-en="Voice bots publish audio only: they do not receive human audio, video, or screen shares. The source URL must use port 80 or 443 and resolve to a public address. A server without the optional voice-bot WebRTC component returns <code>503 { &quot;error&quot;: &quot;voice_bot_unavailable&quot; }</code>."
+       data-tr="Ses botları yalnızca ses yayınlar: insanların sesini, videosunu veya ekran paylaşımını almazlar. Kaynak adresi 80 veya 443 portunu kullanmalı ve herkese açık bir adrese çözümlenmeli. İsteğe bağlı ses-botu WebRTC bileşeni olmayan bir sunucu <code>503 { &quot;error&quot;: &quot;voice_bot_unavailable&quot; }</code> döner.">Voice bots publish audio only: they do not receive human audio, video, or screen shares. The source URL must use port 80 or 443 and resolve to a public address. A server without the optional voice-bot WebRTC component returns <code>503 { "error": "voice_bot_unavailable" }</code>.</p>
+
+    <div class="callout"
+         data-en="Rate limits, slowmode, channel locks, permission checks, and profanity filtering all apply to bot messages exactly as they do to humans — a bot with the default <code>member</code> role obeys the same rules a person with that role would."
+         data-tr="Hız sınırları, yavaş mod, kanal kilitleri, yetki kontrolleri ve küfür filtresi bot mesajlarına da insanlara olduğu gibi aynen uygulanır — varsayılan <code>member</code> rolündeki bir bot, o roldeki bir kişiyle aynı kurallara uyar.">
+      Rate limits, slowmode, channel locks, permission checks, and profanity filtering all apply to bot
+      messages exactly as they do to humans — a bot with the default <code>member</code> role obeys the
+      same rules a person with that role would.
+    </div>
+
+    <h3 id="moderation" data-en="Members, roles &amp; moderation" data-tr="Üyeler, roller ve moderasyon">Members, roles &amp; moderation</h3>
+    <p data-en="A bot can manage members and moderate exactly as far as its own assigned server role allows — grant it <strong>Manage Roles</strong>, <strong>Kick Members</strong>, <strong>Ban Members</strong>, and/or <strong>Timeout Members</strong> in that server's Roles settings the same way you would for a person, then these become available:"
+       data-tr="Bir bot, üyeleri yönetmeyi ve moderasyonu yalnızca kendi sunucu rolünün izin verdiği ölçüde yapabilir — o sunucunun Roller ayarlarından, bir kişiye verdiğin gibi <strong>Rolleri Yönet</strong>, <strong>Üyeleri At</strong>, <strong>Üyeleri Yasakla</strong> ve/veya <strong>Üyeleri Susturt</strong> yetkilerini ver; ardından şunlar kullanılabilir hale gelir:">A bot can manage members and moderate exactly as far as its own assigned server role allows — grant it
+      <strong>Manage Roles</strong>, <strong>Kick Members</strong>, <strong>Ban Members</strong>, and/or
+      <strong>Timeout Members</strong> in that server's Roles settings the same way you would for a person, then
+      these become available:</p>
+    <table class="ep-table">
+      <tr><th data-en="Method &amp; path" data-tr="Yöntem ve yol">Method &amp; path</th><th data-en="What it does" data-tr="Ne işe yarar">What it does</th></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers/:id/members</td><td data-en="Every member, with their assigned <code>role_ids</code>." data-tr="Tüm üyeler ve atanmış <code>role_ids</code> değerleri.">Every member, with their assigned <code>role_ids</code>.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers/:id/roles</td><td data-en="Every role in the server, plus <code>myPerms</code> — the bot's own effective permission bitfield." data-tr="Sunucudaki tüm roller ve ayrıca <code>myPerms</code> — botun kendi geçerli yetki bit alanı.">Every role in the server, plus <code>myPerms</code> — the bot's own effective permission bitfield.</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers/:id/members/:uid/perms</td><td data-en="A specific member's permissions — check this for the person who <em>typed a command</em> before acting on their behalf, so your bot can't be puppeted into moderating someone the invoking human has no authority over." data-tr="Belirli bir üyenin yetkileri — <em>komutu yazan</em> kişi adına işlem yapmadan önce bunu kontrol et; böylece botun, komutu veren kişinin yetkisi olmayan birine moderasyon uygulamak için kullanılamaz.">A specific member's permissions — check this for the person who <em>typed a command</em> before acting on their behalf, so your bot can't be puppeted into moderating someone the invoking human has no authority over.</td></tr>
+      <tr><td><span class="verb post">PUT</span> /bot/v1/servers/:id/members/:uid/roles/:roleId</td><td data-en="Add one role to a member. Requires <strong>Manage Roles</strong> and that the role sits below the bot's own highest role." data-tr="Bir üyeye rol ekle. <strong>Rolleri Yönet</strong> yetkisi ve rolün, botun en yüksek rolünün altında olması gerekir.">Add one role to a member. Requires <strong>Manage Roles</strong> and that the role sits below the bot's own highest role.</td></tr>
+      <tr><td><span class="verb delete">DELETE</span> /bot/v1/servers/:id/members/:uid/roles/:roleId</td><td data-en="Remove one role from a member. Same requirements as above." data-tr="Bir üyeden rol kaldır. Gereksinimler yukarıdakiyle aynı.">Remove one role from a member. Same requirements as above.</td></tr>
+      <tr><td><span class="verb delete">DELETE</span> /bot/v1/servers/:id/members/:uid</td><td data-en="Kick a member. Requires <strong>Kick Members</strong>. Body: <code>{ &quot;reason&quot;: &quot;...&quot; }</code> (optional)." data-tr="Bir üyeyi sunucudan at. <strong>Üyeleri At</strong> yetkisi gerekir. Gövde: <code>{ &quot;reason&quot;: &quot;...&quot; }</code> (isteğe bağlı).">Kick a member. Requires <strong>Kick Members</strong>. Body: <code>{ "reason": "..." }</code> (optional).</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/servers/:id/members/:uid/ban</td><td data-en="Ban a member. Requires <strong>Ban Members</strong>. Body: <code>{ &quot;reason&quot;: &quot;...&quot;, &quot;minutes&quot;: 0 }</code> — both optional; <code>minutes</code> omitted or <code>0</code> is a permanent ban, otherwise it auto-lifts after that many minutes (capped at 1 year)." data-tr="Bir üyeyi yasakla. <strong>Üyeleri Yasakla</strong> yetkisi gerekir. Gövde: <code>{ &quot;reason&quot;: &quot;...&quot;, &quot;minutes&quot;: 0 }</code> — ikisi de isteğe bağlı; <code>minutes</code> yazılmazsa veya <code>0</code> ise kalıcı yasaklamadır, aksi halde o kadar dakika sonra kendiliğinden kalkar (en fazla 1 yıl).">Ban a member. Requires <strong>Ban Members</strong>. Body: <code>{ "reason": "...", "minutes": 0 }</code> — both optional; <code>minutes</code> omitted or <code>0</code> is a permanent ban, otherwise it auto-lifts after that many minutes (capped at 1 year).</td></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/servers/:id/bans</td><td data-en="List current bans. Requires <strong>Ban Members</strong>." data-tr="Mevcut yasaklamaları listele. <strong>Üyeleri Yasakla</strong> yetkisi gerekir.">List current bans. Requires <strong>Ban Members</strong>.</td></tr>
+      <tr><td><span class="verb delete">DELETE</span> /bot/v1/servers/:id/bans/:uid</td><td data-en="Unban. Requires <strong>Ban Members</strong>." data-tr="Yasağı kaldır. <strong>Üyeleri Yasakla</strong> yetkisi gerekir.">Unban. Requires <strong>Ban Members</strong>.</td></tr>
+      <tr><td><span class="verb post">POST</span> /bot/v1/servers/:id/members/:uid/timeout</td><td data-en="Timeout (temporary mute) a member. Requires <strong>Timeout Members</strong>. Body: <code>{ &quot;minutes&quot;: 10, &quot;reason&quot;: &quot;...&quot; }</code> — <code>minutes: 0</code> clears an existing timeout." data-tr="Bir üyeye zaman aşımı (geçici susturma) uygula. <strong>Üyeleri Susturt</strong> yetkisi gerekir. Gövde: <code>{ &quot;minutes&quot;: 10, &quot;reason&quot;: &quot;...&quot; }</code> — <code>minutes: 0</code> mevcut zaman aşımını kaldırır.">Timeout (temporary mute) a member. Requires <strong>Timeout Members</strong>. Body: <code>{ "minutes": 10, "reason": "..." }</code> — <code>minutes: 0</code> clears an existing timeout.</td></tr>
+    </table>
+    <p data-en="All of the mutating routes above share a per-bot rate limit (30 calls/minute) separate from the general message-send limit, so a leaked token can't be used to mass-purge a server."
+       data-tr="Yukarıdaki değişiklik yapan uç noktaların tümü, genel mesaj gönderme sınırından ayrı olarak bot başına ortak bir hız sınırını (dakikada 30 çağrı) paylaşır; böylece sızan bir jetonla bir sunucu topluca boşaltılamaz.">All of the mutating routes above share a per-bot rate limit (30 calls/minute) separate from the general message-send limit, so a leaked token can't be used to mass-purge a server.</p>
+    <p data-en="Your bot also gets a <code>member:joined</code> Socket.IO event (see below) whenever someone new joins a server it's in — handy for auto-role or welcome-message bots."
+       data-tr="Botun ayrıca, bulunduğu bir sunucuya yeni biri katıldığında <code>member:joined</code> Socket.IO olayını alır (aşağıya bak) — otomatik rol veya karşılama mesajı botları için kullanışlıdır.">Your bot also gets a <code>member:joined</code> Socket.IO event (see below) whenever someone new joins a server it's in — handy for auto-role or welcome-message bots.</p>
+
+    <h3 id="commands" data-en="Slash commands" data-tr="Eğik çizgi komutları">Slash commands</h3>
+    <p data-en="Register your own <code>/name</code> commands so they show up in the composer's <code>/</code>-autocomplete for anyone in a server your bot is a member of — no need to tell your users to memorize a prefix. Kept deliberately simple: one command name + description, and your bot gets the raw remainder of the message as a single argument string (no typed/structured options)."
+       data-tr="Kendi <code>/ad</code> komutlarını kaydet; böylece botunun üye olduğu bir sunucudaki herkes için mesaj kutusundaki <code>/</code> otomatik tamamlamasında görünürler — kullanıcılarına bir ön ek ezberletmene gerek kalmaz. Bilinçli olarak sade tutuldu: bir komut adı ve açıklaması; botun da mesajın geri kalanını tek bir argüman metni olarak alır (tipli/yapısal seçenek yok).">Register your own <code>/name</code> commands so they show up in the composer's <code>/</code>-autocomplete
+      for anyone in a server your bot is a member of — no need to tell your users to memorize a prefix. Kept
+      deliberately simple: one command name + description, and your bot gets the raw remainder of the message as a
+      single argument string (no typed/structured options).</p>
+    <table class="ep-table">
+      <tr><th data-en="Method &amp; path" data-tr="Yöntem ve yol">Method &amp; path</th><th data-en="What it does" data-tr="Ne işe yarar">What it does</th></tr>
+      <tr><td><span class="verb get">GET</span> /bot/v1/commands</td><td data-en="List this bot's registered commands." data-tr="Bu botun kayıtlı komutlarını listele.">List this bot's registered commands.</td></tr>
+      <tr><td><span class="verb post">PUT</span> /bot/v1/commands/:name</td><td data-en="Create or update a command. <code>:name</code> must match <code>^[a-z0-9_-]{1,20}$</code>. Body: <code>{ &quot;description&quot;: &quot;Roll dice, e.g. /roll 2d6&quot; }</code>. Capped at 25 commands per bot." data-tr="Bir komut oluştur veya güncelle. <code>:name</code>, <code>^[a-z0-9_-]{1,20}$</code> kalıbına uymalı. Gövde: <code>{ &quot;description&quot;: &quot;Zar at, örn. /roll 2d6&quot; }</code>. Bot başına en fazla 25 komut.">Create or update a command. <code>:name</code> must match <code>^[a-z0-9_-]{1,20}$</code>. Body: <code>{ "description": "Roll dice, e.g. /roll 2d6" }</code>. Capped at 25 commands per bot.</td></tr>
+      <tr><td><span class="verb delete">DELETE</span> /bot/v1/commands/:name</td><td data-en="Remove a command." data-tr="Bir komutu kaldır.">Remove a command.</td></tr>
+    </table>
+    <p data-en="When a member sends a message starting with <code>/yourcommand</code> in a server your bot belongs to, the message posts normally (it's just text, same as any other message) <em>and</em> your bot receives a <code>bot:command</code> Socket.IO event: <code>{ command, args, channelId, userId, messageId }</code> — reply the same way you always would, with <code>message:send</code> or the REST send route."
+       data-tr="Botunun bulunduğu bir sunucuda bir üye <code>/komutun</code> ile başlayan bir mesaj gönderdiğinde, mesaj normal şekilde gönderilir (diğer mesajlar gibi düz metindir) <em>ve</em> botun bir <code>bot:command</code> Socket.IO olayı alır: <code>{ command, args, channelId, userId, messageId }</code> — her zamanki gibi <code>message:send</code> ile veya REST gönderme uç noktasıyla yanıtla.">When a member sends a message starting with <code>/yourcommand</code> in a server your bot belongs to, the
+      message posts normally (it's just text, same as any other message) <em>and</em> your bot receives a
+      <code>bot:command</code> Socket.IO event: <code>{ command, args, channelId, userId, messageId }</code> — reply
+      the same way you always would, with <code>message:send</code> or the REST send route.</p>
+
+    <h3 id="embeds" data-en="Rich embeds" data-tr="Zengin kartlar">Rich embeds</h3>
+    <p data-en="An embed is a small disdroc rich card: an optional title, description, image, and accent color. Pass it on <code>POST /bot/v1/channels/:id/messages</code> or over the socket's <code>message:send</code> — it renders in every client the same way."
+       data-tr="Zengin kart (embed), küçük bir disdroc kartıdır: isteğe bağlı bir başlık, açıklama, görsel ve vurgu rengi. <code>POST /bot/v1/channels/:id/messages</code> ile veya soketteki <code>message:send</code> üzerinden gönder — her istemcide aynı şekilde görüntülenir.">An embed is a small disdroc rich card: an optional title, description, image, and accent color. Pass it on <code>POST /bot/v1/channels/:id/messages</code> or over the socket's <code>message:send</code> — it renders in every client the same way.</p>
+    <pre><code>{
+  "content": "",
+  "embed": {
+    "title": "Deploy finished",
+    "description": "Build #482 shipped in 41s.",
+    "imageUrl": "https://your-host.example/screenshot.png",
+    "color": "#57f287"
+  }
+}</code></pre>
+    <p data-en="<code>imageUrl</code> must be an <code>http(s)</code> URL you host — disdroc just embeds it, it doesn't accept file uploads over the bot REST API. <code>color</code> is a 6-digit hex string; omit it to use the app's default accent. A message needs at least one of <code>content</code>, an attachment, or an embed field — it can't be completely empty."
+       data-tr="<code>imageUrl</code>, senin barındırdığın bir <code>http(s)</code> adresi olmalı — disdroc onu yalnızca gömer, bot REST API'si üzerinden dosya yüklemesi kabul etmez. <code>color</code> 6 haneli bir hex değeridir; uygulamanın varsayılan vurgu rengini kullanmak için yazma. Bir mesajda <code>content</code>, bir dosya eki veya bir embed alanından en az biri bulunmalı — tamamen boş olamaz.">
+      <code>imageUrl</code> must be an <code>http(s)</code> URL you host — disdroc just embeds it, it doesn't accept file uploads over the bot REST API. <code>color</code> is a 6-digit hex string; omit it to use the app's default accent. A message needs at least one of <code>content</code>, an attachment, or an embed field — it can't be completely empty.</p>
+
+    <h3 id="realtime" data-en="Real-time: Socket.IO" data-tr="Gerçek zamanlı: Socket.IO">Real-time: Socket.IO</h3>
+    <p data-en="For a bot that reacts to messages as they happen (instead of polling), connect over Socket.IO the same way the web client does — same gateway, same events, full validation pipeline (attachments, replies, polls included, unlike the REST shortcut above)."
+       data-tr="Mesajlara anlık tepki veren bir bot için (sürekli sorgulamak yerine) web istemcisiyle aynı şekilde Socket.IO üzerinden bağlan — aynı ağ geçidi, aynı olaylar, tam doğrulama hattı (yukarıdaki REST kısayolundan farklı olarak dosya ekleri, yanıtlar ve anketler dâhil).">For a bot that reacts to messages as they happen (instead of polling), connect over Socket.IO the same way the web client does — same gateway, same events, full validation pipeline (attachments, replies, polls included, unlike the REST shortcut above).</p>
+    <pre><code>const { io } = require('socket.io-client');
+const TOKEN = 'dbot_your_token_here';
+const socket = io('https://disdroc.com', { auth: { token: TOKEN } });
+let selfId = null;
+
+socket.on('connect', async () => {
+  const me = await fetch('https://disdroc.com/api/bot/v1/me', {
+    headers: { Authorization: 'Bot ' + TOKEN },
+  }).then(r => r.json());
+  selfId = me.id;
+  const res = await fetch('https://disdroc.com/api/bot/v1/channels', {
+    headers: { Authorization: 'Bot ' + TOKEN },
+  }).then(r => r.json());
+  for (const c of res.channels) socket.emit('chat:join', c.id);
+});
+
+socket.on('message:new', (msg) => {
+  if (msg.user_id === selfId) return; // ignore your own messages to avoid loops
+  if (msg.content === '!ping') {
+    socket.emit('message:send', { chatId: msg.chat_id, content: 'pong' });
+  }
+});</code></pre>
+    <p data-en="Key events: <code>chat:join</code> (emit, join a chat room), <code>message:send</code> (emit, <code>{chatId, content, embed?}</code> with an ack callback), <code>message:new</code> (listen, fires for every message in a joined chat — <strong>note it does not carry an <code>is_bot</code> flag</strong>, compare <code>msg.user_id</code> against your own id from <code>/bot/v1/me</code> instead), <code>member:joined</code> (listen, <code>{serverId, user, joinedAt}</code>, fires when anyone joins a server your bot is in), <code>bot:command</code> (listen, <code>{command, args, channelId, userId, messageId}</code>, fires when someone uses one of your registered <a href=&quot;#commands&quot;>slash commands</a>)."
+       data-tr="Başlıca olaylar: <code>chat:join</code> (gönder, bir sohbet odasına katıl), <code>message:send</code> (gönder, geri bildirim çağrısıyla birlikte <code>{chatId, content, embed?}</code>), <code>message:new</code> (dinle, katıldığın her sohbetteki her mesaj için tetiklenir — <strong>bir <code>is_bot</code> bayrağı taşımadığını unutma</strong>, bunun yerine <code>msg.user_id</code> değerini <code>/bot/v1/me</code>'den aldığın kendi kimliğinle karşılaştır), <code>member:joined</code> (dinle, <code>{serverId, user, joinedAt}</code>, botunun bulunduğu bir sunucuya biri katıldığında tetiklenir), <code>bot:command</code> (dinle, <code>{command, args, channelId, userId, messageId}</code>, biri kayıtlı <a href=&quot;#commands&quot;>eğik çizgi komutlarından</a> birini kullandığında tetiklenir).">Key events: <code>chat:join</code> (emit, join a chat room), <code>message:send</code> (emit, <code>{chatId, content, embed?}</code> with an ack callback), <code>message:new</code> (listen, fires for every message in a joined chat — <strong>note it does not carry an <code>is_bot</code> flag</strong>, compare <code>msg.user_id</code> against your own id from <code>/bot/v1/me</code> instead), <code>member:joined</code> (listen, <code>{serverId, user, joinedAt}</code>, fires when anyone joins a server your bot is in), <code>bot:command</code> (listen, <code>{command, args, channelId, userId, messageId}</code>, fires when someone uses one of your registered <a href="#commands">slash commands</a>).</p>
+
+    <h3 id="hosting" data-en="Community Bot Hosting (we run it for you)" data-tr="Topluluk Bot Barındırma (biz çalıştıralım)">Community Bot Hosting (we run it for you)</h3>
+    <p data-en="Don't want to run your own server for a bot? <a href=&quot;/bot-hosting&quot;>Community Bot Hosting</a> lets you paste your bot's token and your own script, and we run it for you — sandboxed. An admin reviews new scripts (and any edit to one) before they go live, since a hosted script runs unattended with real access to your bot."
+       data-tr="Bir bot için kendi sunucunu çalıştırmak istemiyor musun? <a href=&quot;/bot-hosting&quot;>Topluluk Bot Barındırma</a> ile botunun jetonunu ve kendi betiğini yapıştırırsın, biz de onu senin için yalıtılmış ortamda çalıştırırız. Barındırılan bir betik, botuna gerçek erişimle ve başında kimse olmadan çalıştığı için yeni betikler (ve üzerlerindeki her düzenleme) yayına girmeden önce bir yönetici tarafından incelenir.">Don't want to run your own server for a bot? <a href="/bot-hosting">Community Bot Hosting</a> lets you paste
+      your bot's token and your own script, and we run it for you — sandboxed. An admin reviews new scripts (and
+      any edit to one) before they go live, since a hosted script runs unattended with real access to your bot.</p>
+    <p data-en="The sandbox gives your code exactly one thing: an <code>api</code> object. There is no filesystem or network access of your own in either runtime — every <code>api.*</code> call is proxied to the exact same permission-gated REST endpoints documented above, so a hosted script can never do more than the bot's assigned role allows."
+       data-tr="Sanal alan kodun sadece tek bir şey verir: bir <code>api</code> nesnesi. Her iki çalışma ortamında da kendine ait dosya sistemi veya ağ erişimin yoktur — her <code>api.*</code> çağrısı yukarıda belgelenen, yetkiye tabi aynı REST uç noktalarına yönlendirilir; böylece barındırılan bir betik, botun atanmış rolünün izin verdiğinden fazlasını asla yapamaz.">The sandbox gives your code exactly one thing: an <code>api</code> object. There is no filesystem or network
+      access of your own in either runtime — every <code>api.*</code> call is proxied to the exact same
+      permission-gated REST endpoints documented above, so a hosted script can never do more than the bot's assigned
+      role allows.</p>
+    <p data-en="Pick a <strong>runtime</strong> when you submit a script:" data-tr="Bir betik gönderirken bir <strong>çalışma ortamı</strong> seç:">Pick a <strong>runtime</strong> when you submit a script:</p>
+    <ul>
+      <li data-en="<strong>isolated-vm</strong> (the default) — plain JavaScript in an isolated V8 heap. No <code>require</code>, no <code>process</code>, no timers (<code>setTimeout</code> doesn't exist here). <code>api</code> is an ambient global, NOT a function parameter — do not add it to your own signature."
+          data-tr="<strong>isolated-vm</strong> (varsayılan) — yalıtılmış bir V8 belleğinde düz JavaScript. <code>require</code> yok, <code>process</code> yok, zamanlayıcı yok (<code>setTimeout</code> burada mevcut değildir). <code>api</code> ortamda hazır bir genel değişkendir, işlev parametresi DEĞİLDİR — kendi imzana ekleme."><strong>isolated-vm</strong> (the default) — plain JavaScript in an isolated V8 heap. No
+        <code>require</code>, no <code>process</code>, no timers (<code>setTimeout</code> doesn't exist here).
+        <code>api</code> is an ambient global, NOT a function parameter — do not add it to your own signature.</li>
+      <li data-en="<strong>Node.js</strong> — a real Node process, so timers/<code>Promise</code> chains work normally and <code>require</code> works for a small set of safe core modules (<code>assert</code>, <code>buffer</code>, <code>crypto</code>, <code>events</code>, <code>path</code>, <code>querystring</code>, <code>string_decoder</code>, <code>url</code>, <code>util</code>, <code>zlib</code>) — <code>fs</code>, <code>net</code>, <code>http(s)</code>, <code>child_process</code>, and similar aren't available (there's no filesystem or network to reach anyway; the process runs fully sandboxed with no network of its own). <code>api</code> works exactly the same way as isolated-vm — an ambient identifier inside your script, not a function parameter — so the same script body works under either runtime."
+          data-tr="<strong>Node.js</strong> — gerçek bir Node süreci; yani zamanlayıcılar ve <code>Promise</code> zincirleri normal şekilde çalışır ve <code>require</code>, güvenli çekirdek modüllerden oluşan küçük bir küme için kullanılabilir (<code>assert</code>, <code>buffer</code>, <code>crypto</code>, <code>events</code>, <code>path</code>, <code>querystring</code>, <code>string_decoder</code>, <code>url</code>, <code>util</code>, <code>zlib</code>) — <code>fs</code>, <code>net</code>, <code>http(s)</code>, <code>child_process</code> ve benzerleri kullanılamaz (zaten erişilecek bir dosya sistemi veya ağ yok; süreç kendi ağı olmadan tamamen yalıtılmış çalışır). <code>api</code> tıpkı isolated-vm'deki gibi çalışır — betiğinin içinde hazır bulunan bir tanımlayıcıdır, işlev parametresi değil — bu yüzden aynı betik gövdesi her iki ortamda da çalışır."><strong>Node.js</strong> — a real Node process, so timers/<code>Promise</code> chains work normally and
+        <code>require</code> works for a small set of safe core modules (<code>assert</code>, <code>buffer</code>,
+        <code>crypto</code>, <code>events</code>, <code>path</code>, <code>querystring</code>,
+        <code>string_decoder</code>, <code>url</code>, <code>util</code>, <code>zlib</code>) — <code>fs</code>,
+        <code>net</code>, <code>http(s)</code>, <code>child_process</code>, and similar aren't available (there's no
+        filesystem or network to reach anyway; the process runs fully sandboxed with no network of its own).
+        <code>api</code> works exactly the same way as isolated-vm — an ambient identifier inside your script, not a
+        function parameter — so the same script body works under either runtime.</li>
+    </ul>
+    <pre><code>// Hosted scripts export onMessage / onMemberJoin (schedule is not supported
+// here — hosted scripts are event-driven only). `api` is an ambient global,
+// NOT a function parameter — do not add it to your own signature.
+module.exports.onMessage = async function(text, m, config) {
+  if (text.trim() === '!ping') await api.reply(m.chat_id, 'pong');
+};
+
+module.exports.onMemberJoin = async function(payload, config) {
+  await api.addRole(payload.serverId, payload.user.id, YOUR_ROLE_ID);
+};</code></pre>
+    <p data-en="Available on <code>api</code>: <code>reply(chatId, content)</code>, <code>listMembers(serverId)</code>, <code>listRoles(serverId)</code>, <code>memberPerms(serverId, uid)</code>, <code>addRole(serverId, uid, roleId)</code>, <code>removeRole(serverId, uid, roleId)</code>, <code>kick(serverId, uid, reason)</code>, <code>ban(serverId, uid, reason)</code>, <code>timeout(serverId, uid, minutes, reason)</code> — same names and arguments as the REST endpoints above, just called as plain async functions."
+       data-tr="<code>api</code> üzerinde kullanılabilenler: <code>reply(chatId, content)</code>, <code>listMembers(serverId)</code>, <code>listRoles(serverId)</code>, <code>memberPerms(serverId, uid)</code>, <code>addRole(serverId, uid, roleId)</code>, <code>removeRole(serverId, uid, roleId)</code>, <code>kick(serverId, uid, reason)</code>, <code>ban(serverId, uid, reason)</code>, <code>timeout(serverId, uid, minutes, reason)</code> — yukarıdaki REST uç noktalarıyla aynı adlar ve argümanlar, sadece düz async işlevler olarak çağrılır.">Available on <code>api</code>: <code>reply(chatId, content)</code>, <code>listMembers(serverId)</code>,
+      <code>listRoles(serverId)</code>, <code>memberPerms(serverId, uid)</code>,
+      <code>addRole(serverId, uid, roleId)</code>, <code>removeRole(serverId, uid, roleId)</code>,
+      <code>kick(serverId, uid, reason)</code>, <code>ban(serverId, uid, reason)</code>,
+      <code>timeout(serverId, uid, minutes, reason)</code> — same names and arguments as the REST endpoints above,
+      just called as plain async functions.</p>
+    <p data-en="<strong>The <code>config</code> argument</strong> is whatever the server admin who installed your bot filled in on its setup screen — a channel to post in, a mod role, a toggle, a custom prefix, whatever your bot needs per server. You define that screen yourself: open your script's card in <a href=&quot;/bot-hosting&quot;>Community Bot Hosting</a> and click <strong>Setup Screen</strong> to add fields (text, number, on/off, dropdown, or a channel/role picker). Anyone who then adds your bot from the Bot Marketplace gets a form built from those fields, and the values they save arrive as <code>config.yourFieldKey</code> — e.g. a field with key <code>logChannel</code> shows up as <code>config.logChannel</code>. A field left unset (or a bot with no setup screen at all) just comes through as its declared default, or missing from <code>config</code> if it has none."
+       data-tr="<strong><code>config</code> argümanı</strong>, botunu kuran sunucu yöneticisinin kurulum ekranında doldurduğu değerlerdir — mesaj atılacak bir kanal, bir moderatör rolü, bir anahtar, özel bir ön ek; botunun sunucu başına neye ihtiyacı varsa. O ekranı sen tanımlarsın: <a href=&quot;/bot-hosting&quot;>Topluluk Bot Barındırma</a>'da betiğinin kartını aç ve alan eklemek için <strong>Kurulum Ekranı</strong>'na tıkla (metin, sayı, açık/kapalı, açılır liste ya da kanal/rol seçici). Sonrasında botunu Bot Marketi'nden ekleyen herkes bu alanlardan oluşan bir form görür ve kaydettikleri değerler <code>config.alanAnahtarın</code> olarak gelir — örneğin <code>logChannel</code> anahtarlı bir alan <code>config.logChannel</code> olarak görünür. Boş bırakılan bir alan (ya da hiç kurulum ekranı olmayan bir bot) tanımlanmış varsayılan değeriyle gelir; varsayılanı yoksa <code>config</code> içinde hiç bulunmaz."><strong>The <code>config</code> argument</strong> is whatever the server admin who installed your bot filled
+      in on its setup screen — a channel to post in, a mod role, a toggle, a custom prefix, whatever your bot needs
+      per server. You define that screen yourself: open your script's card in
+      <a href="/bot-hosting">Community Bot Hosting</a> and click <strong>Setup Screen</strong> to add fields (text,
+      number, on/off, dropdown, or a channel/role picker). Anyone who then adds your bot from the Bot Marketplace
+      gets a form built from those fields, and the values they save arrive as <code>config.yourFieldKey</code> —
+      e.g. a field with key <code>logChannel</code> shows up as <code>config.logChannel</code>. A field left unset
+      (or a bot with no setup screen at all) just comes through as its declared default, or missing from
+      <code>config</code> if it has none.</p>
+    <p data-en="Limits: 50KB of code per script, 32MB memory and a short per-call timeout enforced by the sandbox, and up to 10 consecutive errors before a script is auto-disabled (fix it and re-enable — no re-review needed unless you also changed the code). Prefer running it yourself instead of having us host it? The &quot;disdroc Bot Builder&quot; desktop tool does the same preset/script-picking on your own machine."
+       data-tr="Sınırlar: betik başına 50KB kod, 32MB bellek ve sanal alanın uyguladığı kısa bir çağrı zaman aşımı; ayrıca bir betik otomatik olarak devre dışı bırakılmadan önce en fazla 10 ardışık hata (düzeltip yeniden etkinleştir — kodu da değiştirmediysen yeniden incelemeye gerek yok). Biz barındırmak yerine kendin mi çalıştırmak istersin? &quot;disdroc Bot Builder&quot; masaüstü aracı aynı hazır bot/betik seçimini kendi bilgisayarında yapar.">Limits: 50KB of code per script, 32MB memory and a short per-call timeout enforced by the sandbox, and up
+      to 10 consecutive errors before a script is auto-disabled (fix it and re-enable — no re-review needed unless
+      you also changed the code). Prefer running it yourself instead of having us host it? The "disdroc Bot
+      Builder" desktop tool does the same preset/script-picking on your own machine.</p>
+
+    <h3 id="limits" data-en="Limits" data-tr="Sınırlar">Limits</h3>
+    <ul>
+      <li data-en="Creating or regenerating a bot application: 20 per hour per account." data-tr="Bot uygulaması oluşturma veya jeton yenileme: hesap başına saatte 20.">Creating or regenerating a bot application: 20 per hour per account.</li>
+      <li data-en="Message content: 2000 characters max. Embed title: 256, description: 1000." data-tr="Mesaj içeriği: en fazla 2000 karakter. Kart başlığı: 256, açıklama: 1000.">Message content: 2000 characters max. Embed title: 256, description: 1000.</li>
+      <li data-en="Message send rate: the same abuse-detection ladder every account is subject to (warn → throttle → temporary suspend on sustained bursts), plus per-channel slowmode if the channel has one set." data-tr="Mesaj gönderme hızı: her hesabın tabi olduğu aynı kötüye kullanım kademeleri (uyarı → yavaşlatma → sürekli yığın gönderimde geçici askıya alma) ve kanalda ayarlanmışsa kanal bazlı yavaş mod.">Message send rate: the same abuse-detection ladder every account is subject to (warn → throttle → temporary suspend on sustained bursts), plus per-channel slowmode if the channel has one set.</li>
+      <li data-en="Message history reads: <code>limit</code> is capped at 100 per request — page with <code>before</code>." data-tr="Mesaj geçmişi okuma: <code>limit</code> istek başına en fazla 100'dür — sayfalamak için <code>before</code> kullan.">Message history reads: <code>limit</code> is capped at 100 per request — page with <code>before</code>.</li>
+    </ul>
+
+    <h3 id="example" data-en="Full example: an echo bot" data-tr="Tam örnek: bir yankı botu">Full example: an echo bot</h3>
+    <pre><code>npm install socket.io-client node-fetch</code></pre>
+    <pre><code>const { io } = require('socket.io-client');
+const TOKEN = 'dbot_your_token_here';
+const BASE = 'https://disdroc.com';
+
+const socket = io(BASE, { auth: { token: TOKEN } });
+let selfId = null;
+
+socket.on('connect', async () => {
+  console.log('connected as bot');
+  const me = await fetch(BASE + '/api/bot/v1/me', { headers: { Authorization: 'Bot ' + TOKEN } }).then(r => r.json());
+  selfId = me.id;
+  const { channels } = await fetch(BASE + '/api/bot/v1/channels', {
+    headers: { Authorization: 'Bot ' + TOKEN },
+  }).then(r => r.json());
+  channels.forEach(c => socket.emit('chat:join', c.id));
+});
+
+socket.on('message:new', (msg) => {
+  if (msg.user_id === selfId) return;
+  if (msg.content?.startsWith('!echo ')) {
+    socket.emit('message:send', { chatId: msg.chat_id, content: msg.content.slice(6) });
+  }
+});</code></pre>
+    <p data-en="Run it with <code>node bot.js</code> — it stays connected and replies to <code>!echo hello</code> with <code>hello</code> in any channel it's a member of."
+       data-tr="<code>node bot.js</code> ile çalıştır — bağlı kalır ve üyesi olduğu her kanalda <code>!echo merhaba</code> mesajına <code>merhaba</code> diye yanıt verir.">Run it with <code>node bot.js</code> — it stays connected and replies to <code>!echo hello</code> with <code>hello</code> in any channel it's a member of.</p>
+  </div>
+  <script src="/js/lang.js"></script>
+</body>
+</html>
