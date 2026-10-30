@@ -1,9 +1,9 @@
 # disdroc — client source
 
 [github.com/nadirisim/disdroc](https://github.com/nadirisim/disdroc) — this is
-the client source for [disdroc](https://disdroc.com), a free, self-hosted
-chat platform (servers, channels, DMs, voice/video, a local AI assistant) built
-and run by **nadirisim** — a solo project, not a company. See
+the client source for [disdroc](https://disdroc.com), a free chat platform
+(servers, channels, DMs, voice/video, a local AI assistant) built and run by
+**nadirisim** — a solo project, not a company. See
 [disdroc.com/who-we-are](https://disdroc.com/who-we-are) for the full story.
 
 ## What's in this repo
@@ -42,13 +42,17 @@ is documented separately for anyone building on top of disdroc: see
 No account data (messages, files, the user database) is or was ever part of
 this repo either way.
 
-## Using this code
+## You can't host disdroc yourself
 
-This mirror is meant to be read, audited, and — if something's genuinely
-broken or missing — patched via a pull request. It isn't a drop-in server:
-`public/` expects to be served by disdroc's (private) backend, which exposes
-the `/api/*` routes the client calls. There's no local dev server included
-here.
+disdroc is one service, and it runs only at [disdroc.com](https://disdroc.com).
+There is no self-hosted version, no federation, and no way to connect your own
+server to disdroc. A "server" inside disdroc is a community you create in the
+app, not a machine you run.
+
+This repo is not a server. `public/` needs disdroc's private backend, which
+serves the `/api/*` routes the client calls. No server or local dev setup is
+included. The repo is here to be read, audited and, if something is broken,
+patched with a pull request.
 
 ## Contributing
 
@@ -59,10 +63,8 @@ those stay closed.
 
 ## License
 
-[GNU AGPL-3.0](./LICENSE). In short: you're free to use, study, modify, and
-redistribute this code, including running your own modified version publicly
-— but if you do run a modified version as a public service, you must make
-your changes to this client source available to its users too.
+[GNU AGPL-3.0](./LICENSE). The license covers this client code only. It does
+not give access to the disdroc service, its servers or its accounts.
 
 ---
 
