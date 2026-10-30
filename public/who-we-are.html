@@ -6,11 +6,11 @@
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="/assets/icon-192.png?v=2">
   <title data-en="Who we are — disdroc" data-tr="Biz kimiz — disdroc">Who we are — disdroc</title>
-  <meta name="description" content="disdroc is built and run by nadirisim — a solo, self-hosted chat project. Here's who's behind it, why the client source is public on GitHub, and what stays closed on purpose.">
+  <meta name="description" content="Meet nadirisim, the independent developer behind disdroc. Read the public client source, dated updates, service status and privacy information.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://disdroc.com/who-we-are">
   <meta property="og:title" content="Who we are — disdroc">
-  <meta property="og:description" content="A solo, self-hosted chat project by nadirisim. Client source is public on GitHub; safety-critical server internals stay closed on purpose.">
+  <meta property="og:description" content="Who operates disdroc, what the public client source includes, and where to check privacy and availability.">
   <meta property="og:image" content="https://disdroc.com/assets/icon-512.png?v=2">
   <meta property="og:url" content="https://disdroc.com/who-we-are">
   <meta property="og:type" content="website">
@@ -114,6 +114,7 @@
       <a class="brand" href="/"><img src="/assets/icon-192.png?v=2" alt="disdroc"> disdroc</a>
       <div class="nav-links">
         <a class="lk" href="/#features" data-en="Features" data-tr="Özellikler">Features</a>
+        <a class="lk" href="/trust" data-en="Trust &amp; privacy" data-tr="Güven ve gizlilik">Trust &amp; privacy</a>
         <a class="lk" href="/support" data-en="Support" data-tr="Destek">Support</a>
         <a class="lk" href="/login" data-en="Log in" data-tr="Giriş yap">Log in</a>
         <button class="lang-toggle" id="langToggle" type="button" aria-label="Language / Dil">
@@ -126,7 +127,7 @@
   <header class="wrap head">
     <p class="eyebrow" data-en="Behind disdroc" data-tr="disdroc'in arkasında">Behind disdroc</p>
     <h1 data-en="Who we are" data-tr="Biz kimiz">Who we are</h1>
-    <p class="lede" data-en="disdroc isn't a company. It's a solo, self-hosted project — built, run and paid for by one person under the name <b>nadirisim</b> — that grew from a personal side project into something real people use every day." data-tr="disdroc bir şirket değil. Tek bir kişi tarafından <b>nadirisim</b> adıyla geliştirilen, işletilen ve karşılanan; kişisel bir yan projeden gerçek insanların her gün kullandığı bir şeye dönüşmüş, kendi kendine barındırılan bir projedir.">disdroc isn't a company. It's a solo, self-hosted project — built, run and paid for by one person under the name <b>nadirisim</b> — that grew from a personal side project into something real people use every day.</p>
+    <p class="lede" data-en="disdroc is built, operated and funded by <b>nadirisim</b>, an independent developer. It started as a personal project for chatting with friends and now offers servers, messages, voice and shared activities in English and Turkish." data-tr="disdroc, bağımsız geliştirici <b>nadirisim</b> tarafından geliştiriliyor, işletiliyor ve finanse ediliyor. Arkadaşlarla sohbet etmek için kişisel bir proje olarak başladı; bugün Türkçe ve İngilizce sunucular, mesajlar, sesli görüşme ve ortak aktiviteler sunuyor.">disdroc is built, operated and funded by <b>nadirisim</b>, an independent developer. It started as a personal project for chatting with friends and now offers servers, messages, voice and shared activities in English and Turkish.</p>
   </header>
 
   <main class="wrap">
@@ -135,36 +136,36 @@
       <ul>
         <li data-en="disdroc is made by <b>nadirisim</b> — one developer, not a company, no investors." data-tr="disdroc <b>nadirisim</b> tarafından yapılıyor — bir şirket değil, tek bir geliştirici, yatırımcı yok."><b>nadirisim</b> — one developer, not a company, no investors.</li>
         <li data-en="It runs on hardware we own, not a rented cloud." data-tr="Kiralık bir bulutta değil, kendi sahip olduğumuz donanımda çalışır.">It runs on hardware we own, not a rented cloud.</li>
-        <li data-en="The client — everything you can see and audit — is going public on GitHub." data-tr="İstemci — görebileceğiniz ve denetleyebileceğiniz her şey — GitHub'da herkese açık hale geliyor.">The client — everything you can see and audit — is going public on GitHub.</li>
-        <li data-en="A few server-side pieces (auth, anti-abuse, moderation) stay closed on purpose — see below." data-tr="Birkaç sunucu tarafı parça (kimlik doğrulama, kötüye kullanım önleme, moderasyon) kasıtlı olarak kapalı kalır — aşağıya bakın.">A few server-side pieces (auth, anti-abuse, moderation) stay closed on purpose — see below.</li>
+        <li data-en="The client source is public on GitHub under AGPL-3.0." data-tr="İstemci kodu GitHub üzerinde AGPL-3.0 lisansıyla herkese açık.">The client source is public on GitHub under AGPL-3.0.</li>
+        <li data-en="The live server implementation is not public. The client source does not verify server operations." data-tr="Canlı sunucunun kodu herkese açık değil. İstemci kodu, sunucunun nasıl işletildiğini doğrulamaz.">The live server implementation is not public. The client source does not verify server operations.</li>
       </ul>
     </div>
 
     <section class="s">
       <h2><span class="n">01</span> <span data-en="One person, not a company" data-tr="Bir şirket değil, tek bir kişi">One person, not a company</span></h2>
-      <p data-en="There's no team, no office and no funding round behind disdroc — just <b>nadirisim</b>, building and running it as a hobby that turned into a real, working chat platform. Every feature, every bug fix and every 2am outage response has come from the same person. That's also why the tone of this site is honest about what disdroc is: a passion project, not a startup pitch." data-tr="disdroc'un arkasında bir ekip, bir ofis ya da bir yatırım turu yok — sadece hobiden gerçek, çalışan bir sohbet platformuna dönüşen bir şeyi kuran ve işleten <b>nadirisim</b> var. Her özellik, her hata düzeltmesi ve sabahın 2'sindeki her kesinti müdahalesi aynı kişiden geldi. Bu sitenin tonunun disdroc'un ne olduğu konusunda dürüst olmasının nedeni de bu: bir startup sunumu değil, bir tutku projesi.">There's no team, no office and no funding round behind disdroc — just <b>nadirisim</b>, building and running it as a hobby that turned into a real, working chat platform. Every feature, every bug fix and every 2am outage response has come from the same person. That's also why the tone of this site is honest about what disdroc is: a passion project, not a startup pitch.</p>
+      <p data-en="nadirisim develops the app and operates it on owned hardware. You can read the dated <a class=&quot;inline&quot; href=&quot;/updates&quot;>release notes</a>, check <a class=&quot;inline&quot; href=&quot;https://status.disdroc.com&quot;>service status</a>, and use <a class=&quot;inline&quot; href=&quot;/support&quot;>Support</a> to ask a question before creating an account." data-tr="nadirisim uygulamayı geliştiriyor ve kendi donanımında işletiyor. Tarihli <a class=&quot;inline&quot; href=&quot;/updates&quot;>sürüm notlarını</a> okuyabilir, <a class=&quot;inline&quot; href=&quot;https://status.disdroc.com&quot;>hizmet durumunu</a> kontrol edebilir ve hesap oluşturmadan önce <a class=&quot;inline&quot; href=&quot;/support&quot;>Destek</a> üzerinden soru sorabilirsin.">nadirisim develops the app and operates it on owned hardware. You can read the dated <a class="inline" href="/updates">release notes</a>, check <a class="inline" href="https://status.disdroc.com">service status</a>, and use <a class="inline" href="/support">Support</a> to ask a question before creating an account.</p>
       <p data-en="This project's source is at <a class=&quot;inline&quot; href=&quot;https://github.com/nadirisim/disdroc&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>github.com/nadirisim/disdroc</a>, and nadirisim's other work is on <a class=&quot;inline&quot; href=&quot;https://github.com/nadirisim&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>github.com/nadirisim</a>." data-tr="Bu projenin kaynağı <a class=&quot;inline&quot; href=&quot;https://github.com/nadirisim/disdroc&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>github.com/nadirisim/disdroc</a> adresinde, nadirisim'in diğer çalışmaları ise <a class=&quot;inline&quot; href=&quot;https://github.com/nadirisim&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>github.com/nadirisim</a>'de.">This project's source is at <a class="inline" href="https://github.com/nadirisim/disdroc" target="_blank" rel="noopener">github.com/nadirisim/disdroc</a>, and nadirisim's other work is on <a class="inline" href="https://github.com/nadirisim" target="_blank" rel="noopener">github.com/nadirisim</a>.</p>
     </section>
 
     <section class="s">
-      <h2><span class="n">02</span> <span data-en="Why we're opening the source" data-tr="Kaynağı neden açıyoruz">Why we're opening the source</span></h2>
-      <p data-en="This site already claims no ads, no tracking and no data selling. Those claims shouldn't have to be taken on faith — they should be checkable. Opening the client source means anyone can read exactly what disdroc sends, stores and requests, line by line, instead of trusting a paragraph on a privacy page. It also means people can report bugs against real code, suggest features with a patch attached, and see how a small self-hosted app is actually built." data-tr="Bu site zaten reklam yok, takip yok ve veri satışı yok diyor. Bu iddiaların güvene dayanması gerekmiyor — kontrol edilebilir olmalı. İstemci kaynağını açmak, herkesin disdroc'un tam olarak neyi gönderdiğini, sakladığını ve istediğini bir gizlilik sayfasındaki paragrafa güvenmek yerine satır satır okuyabilmesi anlamına gelir. Ayrıca insanların gerçek koda karşı hata bildirebilmesi, yamayla birlikte özellik önerebilmesi ve küçük, kendi kendine barındırılan bir uygulamanın gerçekte nasıl inşa edildiğini görebilmesi anlamına gelir.">This site already claims no ads, no tracking and no data selling. Those claims shouldn't have to be taken on faith — they should be checkable. Opening the client source means anyone can read exactly what disdroc sends, stores and requests, line by line, instead of trusting a paragraph on a privacy page. It also means people can report bugs against real code, suggest features with a patch attached, and see how a small self-hosted app is actually built.</p>
+      <h2><span class="n">02</span> <span data-en="Why the client source is public" data-tr="İstemci kodu neden herkese açık">Why the client source is public</span></h2>
+      <p data-en="Publishing the client lets people inspect its code, understand the requests it makes and contribute fixes. The repository contains the web client, desktop wrapper and browser extension. It does not include the live server implementation or private user data." data-tr="İstemci kodunu yayınlamak, insanların kodu incelemesini, yaptığı istekleri anlamasını ve düzeltmelere katkıda bulunmasını sağlar. Depoda web istemcisi, masaüstü sarmalayıcısı ve tarayıcı uzantısı bulunur. Canlı sunucunun kodunu veya özel kullanıcı verilerini içermez.">Publishing the client lets people inspect its code, understand the requests it makes and contribute fixes. The repository contains the web client, desktop wrapper and browser extension. It does not include the live server implementation or private user data.</p>
     </section>
 
     <section class="s">
       <h2><span class="n">03</span> <span data-en="What's public, and what stays closed" data-tr="Ne açık, ne kapalı kalıyor">What's public, and what stays closed</span></h2>
-      <p data-en="disdroc is open enough to read and learn from, not open enough to hand out a blueprint for breaking it. Concretely:" data-tr="disdroc okunacak ve öğrenilecek kadar açık, ancak onu kırmanın planını verecek kadar açık değil. Somut olarak:">disdroc is open enough to read and learn from, not open enough to hand out a blueprint for breaking it. Concretely:</p>
+      <p data-en="The public repository covers the client. Here is the boundary between that code and the hosted service:" data-tr="Herkese açık depo istemciyi kapsar. Bu kod ile barındırılan hizmet arasındaki sınır şöyle:">The public repository covers the client. Here is the boundary between that code and the hosted service:</p>
       <div class="split">
         <div class="card">
           <h3><span class="dot-open"></span> <span data-en="Public" data-tr="Açık">Public</span></h3>
-          <p data-en="The full web client, the desktop app and the Android app — every screen, every request they make. Also the Bot API used by third-party bots, documented in the <a class=&quot;inline&quot; href=&quot;/bot-docs&quot;>developer docs</a>." data-tr="Tam web istemcisi, masaüstü uygulaması ve Android uygulaması — her ekran, yaptıkları her istek. Ayrıca üçüncü taraf botların kullandığı Bot API, <a class=&quot;inline&quot; href=&quot;/bot-docs&quot;>geliştirici dokümanlarında</a> belgelenmiştir.">The full web client, the desktop app and the Android app — every screen, every request they make. Also the Bot API used by third-party bots, documented in the <a class="inline" href="/bot-docs">developer docs</a>.</p>
+          <p data-en="The web client, desktop wrapper and browser extension are available in the <a class=&quot;inline&quot; href=&quot;https://github.com/Nadirisim/disdroc&quot;>public repository</a>. The <a class=&quot;inline&quot; href=&quot;/bot-docs&quot;>Bot API documentation</a> describes how to build integrations." data-tr="Web istemcisi, masaüstü sarmalayıcısı ve tarayıcı uzantısı <a class=&quot;inline&quot; href=&quot;https://github.com/Nadirisim/disdroc&quot;>herkese açık depoda</a> bulunur. <a class=&quot;inline&quot; href=&quot;/bot-docs&quot;>Bot API belgeleri</a> entegrasyonların nasıl geliştirileceğini açıklar.">The web client, desktop wrapper and browser extension are available in the <a class="inline" href="https://github.com/Nadirisim/disdroc">public repository</a>. The <a class="inline" href="/bot-docs">Bot API documentation</a> describes how to build integrations.</p>
         </div>
         <div class="card">
-          <h3><span class="dot-closed"></span> <span data-en="Closed on purpose" data-tr="Kasıtlı olarak kapalı">Closed on purpose</span></h3>
-          <p data-en="Server-side authentication, session security, moderation/anti-abuse detection and rate-limiting. Publishing exact thresholds and internals there wouldn't help anyone use disdroc — it would just be a how-to guide for breaking in or dodging the safety filters." data-tr="Sunucu tarafı kimlik doğrulama, oturum güvenliği, moderasyon/kötüye kullanım önleme tespiti ve hız sınırlama. Buradaki tam eşikleri ve iç yapıyı yayınlamak kimsenin disdroc'u kullanmasına yardımcı olmaz — sadece içeri girmek ya da güvenlik filtrelerinden kaçmak için bir kılavuz olurdu.">Server-side authentication, session security, moderation/anti-abuse detection and rate-limiting. Publishing exact thresholds and internals there wouldn't help anyone use disdroc — it would just be a how-to guide for breaking in or dodging the safety filters.</p>
+          <h3><span class="dot-closed"></span> <span data-en="Server implementation" data-tr="Sunucu kodu">Server implementation</span></h3>
+          <p data-en="The server implementation is not published. Its authentication, storage and moderation behavior cannot be independently checked from the client source alone." data-tr="Sunucu kodu yayınlanmıyor. Kimlik doğrulama, saklama ve moderasyon davranışı yalnızca istemci kodundan bağımsız olarak doğrulanamaz.">The server implementation is not published. Its authentication, storage and moderation behavior cannot be independently checked from the client source alone.</p>
         </div>
       </div>
-      <p data-en="Think of it like a lock manufacturer publishing how their doors are hung, but not the keyway blueprints. The account data behind the live service (messages, files, the user database) is never part of this either way — open source describes the code, not a copy of everyone's conversations." data-tr="Bir kilit üreticisinin kapılarının nasıl asıldığını yayınlaması ama anahtar deliği şemalarını yayınlamaması gibi düşünün. Canlı hizmetin arkasındaki hesap verileri (mesajlar, dosyalar, kullanıcı veritabanı) her hâlükârda buna dahil değildir — açık kaynak kodu tanımlar, herkesin konuşmalarının bir kopyasını değil.">Think of it like a lock manufacturer publishing how their doors are hung, but not the keyway blueprints. The account data behind the live service (messages, files, the user database) is never part of this either way — open source describes the code, not a copy of everyone's conversations.</p>
+      <p data-en="Public source is useful evidence about the client, not a security certification. Read <a class=&quot;inline&quot; href=&quot;/trust&quot;>Trust &amp;amp; privacy</a> for message access, data handling, outside providers and service availability." data-tr="Herkese açık kod, istemci hakkında yararlı bilgi sunar; bir güvenlik sertifikası değildir. Mesajlara erişim, veri işleme, dış sağlayıcılar ve hizmetin erişilebilirliği için <a class=&quot;inline&quot; href=&quot;/trust&quot;>Güven ve gizlilik</a> sayfasını oku.">Public source is useful evidence about the client, not a security certification. Read <a class="inline" href="/trust">Trust &amp; privacy</a> for message access, data handling, outside providers and service availability.</p>
     </section>
 
     <section class="s">
@@ -177,19 +178,20 @@
         <span class="chip">SQLite</span>
         <span class="chip">Vanilla JS frontend</span>
         <span class="chip">llama.cpp (local AI)</span>
-        <span class="chip">Self-hosted, own hardware</span>
+        <span class="chip">Runs on owned hardware</span>
       </div>
     </section>
 
     <div class="contact">
       <div>
         <h3 data-en="Want to look at the code, or report something?" data-tr="Koda bakmak ya da bir şey bildirmek mi istiyorsunuz?">Want to look at the code, or report something?</h3>
-        <p data-en="The client source lives on nadirisim's GitHub. Found a bug or have a fix? Open an issue or a pull request there — or drop by the subreddit to chat." data-tr="İstemci kaynağı nadirisim'in GitHub'ında bulunur. Bir hata mı buldunuz ya da bir düzeltmeniz mi var? Orada bir issue ya da pull request açın — ya da sohbet etmek için subreddit'e uğrayın.">The client source lives on nadirisim's GitHub. Found a bug or have a fix? Open an issue or a pull request there — or drop by the subreddit to chat.</p>
+        <p data-en="For a normal bug or code contribution, use GitHub. For a private issue or a question before joining, use Support without an account. Do not include passwords or recovery codes in a report." data-tr="Normal bir hata veya kod katkısı için GitHub kullan. Özel bir sorun ya da katılmadan önce bir soru için hesap oluşturmadan Destek üzerinden yaz. Bildirimlere parola veya yedek kod ekleme.">For a normal bug or code contribution, use GitHub. For a private issue or a question before joining, use Support without an account. Do not include passwords or recovery codes in a report.</p>
       </div>
       <div class="contact-links">
         <a class="btn2 primary" href="https://github.com/nadirisim/disdroc" target="_blank" rel="noopener" data-en="View on GitHub" data-tr="GitHub'da görüntüle">View on GitHub</a>
         <a class="btn2 ghost" href="https://www.reddit.com/r/disdrocapp/" target="_blank" rel="noopener" data-en="r/disdrocapp" data-tr="r/disdrocapp">r/disdrocapp</a>
         <a class="btn2 ghost" href="/support" data-en="Contact support" data-tr="Destekle iletişime geç">Contact support</a>
+        <a class="btn2 ghost" href="/trust" data-en="Trust &amp; privacy" data-tr="Güven ve gizlilik">Trust &amp; privacy</a>
       </div>
     </div>
   </main>
